@@ -33,10 +33,10 @@ export default function Header(){
 
 			<nav className="flex h-fit basis-100">
 				<ul className="flex flex-row gap-8 content-between">
-					<li>Listing</li>
-					<li>Products</li>
-					<li>Dashboard</li>
-					<li>Orders</li>
+					<li><a href="">Listing</a></li>
+					<li><a href="">Products</a></li>
+					<li><a href="">Dashboard</a></li>
+					<li><a href="">Orders</a></li>
 				</ul>
 			</nav>
 

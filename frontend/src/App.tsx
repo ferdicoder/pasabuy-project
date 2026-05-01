@@ -1,9 +1,10 @@
-import ProductCard from "./components/ProductCard"
+import ListingPage from "./pages/ListingPage"
 
 function App() {
-
   return (
-    <ProductCard />
+    <>
+     <ListingPage />
+    </>
   )
 }
 
