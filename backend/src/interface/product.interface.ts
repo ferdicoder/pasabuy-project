@@ -3,5 +3,4 @@ export interface Product{
   name: string
   quantity: number
   ratings?: number | null
-  userId: number
 }

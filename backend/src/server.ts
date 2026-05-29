@@ -1,24 +1,26 @@
-import express from 'express'; 
+import express from 'express';
 import 'dotenv/config'
 
-import { createProduct } from './controllers/productsController'
-import { getOneProduct } from './controllers/productsController'
-import { getAllProducts } from './controllers/productsController'
-import { editProduct } from './controllers/productsController'
-import { removeProduct } from './controllers/productsController'
+import { connectDB } from './config/connectDB'
 
-const app = express(); 
-const PORT = process.env.PORT
+const app = express();
+const PORT = Number(process.env.SERVER_PORT ?? 5000);
 
-app.use(express.json()); 
-
-app.get('/products', getAllProducts);
-app.get('/products/:id', getOneProduct);
-app.post('/products', createProduct);
-app.patch('/products/:id', editProduct);
-app.delete('/products/:id', removeProduct);
+app.use(express.json());
 
 
-app.listen(PORT, ()=>{
-  console.log(`Server Running on PORT: ${PORT}`); 
-}); 
+
+
+
+async function startServer() {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Server Running on PORT: ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+startServer();
