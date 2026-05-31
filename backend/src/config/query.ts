@@ -1,7 +1,9 @@
-import { Pool } from "pg";
+import { pool } from "./connectDB";
+import type { QueryResult, QueryResultRow } from "pg";
 
-const pool = new Pool(); 
-
-export async function query(){
-  
+export async function sql<T extends QueryResultRow = QueryResultRow>(
+  text: string,
+  params?: unknown[]
+): Promise<QueryResult<T>> {
+  return pool.query(text, params);
 }
