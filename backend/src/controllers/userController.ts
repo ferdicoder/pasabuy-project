@@ -1,11 +1,12 @@
 import type { Request, Response } from 'express'; 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'; 
+import { validateBody } from '../utils/validateBody'
 
-
-import type { 
-  Users
-} from '../interface/user.internface';
+import { 
+  UserSchema,
+  LoginSchema
+  } from '../interface/user.internface';
 
 import { 
   createUser, 
@@ -14,13 +15,12 @@ import {
 } from '../services/userServices';
 
 
-
-
 async function registerUser(req:Request, res:Response){
-  if(!validateRegisterBody(req.body)) return res.sendStatus(400); 
+  const result = validateBody(UserSchema, req.body);
+  if(!result.success) return res.sendStatus(400); 
   
   try{
-    let { username, password, email }: Users = req.body; 
+    let { username, password, email } = result.data; 
     const hashedPass = await bcrypt.hash(password, 10); 
     password = hashedPass; 
 
@@ -28,21 +28,15 @@ async function registerUser(req:Request, res:Response){
     
     return res.status(201).json(newUser); 
   }catch(error){
-    console.log(`Error MEssage: ${error}`); 
+    console.log(`Error Message: ${error}`); 
     return res.sendStatus(500)
   }
 }
-function validateRegisterBody(body: any): boolean{
-  if(!body) return false;
-  const { username, password, email} = body; 
-
-  return typeof username === "string" && typeof password === "string" && typeof email === "string";
-}
-
 
 async function logInUser(req:Request, res:Response){
-  if(!validateLoginBody(req.body)) return res.sendStatus(400); 
-  const { email, password }: Users = req.body; 
+  const result = validateBody(LoginSchema, req.body);
+  if(!result.success) return res.sendStatus(400); 
+  const { email, password } = result.data; 
 
   try{
     const user = await readUser(email); 
@@ -69,12 +63,6 @@ async function logInUser(req:Request, res:Response){
     console.log(`Error Message: ${error}`);
     return res.sendStatus(500);
   }
-}
-function validateLoginBody(body: any): boolean{
-  if(!body) return false;
-  const { password, email} = body; 
-
-  return typeof password === "string" && typeof email === "string";
 }
 function signTokens(user: any){
   const accessSecret = process.env.ACCESS_TOKEN_SECRET;
