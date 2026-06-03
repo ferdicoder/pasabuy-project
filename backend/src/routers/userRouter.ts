@@ -10,5 +10,6 @@ const userRouter = Router();
 
 export default userRouter
   .post('/register', registerUser)
-  .post('/login', logInUser, requireAuth)
+  .post('/login', logInUser)
+  .get('/me', requireAuth)
   
