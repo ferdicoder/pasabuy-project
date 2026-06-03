@@ -11,9 +11,8 @@ const pool = new Pool({
 });
 
 export async function connectDB() {
-  await pool.query("SELECT 1");
   console.log("Database Connected");
-  return pool;
+  
 }
 
 export { pool };
