@@ -3,7 +3,6 @@ import type { Application } from 'express';
 import 'dotenv/config'
 
 import { connectDB } from './config/connectDB'; 
-
 import userRouter from './routers/userRouter';
 
 const app: Application = express();
@@ -21,9 +20,7 @@ async function startServer() {
       console.log(`Server Running on PORT: ${PORT}`);
     });
 
-    
     app.use('/api/v1/users', userRouter); 
-
     
   } catch (error) {
     console.error('Failed to start server:', error);
