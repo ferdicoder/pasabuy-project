@@ -4,6 +4,8 @@ import type {
 } from "../interface/user.internface";
 import { sql } from "../config/query";
 
+
+
 async function createUser({ ...userData }: Users){ 
   const {  username, password, email } = userData; 
   
@@ -24,6 +26,7 @@ async function createUser({ ...userData }: Users){
 
   return newUser.rows[0];
 }
+
 
 async function readUser(email: string):Promise<DbUser>{
   const query = `
