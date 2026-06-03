@@ -3,7 +3,6 @@ export interface Product{
   userId: number
   name: string
   quantity: number
-  ratings?: number | null
 }
 
 export type addProductBody = Omit<Product, "productId">

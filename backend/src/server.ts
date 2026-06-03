@@ -4,9 +4,10 @@ import 'dotenv/config'
 
 import { connectDB } from './config/connectDB'; 
 import productRouter from './routers/productRouters';
+import userRouter from './routers/userRouter';
 
 const app: Application = express();
-const PORT = Number(process.env.SERVER_PORT ?? 5000);
+const PORT = process.env.SERVER_PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,7 @@ async function startServer() {
     });
 
     app.use(`/api/v1/products`, productRouter); 
+    app.use('/api/v1/users', userRouter); 
     
   } catch (error) {
     console.error('Failed to start server:', error);
