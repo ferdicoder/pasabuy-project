@@ -1,13 +1,14 @@
 import { sql } from "../config/query";
-import type { ReqList } from "../interface/reqList.interface";
+import type {  ReqList, UpdateReqList } from "../interface/reqList.interface";
 
-async function createRequest(requestData: ReqList) {
+async function createReqList(requestData: ReqList) {
   const query = `
     INSERT INTO requests(
       buyer_id, 
       title, 
       description, 
       estimated_price, 
+      
       origin,
       delivery_location
     ) 
@@ -24,11 +25,75 @@ async function createRequest(requestData: ReqList) {
   ];
 
   const newRequest = await sql(query, val);
-  if(newRequest.rowCount === 0) throw Error('request listing creation failed'); 
+  if(newRequest.rowCount === 0) throw Error('creation failed'); 
   
   return newRequest.rows[0]; 
 }
 
+async function readReqList(reqId: string){
+  const query = `
+    SELECT * 
+    FROM requests 
+    WHERE request_id = $1; 
+  `
+  const val = [reqId]; 
+  
+  const reqList = await sql(query, val); 
+  if(reqList.rowCount === 0) throw new Error('not found'); 
+  
+  return reqList.rows[0]; 
+}
+
+async function updateReqList(reqId: string, requestData: UpdateReqList) {
+  await readReqList(reqId);
+
+  const query = `
+    UPDATE requests
+    SET
+      buyer_id = COALESCE($2, buyer_id),
+      title = COALESCE($3, title),
+      description = COALESCE($4, description),
+      estimated_price = COALESCE($5, estimated_price),
+      origin = COALESCE($6, origin),
+      delivery_location = COALESCE($7, delivery_location)
+    WHERE request_id = $1
+    RETURNING *
+  `;
+  const val = [
+    reqId,
+    requestData.buyer_id,
+    requestData.title,
+    requestData.description,
+    requestData.estimated_price,
+    requestData.origin,
+    requestData.delivery_location,
+  ];
+
+  const updatedReq = await sql(query, val);
+  if(updatedReq.rowCount === 0) throw new Error('update failed');
+
+  return updatedReq.rows[0];
+}
+
+async function deleteReqList(reqId: string){
+  await readReqList(reqId);
+  
+  const query = `
+    DELETE FROM requests
+    WHERE request_id = $1
+    RETURNING *
+  `;
+  const val = [reqId];
+
+  const deletedReq = await sql(query, val);
+  if(deletedReq.rowCount === 0) throw new Error('delete failed');
+
+  return deletedReq.rows[0];
+}
+
 export{
-  createRequest
+  createReqList,
+  readReqList,
+  updateReqList,
+  deleteReqList
 }
