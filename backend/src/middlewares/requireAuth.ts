@@ -10,8 +10,8 @@ export function requireAuth(
   res: Response,
   next: NextFunction
 ) {
-  const header = req.headers.authorization;
-  if (!header) return res.sendStatus(401);
+  const header = req.headers.authorization || req.headers.Authorization;
+  if (!header || typeof header !== 'string') return res.sendStatus(401);
 
   const [scheme, token] = header.split(" ");
   if (scheme !== "Bearer" || !token) return res.sendStatus(401);
@@ -21,7 +21,8 @@ export function requireAuth(
 
   try {
     const decoded = jwt.verify(token, secret);
-    if(!decoded) throw new Error("a")
+    if(!decoded) throw new Error("unauthorized"); 
+    
     req.user = decoded;
     return next();
 
@@ -30,4 +31,3 @@ export function requireAuth(
     return res.sendStatus(401);
   }
 }
-
