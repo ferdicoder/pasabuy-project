@@ -20,11 +20,11 @@ async function registerUser(req:Request, res:Response){
   if(!result.success) return res.sendStatus(400); 
   
   try{
-    let { username, password, email } = result.data; 
+    let { password } = result.data; 
     const hashedPass = await bcrypt.hash(password, 10); 
     password = hashedPass; 
 
-    const newUser = await createUser({username, password, email});
+    const newUser = await createUser({ ...result.data });
     
     return res.status(201).json(newUser); 
   }catch(error){
