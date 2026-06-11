@@ -8,8 +8,9 @@
 - Requset-First Marketplace - from a buyer posting their product they want and their location. Traveller could browse this page while planning their trip.
 - Matching - match based on route from another user's set up trip or posted request
 
-## Tools
+## Tools & Technologies
 - React
 - TailwindCSS
 - TypeScript
 - Node + Express
+- PostgreSQL (in NeonDB)
