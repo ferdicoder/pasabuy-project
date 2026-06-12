@@ -1,15 +1,21 @@
+import pasabuyLogo from '../assets/pasabuy-logo.svg';
 
 export default function Header(){
 	const profileName = "Pasabuy User";
 	const profileInitialAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(profileName)}&background=0D8ABC&color=fff&rounded=true&size=64`;
 
 	return (
-		<header className="flex flex-row border-b py-2 px-4 gap-4 h-20 items-center fixed top-0 right-0 left-0">
-			<div 
-			className="grow h-fit basis-1 ">
-				pasabuy logo
+		<header className="flex flex-row py-2 px-4 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-10">
+			<div className="ml-0 w-40 h-15">
+				<img
+					src={pasabuyLogo}
+					alt="Pasabuy logo"
+					className="block h-full w-full object-contain"
+				/>
 			</div>
 
+			
+			{/* Search
 			<div className="relative flex flex-row basis-64 grow shrink h-fit items-center border rounded-md">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -29,12 +35,12 @@ export default function Header(){
 					placeholder="Search Items, Location, People" 
 					className="w-full p-2 pl-10 placeholder:italic"
 				/>
-			</div>
+			</div> */}
 
 			<nav className="flex h-fit basis-100">
 				<ul className="flex flex-row gap-8 content-between">
-					<li><a href="">Listing</a></li>
-					<li><a href="">Products</a></li>
+					<li><a href="">Marketplace</a></li>
+					<li><a href="">Request</a></li>
 					<li><a href="">Dashboard</a></li>
 					<li><a href="">Orders</a></li>
 				</ul>
