@@ -5,7 +5,7 @@ export default function Header(){
 	const profileInitialAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(profileName)}&background=0D8ABC&color=fff&rounded=true&size=64`;
 
 	return (
-		<header className="flex flex-row py-2 px-4 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-10">
+		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-10 bg-[#F8F8FF]">
 			<div className="ml-0 w-40 h-15">
 				<img
 					src={pasabuyLogo}
@@ -14,16 +14,25 @@ export default function Header(){
 				/>
 			</div>
 
+			<nav className="w-sm flex item-center justify-center">
+				<ul className="flex flex-row gap-8 content-between w-fit">
+					<li><a href="">Home</a></li>
+					<li><a href="">Requests</a></li>
+					<li><a href="">Trips</a></li>
+					<li><a href="">My Activity</a></li>
+				</ul>
+			</nav>
+
+		
 			
-			{/* Search
-			<div className="relative flex flex-row basis-64 grow shrink h-fit items-center border rounded-md">
+			<div className="relative flex flex-row basis-64 grow shrink h-fit items-center shadow-md rounded-md ">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					fill="none"
 					stroke="currentColor"
 					strokeWidth="1.8"
-					className="w-5 h-5 text-gray-500 absolute left-3 pointer-events-none"
+					className="w-5 h-5 text-gray-500 absolute left-3 pointer-events-none hover:cursor-pointer"
 					aria-hidden="true"
 				>
 					<circle cx="11" cy="11" r="6" />
@@ -33,25 +42,34 @@ export default function Header(){
 				<input 
 					type="text" 
 					placeholder="Search Items, Location, People" 
-					className="w-full p-2 pl-10 placeholder:italic"
+					className="w-full p-2 pl-10 placeholder:italic "
 				/>
-			</div> */}
+			</div>
 
-			<nav className="flex h-fit basis-100">
-				<ul className="flex flex-row gap-8 content-between">
-					<li><a href="">Marketplace</a></li>
-					<li><a href="">Request</a></li>
-					<li><a href="">Dashboard</a></li>
-					<li><a href="">Orders</a></li>
-				</ul>
-			</nav>
-
+			
 			<div className="flex flex-row gap-3 h-fit items-center">
 				<button
 					type="button"
-					aria-label="Open bag"
-					className="p-2 rounded-full hover:bg-gray-100 cursor-pointer"
+					aria-label="Add item"
+					className="p-2 rounded-full cursor-pointer"
 				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="1.8"
+						className="w-7 h-7  rounded-full hover:bg-gray-200"
+						aria-hidden="true"
+					>
+					<path d="M12 5v14M5 12h14"/>
+					</svg>
+				</button>
+
+				<button
+					type="button"
+					aria-label="Open messages"
+					className="p-2 rounded-full hover:bg-gray-200 cursor-pointer">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
@@ -60,15 +78,14 @@ export default function Header(){
 						strokeWidth="1.8"
 						className="w-7 h-7"
 					>
-						<path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" />
-						<path d="M9 10V7a3 3 0 0 1 6 0v3" />
+						<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
 					</svg>
 				</button>
 
 				<button
 					type="button"
 					aria-label="Open notifications"
-					className="p-2 rounded-full hover:bg-gray-100 cursor-pointer"
+					className="p-2 rounded-full hover:bg-gray-200 cursor-pointer"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -83,12 +100,14 @@ export default function Header(){
 					</svg>
 				</button>
 
-				<img
-					src={profileInitialAvatar}
-					alt={`${profileName} avatar`}
-					className="w-9 h-9 rounded-full border border-gray-200"
-				/>
-
+				<button className='cursor-pointer rounded-full hover:border-gray-300'>
+					<img
+						src={profileInitialAvatar}
+						alt={`${profileName} avatar`}
+						className="w-9 h-9 rounded-full  "
+					/>
+				</button>
+				
 			</div>
 
 		</header>

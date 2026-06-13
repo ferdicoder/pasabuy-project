@@ -4,7 +4,7 @@ import type ProductCardProp from "../types/ProductCardProp";
 
 export default function ProductCard({ page }: ProductCardProp){
     return(
-      <div className="shadow-sm w-72 h-112 flex flex-col justify-between p-4 rounded-sm" >
+      <div className="shadow-sm w-72 h-112 flex flex-col justify-between p-4 rounded-md bg-white" >
         <div className="flex  h-50">
           <img 
             className="object-fill w-full rounded-md "
