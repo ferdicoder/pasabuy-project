@@ -1,10 +1,11 @@
 import ProductButton from "./ProductButton"; 
 import productImage from "../assets/images.jpg"; // to remove 
-import type ProductCardProp from "../types/ProductCardProp";
+import Avatar from "./Avatar";
 
-export default function ProductCard({ page }: ProductCardProp){
+export default function ProductCard(){
     return(
       <div className="shadow-sm w-72 h-112 flex flex-col justify-between p-4 rounded-md bg-white" >
+        
         <div className="flex  h-50">
           <img 
             className="object-fill w-full rounded-md "
@@ -21,12 +22,11 @@ export default function ProductCard({ page }: ProductCardProp){
         </div>
 
         <div>
-          avatar name 4.5
+          <Avatar />
         </div>
         
         <div className="flex flex-col gap-2">
-          <ProductButton name="Buy"/>
-          <ProductButton name="Add to Bag"/>
+          <ProductButton name="Take Request"/>
         </div>
 
       </div>

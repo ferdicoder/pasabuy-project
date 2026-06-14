@@ -1,3 +1,3 @@
 export default interface ButtonProp{ 
-  name: string,
+  name: string
 }

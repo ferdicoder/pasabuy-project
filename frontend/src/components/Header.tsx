@@ -1,8 +1,8 @@
 import pasabuyLogo from '../assets/pasabuy-logo.svg';
+import Avatar from './Avatar';
 
 export default function Header(){
-	const profileName = "Pasabuy User";
-	const profileInitialAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(profileName)}&background=0D8ABC&color=fff&rounded=true&size=64`;
+	
 
 	return (
 		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-10 bg-[#F8F8FF]">
@@ -101,11 +101,7 @@ export default function Header(){
 				</button>
 
 				<button className='cursor-pointer rounded-full hover:border-gray-300'>
-					<img
-						src={profileInitialAvatar}
-						alt={`${profileName} avatar`}
-						className="w-9 h-9 rounded-full  "
-					/>
+					<Avatar />
 				</button>
 				
 			</div>

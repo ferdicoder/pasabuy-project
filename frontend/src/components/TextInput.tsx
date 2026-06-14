@@ -1,4 +1,4 @@
-import type InputProp from "../types/InputProp"
+import type InputProp from "../interface/InputProp"
 
 export default function TextInput({ type, placeholder, borderColor }: InputProp){
   return(

@@ -1,15 +1,21 @@
 import { Route, Routes } from 'react-router-dom';
-import ListingPage from "./pages/ListingPage"; 
-import ProductPage from './pages/ProductPage';
+import ProductCard from './components/ProductCard';
+import Header from './components/Header';
 
 
 function App() {
   return (
-    <Routes>
-     <Route path="/" element={ <ProductPage /> } />
-     <Route path="/listing" element={ <ListingPage /> } /> 
-    </Routes>
+    <>
+      
+      <ProductCard />
+    </>
   )
 }
 
 export default App
+
+
+ // <Routes>
+    //  <Route path="/" element={ <ProductPage /> } />
+    //  <Route path="/listing" element={ <ListingPage /> } /> 
+    // </Routes>
