@@ -1,34 +1,79 @@
-import ProductButton from "./ProductButton"; 
-import productImage from "../assets/images.jpg"; // to remove 
-import Avatar from "./Avatar";
+import { Avatar } from "./Avatar";
+import type ProducCardProp from "../interface/ProductCardProp";
 
-export default function ProductCard(){
-    return(
-      <div className="shadow-sm w-72 h-112 flex flex-col justify-between p-4 rounded-md bg-white" >
-        
-        <div className="flex  h-50">
-          <img 
-            className="object-fill w-full rounded-md "
-            src={productImage} alt="Strawberry 16pcs" 
+
+export default function ProductCard({ ...cardData }: ProducCardProp) {
+  return (
+    <div className="w-72 flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+
+      {/* Image */}
+      <div className="relative h-44 bg-gray-100 shrink-0">
+        {cardData.imageUrl ? (
+          <img
+            className="w-full h-full object-cover"
+            src={cardData.imageUrl}
+            alt={cardData.title}
           />
-        </div>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-300 text-sm">
+            No image
+          </div>
+        )}
+
+        {/* Origin */}
+        <span className="absolute bottom-2.5 left-2.5 flex items-center gap-1 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 21c-4-4-7-7.5-7-11a7 7 0 0 1 14 0c0 3.5-3 7-7 11z"/>
+            <circle cx="12" cy="10" r="2"/>
+          </svg>
+          {cardData.origin}
+        </span>
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-col gap-2.5 p-3.5 flex-1">
+
         
-        <div>
-          <h1 className="font-bold">Strawberry 16pcs </h1>
+        <div className="flex justify-between items-start gap-2">
+          <p className="font-medium text-[15px] text-gray-900 leading-snug">{cardData.title}</p>
+          <span className="shrink-0 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+            ~₱{cardData.estimatedPrice}
+          </span>
         </div>
 
-        <div>
-          <p>From: Baguio</p>
+        {/* Desc */}
+        {cardData.description && (
+          <p className="text-[13px] text-gray-500 leading-relaxed">{cardData.description}</p>
+        )}
+
+        <hr className="border-gray-100" />
+
+        {/* Avatar and timestampz */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Avatar username={cardData.buyerUsername} />
+            <p className="text-[13px] text-gray-500">{cardData.buyerUsername}</p>
+          </div>
+          <span className="flex items-center gap-1 text-[12px] text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            {cardData.createdAt}
+          </span>
         </div>
 
-        <div>
-          <Avatar />
-        </div>
-        
-        <div className="flex flex-col gap-2">
-          <ProductButton name="Take Request"/>
-        </div>
+        {/* Button */}
+        <button
+          onClick={cardData.onTakeRequest}
+          className="w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-sm font-medium py-2.5 rounded-lg transition-all duration-150"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          Take Request
+        </button>
 
       </div>
-    )
-  }
+    </div>
+  );
+}

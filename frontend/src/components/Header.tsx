@@ -1,9 +1,11 @@
 import pasabuyLogo from '../assets/pasabuy-logo.svg';
-import Avatar from './Avatar';
+import { 
+	Avatar 
+	type AvatarProp
+} from './Avatar';
 
-export default function Header(){
-	
 
+export default function Header({ username }: AvatarProp){
 	return (
 		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-10 bg-[#F8F8FF]">
 			<div className="ml-0 w-40 h-15">
@@ -101,7 +103,7 @@ export default function Header(){
 				</button>
 
 				<button className='cursor-pointer rounded-full hover:border-gray-300'>
-					<Avatar />
+					<Avatar username={username}/>
 				</button>
 				
 			</div>

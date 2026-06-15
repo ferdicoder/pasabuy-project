@@ -1,6 +1,10 @@
 export default interface ProducCardProp{
-  page?: string
-  name?: string, 
-  origin?: string, 
-  poster?: string, 
+  title: string;
+  estimatedPrice: number;
+  origin: string;
+  description?: string;
+  createdAt: string;
+  buyerUsername: string;
+  imageUrl?: string;
+  onTakeRequest?: () => void;
 }
