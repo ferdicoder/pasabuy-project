@@ -9,7 +9,7 @@ export default function ProductCard({ ...cardData }: ProducCardProp) {
   return (
     <div className={`flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor}`}>
       {/* Image */}
-      <div className="relative h-44 bg-gray-100 shrink-0">
+      <div className="relative h-44 bg-gray-100 shrink-0 rounded-t-xl">
         {cardData.imageUrl ? (
           <img
             className="w-full h-full object-cover"

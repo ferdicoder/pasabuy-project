@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import type ProductCardProp from "../interface/ProductCardProp";
+
 
 const testData: ProductCardProp = {
   title: "starbery",
@@ -25,6 +27,8 @@ const testDataa: ProductCardProp = {
 }
 
 export default function RequestPage(){
+  const [reqData, setReqData] = useState({}); 
+  
   return (
     <section className="py-24">
       <Header username="Current User"/>
