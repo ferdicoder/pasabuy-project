@@ -1,10 +1,12 @@
 export default interface ProductCardProp{
   title: string;
   estimatedPrice: number;
-  origin: string;
+  origin?: string;
   description?: string;
   createdAt: string;
   buyerUsername: string;
+  status: string
   imageUrl?: string;
-  onTakeRequest?: () => void;
+  deliveryLocation: string; 
+  onTakeRequest?: () => unknown
 }

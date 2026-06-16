@@ -8,9 +8,21 @@ const testData: ProductCardProp = {
   origin: 'Baguio',
   description: 'mga nasa baguio dyan baka namanaaaaaaaaaaaaaaaaaaaaaaan',
   createdAt: '2h',
-  buyerUsername: 'Mang Gustine'
+  buyerUsername: 'Mang Gustine',
+  status: 'active',
+  deliveryLocation: 'Manila'
 }
 
+const testDataa: ProductCardProp = {
+  title: "starbery",
+  estimatedPrice: 100,
+  // origin: 'Baguio',
+  description: 'mga nasa baguio dyan baka namanaaaaaaaaaaaaaaaaaaaaaaan',
+  createdAt: '2h',
+  buyerUsername: 'Mang Gustine',
+  status: 'taken',
+  deliveryLocation: 'Manila'
+}
 
 export default function RequestPage(){
   return (
@@ -19,8 +31,8 @@ export default function RequestPage(){
 
       <div className="grid grid-cols-1 2xl:grid-cols-6 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-4 px-16">
         <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
+        <ProductCard { ...testDataa}/>
+        <ProductCard { ...testDataa}/>
         <ProductCard { ...testData}/>
         <ProductCard { ...testData}/>
         <ProductCard { ...testData}/>

@@ -3,8 +3,11 @@ import type ProducCardProp from "../interface/ProductCardProp";
 
 
 export default function ProductCard({ ...cardData }: ProducCardProp) {
+  const isTaken = cardData.status === 'taken'; 
+  let borderColor = isTaken ? 'border-red-400' : 'border-green-800'; 
+
   return (
-    <div className="flex flex-col rounded-xl border border-gray-200 bg-white shadow-sm m-0 w-full">
+    <div className={`flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor}`}>
       {/* Image */}
       <div className="relative h-44 bg-gray-100 shrink-0">
         {cardData.imageUrl ? (
@@ -25,7 +28,7 @@ export default function ProductCard({ ...cardData }: ProducCardProp) {
             <path d="M12 21c-4-4-7-7.5-7-11a7 7 0 0 1 14 0c0 3.5-3 7-7 11z"/>
             <circle cx="12" cy="10" r="2"/>
           </svg>
-          {cardData.origin}
+          {cardData.origin ? (`${cardData.origin} to ${cardData.deliveryLocation}`) : (`to ${cardData.deliveryLocation}`)}
         </span>
       </div>
 
@@ -63,8 +66,9 @@ export default function ProductCard({ ...cardData }: ProducCardProp) {
 
         {/* Button */}
         <button
+          disabled={isTaken}
           onClick={cardData.onTakeRequest}
-          className="w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-[1rem] font-medium py-2.5 rounded-lg transition-all duration-150"
+          className={`w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-[1rem] font-medium py-2.5 rounded-lg transition-all duration-150  disabled:cursor-not-allowed disabled:opacity-75`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
