@@ -8,7 +8,6 @@ async function createReqList(requestData: ReqList) {
       title, 
       description, 
       estimated_price, 
-      
       origin,
       delivery_location
     ) 

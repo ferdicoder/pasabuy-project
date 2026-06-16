@@ -1,6 +1,6 @@
 import pasabuyLogo from '../assets/pasabuy-logo.svg';
 import { 
-	Avatar 
+	Avatar,
 	type AvatarProp
 } from './Avatar';
 
