@@ -4,8 +4,7 @@ import type ProducCardProp from "../interface/ProductCardProp";
 
 export default function ProductCard({ ...cardData }: ProducCardProp) {
   return (
-    <div className="w-72 flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
-
+    <div className="flex flex-col rounded-xl border border-gray-200 bg-white shadow-sm m-0 w-full">
       {/* Image */}
       <div className="relative h-44 bg-gray-100 shrink-0">
         {cardData.imageUrl ? (
@@ -43,7 +42,7 @@ export default function ProductCard({ ...cardData }: ProducCardProp) {
 
         {/* Desc */}
         {cardData.description && (
-          <p className="text-[13px] text-gray-500 leading-relaxed">{cardData.description}</p>
+          <p className="text-sm text-gray-500 leading-relaxed truncate">{cardData.description}</p>
         )}
 
         <hr className="border-gray-100" />
@@ -58,14 +57,14 @@ export default function ProductCard({ ...cardData }: ProducCardProp) {
             <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
-            {cardData.createdAt}
+            {`${cardData.createdAt} ago`}
           </span>
         </div>
 
         {/* Button */}
         <button
           onClick={cardData.onTakeRequest}
-          className="w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-sm font-medium py-2.5 rounded-lg transition-all duration-150"
+          className="w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-[1rem] font-medium py-2.5 rounded-lg transition-all duration-150"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>

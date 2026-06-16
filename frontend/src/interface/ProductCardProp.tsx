@@ -1,4 +1,4 @@
-export default interface ProducCardProp{
+export default interface ProductCardProp{
   title: string;
   estimatedPrice: number;
   origin: string;
