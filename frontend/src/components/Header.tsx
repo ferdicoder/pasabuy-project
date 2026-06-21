@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import pasabuyLogo from '../assets/pasabuy-logo.svg';
 import { 
 	Avatar,
@@ -18,9 +19,9 @@ export default function Header({ username }: AvatarProp){
 
 			<nav className="w-sm flex item-center justify-center">
 				<ul className="flex flex-row gap-8 content-between w-fit">
-					<li><a href="">Home</a></li>
-					<li><a href="">Requests</a></li>
-					<li><a href="">Trips</a></li>
+					<li><a href="/">Home</a></li>
+					<Link to='requests'><li>Requests</li></Link>
+					<Link to='trips'><li>Trips</li></Link>
 					<li><a href="">My Activity</a></li>
 				</ul>
 			</nav>
