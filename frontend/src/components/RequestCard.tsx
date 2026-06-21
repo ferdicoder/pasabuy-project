@@ -1,15 +1,16 @@
 import { Avatar } from "./Avatar";
-import type ProducCardProp from "../interface/ProductCardProp";
+import type { RequestCardProp } from "../interface/Request.interface";
 
 
-export default function ProductCard({ ...cardData }: ProducCardProp) {
+export default function RequestCard({ ...cardData }: RequestCardProp) {
   const isTaken = cardData.status === 'taken'; 
   let borderColor = isTaken ? 'border-red-400' : 'border-green-800'; 
 
   return (
     <div className={`flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor}`}>
       {/* Image */}
-      <div className="relative h-44 bg-gray-100 shrink-0 rounded-t-xl">
+      <div className="relative h-44 bg-gray-100 shrink-0 rounded-t-xl"
+      >
         {cardData.imageUrl ? (
           <img
             className="w-full h-full object-cover"
@@ -28,7 +29,7 @@ export default function ProductCard({ ...cardData }: ProducCardProp) {
             <path d="M12 21c-4-4-7-7.5-7-11a7 7 0 0 1 14 0c0 3.5-3 7-7 11z"/>
             <circle cx="12" cy="10" r="2"/>
           </svg>
-          {cardData.origin ? (`${cardData.origin} to ${cardData.deliveryLocation}`) : (`to ${cardData.deliveryLocation}`)}
+          {cardData.origin ? (`${cardData.origin} to ${cardData.delivery_location}`) : (`to ${cardData.delivery_location}`)}
         </span>
       </div>
 

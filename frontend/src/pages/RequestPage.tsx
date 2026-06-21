@@ -1,51 +1,48 @@
 import { useState, useEffect } from "react";
+
 import Header from "../components/Header";
-import ProductCard from "../components/ProductCard";
-import type ProductCardProp from "../interface/ProductCardProp";
-
-
-const testData: ProductCardProp = {
-  title: "starbery",
-  estimatedPrice: 100,
-  origin: 'Baguio',
-  description: 'mga nasa baguio dyan baka namanaaaaaaaaaaaaaaaaaaaaaaan',
-  createdAt: '2h',
-  buyerUsername: 'Mang Gustine',
-  status: 'active',
-  deliveryLocation: 'Manila'
-}
-
-const testDataa: ProductCardProp = {
-  title: "starbery",
-  estimatedPrice: 100,
-  // origin: 'Baguio',
-  description: 'mga nasa baguio dyan baka namanaaaaaaaaaaaaaaaaaaaaaaan',
-  createdAt: '2h',
-  buyerUsername: 'Mang Gustine',
-  status: 'taken',
-  deliveryLocation: 'Manila'
-}
+import RequestCard from "../components/RequestCard";
+import type { RequestResponse} from "../interface/Request.interface";
 
 export default function RequestPage(){
-  const [reqData, setReqData] = useState({}); 
+  const [reqData, setReqData] = useState<RequestResponse[]>([]); 
   
+  useEffect(() => {
+
+    const loadReq = async () => {
+      try {
+        const url = 'http://localhost:5000/api/v1/request/getAll';
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!res.ok) throw new Error('Request Error');
+        
+        const result = await res.json();
+        setReqData(result); 
+
+      } catch (error) {
+        console.log(`Error: ${error}`);
+      }
+    };
+
+    loadReq();
+}, []); 
+
+
   return (
     <section className="py-24">
       <Header username="Current User"/>
 
       <div className="grid grid-cols-1 2xl:grid-cols-6 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-4 px-16">
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testDataa}/>
-        <ProductCard { ...testDataa}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
-        <ProductCard { ...testData}/>
+        {
+          reqData.map(req =>(
+            <RequestCard key={req.request_id} { ...req }/>
+          ))
+        }
       </div>
     </section>
   )
