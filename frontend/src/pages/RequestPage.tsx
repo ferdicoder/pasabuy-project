@@ -1,38 +1,42 @@
-import { useState, useEffect } from "react";
-
+import type { RequestResponse} from "../interface/Request.interface";
+import usePull from "../hooks/usePull";
 import Header from "../components/Header";
 import RequestCard from "../components/RequestCard";
-import type { RequestResponse} from "../interface/Request.interface";
+
 
 export default function RequestPage(){
+  /*
   const [reqData, setReqData] = useState<RequestResponse[]>([]); 
   
-  useEffect(() => {
+//   useEffect(() => {
 
-    const loadReq = async () => {
-      try {
-        const url = 'http://localhost:5000/api/v1/request/getAll';
-        const res = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+//     const loadReq = async () => {
+//       try {
+//         const url = 'http://localhost:5000/api/v1/request/getAll';
+//         const res = await fetch(url, {
+//           method: 'GET',
+//           headers: {
+//             'Content-Type': 'application/json'
+//           }
+//         });
         
-        if (!res.ok) throw new Error('Request Error');
+//         if (!res.ok) throw new Error('Request Error');
         
-        const result = await res.json();
-        setReqData(result); 
+//         const result = await res.json();
+//         setReqData(result); 
 
-      } catch (error) {
-        console.log(`Error: ${error}`);
-      }
-    };
+//       } catch (error) {
+//         console.log(`Error: ${error}`);
+//       }
+//     };
 
-    loadReq();
-}, []); 
+//     loadReq();
+// }, []); 
 
-
+*/
+  
+  const reqData = usePull<RequestResponse>('http://localhost:5000/api/v1/trips/getAll');  
+  
   return (
     <section className="py-24">
       <Header username="Current User"/>

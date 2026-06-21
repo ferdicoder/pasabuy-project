@@ -4,8 +4,8 @@ const tripSchema = z.object({
   user_id: z.number().nonnegative(), 
   current_loc: z.string(), 
   destination: z.string(),
-  depart_date: z.date(), 
-  arrival_date: z.date(), 
+  depart_date: z.coerce.date(), 
+  arrival_date: z.coerce.date(), 
   capacity_kg: z.number().nonnegative(),
   status: z.string()
 }); 

@@ -32,7 +32,7 @@ async function createTrip(tripData: Trip) {
   return result.rows[0];
 }
 
-async function readTrip(tripId: string) {
+async function readOneTrip(tripId: string) {
   const query = `
     SELECT *
     FROM trips
@@ -46,8 +46,21 @@ async function readTrip(tripId: string) {
   return result.rows[0];
 }
 
+// to be changed for sorting, filtering and pagination
+async function readAllTrip() {
+  const query = `
+    SELECT *
+    FROM trips
+  `;
+
+  const result = await sql(query);
+  if (result.rowCount === 0) throw new Error("not found");
+
+  return result.rows;
+}
+
 async function updateTrip(tripId: string, tripData: UpdateTrip) {
-  await readTrip(tripId);
+  await readOneTrip(tripId);
 
   const query = `
     UPDATE trips
@@ -81,7 +94,7 @@ async function updateTrip(tripId: string, tripData: UpdateTrip) {
 }
 
 async function deleteTrip(tripId: string) {
-  await readTrip(tripId);
+  await readOneTrip(tripId);
 
   const query = `
     DELETE FROM trips
@@ -98,7 +111,8 @@ async function deleteTrip(tripId: string) {
 
 export {
   createTrip,
-  readTrip,
+  readOneTrip,
+  readAllTrip,
   updateTrip,
   deleteTrip,
 };

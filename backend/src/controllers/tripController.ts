@@ -3,7 +3,8 @@ import { validateBody } from "../utils/validateBody";
 import { tripSchema, UpdateTripSchema } from "../interface/trip.interface";
 import {
   createTrip,
-  readTrip,
+  readOneTrip,
+  readAllTrip,
   updateTrip,
   deleteTrip,
 } from "../services/tripServices";
@@ -22,12 +23,23 @@ async function setTrip(req: Request, res: Response) {
   }
 }
 
-async function getTrip(req: Request<{ id: string }>, res: Response) {
+async function getOneTrip(req: Request<{ id: string }>, res: Response) {
   const tripId = req.params.id;
   if (!tripId || typeof tripId !== "string") return res.sendStatus(400);
 
   try {
-    const trip = await readTrip(tripId);
+    const trip = await readOneTrip(tripId);
+    return res.status(200).json(trip);
+  } catch (error) {
+    console.log(`${error}`);
+    return res.sendStatus(404);
+  }
+}
+
+async function getAllTrip(req: Request, res: Response) {
+
+  try {
+    const trip = await readAllTrip();
     return res.status(200).json(trip);
   } catch (error) {
     console.log(`${error}`);
@@ -66,7 +78,8 @@ async function removeTrip(req: Request<{ id: string }>, res: Response) {
 
 export { 
   setTrip, 
-  getTrip, 
+  getOneTrip, 
+  getAllTrip,
   patchTrip, 
   removeTrip 
 };
