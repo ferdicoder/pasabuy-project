@@ -6,15 +6,11 @@ import TripPage from './pages/TripPage';
 
 function App() {
   return (
-    <TripPage />
-    // <RequestPage/>
+    <Routes>
+      <Route path="/" element={ <RequestPage/> } />
+      <Route path="/TripPage" element={ <TripPage /> } /> 
+    </Routes>
   )
 }
 
 export default App;
-
-
-  // <Routes>
-    //  <Route path="/" element={ <RequestPage/> } />
-    //  <Route path="/TripPage" element={ <TripPage /> } /> 
-    // </Routes>
