@@ -7,6 +7,7 @@ import {
 
 import { 
   createReqList,
+  readOneReqList,
   readReqList,
   updateReqList,
   deleteReqList
@@ -33,12 +34,23 @@ async function postReqList(req:Request, res:Response){
   }
 }
 
-async function getReqList(req:Request<{ id: string }>, res:Response){
+async function getOneReqList(req:Request<{ id: string }>, res:Response){
   const reqId = req.params.id;
   if(!reqId || typeof reqId !== 'string') return res.sendStatus(400);
 
   try{
-    const reqList = await readReqList(reqId);
+    const reqList = await readOneReqList(reqId);
+    return res.status(200).json(reqList);
+  }catch(error){
+    console.log(`${error}`);
+    return res.sendStatus(404);
+  }
+}
+
+/// tp be changes 
+async function getReqList(req:Request, res:Response){
+  try{
+    const reqList = await readReqList();
     return res.status(200).json(reqList);
   }catch(error){
     console.log(`${error}`);
@@ -77,7 +89,8 @@ async function removeReqList(req:Request<{ id: string }>, res:Response){
 
 export{ 
   postReqList,
+  getOneReqList,
   getReqList,
   patchReqList,
-  removeReqList
+  removeReqList,
 }

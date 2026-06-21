@@ -29,7 +29,7 @@ async function createReqList(requestData: ReqList) {
   return newRequest.rows[0]; 
 }
 
-async function readReqList(reqId: string){
+async function readOneReqList(reqId: string){
   const query = `
     SELECT * 
     FROM requests 
@@ -43,8 +43,34 @@ async function readReqList(reqId: string){
   return reqList.rows[0]; 
 }
 
+
+// to be chaged for pagination, filtering, and sorting
+async function readReqList(){
+  const query = `
+    SELECT 
+      r.request_id,
+      r.buyer_id, 
+      r.title, 
+      r.description, 
+      r.estimated_price AS "estimatedPrice", 
+      r.origin,
+      r.delivery_location, 
+      r.imageurl AS "imageUrl",
+      r.status,
+      r.created_at AS "createdAt",
+      u.username AS buyerUsername
+    FROM requests r 
+    JOIN users u ON r.buyer_id = u.user_id
+  `
+  
+  const reqList = await sql(query); 
+  if(reqList.rowCount === 0) throw new Error('not found'); 
+  
+  return reqList.rows; 
+}
+
 async function updateReqList(reqId: string, requestData: UpdateReqList) {
-  await readReqList(reqId);
+  await readOneReqList(reqId);
 
   const query = `
     UPDATE requests
@@ -75,7 +101,7 @@ async function updateReqList(reqId: string, requestData: UpdateReqList) {
 }
 
 async function deleteReqList(reqId: string){
-  await readReqList(reqId);
+  await readOneReqList(reqId);
   
   const query = `
     DELETE FROM requests
@@ -94,5 +120,6 @@ export{
   createReqList,
   readReqList,
   updateReqList,
-  deleteReqList
+  deleteReqList,
+  readOneReqList
 }

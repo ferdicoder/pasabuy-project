@@ -7,11 +7,13 @@ const ReqListSchema = z.object({
   estimated_price: z.number().nonnegative(),
   origin: z.string(),
   delivery_location: z.string(),
+  imageUrl: z.string().optional()
 }); 
 const UpdateReqListSchema = ReqListSchema.partial();
+type UpdateReqList = z.infer<typeof UpdateReqListSchema>
 
 type ReqList = z.infer<typeof ReqListSchema>
-type UpdateReqList = z.infer<typeof UpdateReqListSchema>
+
 // type UpdateReqList = z.infer<typeof ReqListSchema.partial> returns schema value
 
 

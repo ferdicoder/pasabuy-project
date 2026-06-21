@@ -12,7 +12,7 @@ const pool = new Pool({
 
 export async function connectDB() {
   console.log("Database Connected");
-  
+  await pool.query('SELECT NOW()'); 
 }
 
 export { pool };

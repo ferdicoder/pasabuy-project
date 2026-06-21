@@ -1,6 +1,8 @@
+import cors from 'cors';
+import 'dotenv/config';
 import express from 'express';
 import type { Application } from 'express';
-import 'dotenv/config'
+
 
 import { connectDB } from './config/connectDB'; 
 
@@ -13,7 +15,7 @@ const PORT = process.env.SERVER_PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors());
 
 
 async function startServer() {
