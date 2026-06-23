@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import pasabuyLogo from '../assets/pasabuy-logo.svg';
-import { 
-	Avatar,
-	type AvatarProp
-} from './Avatar';
+
+import AvatarButton from './AvatarButton';
+import NotifButton from './NotifButton';
+import CreateButton from './CreateButton';
 
 
-export default function Header({ username }: AvatarProp){
+export default function Header({ username }: {username: string} ){
 	return (
 		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-10 bg-[#F8F8FF]">
 			<div className="ml-0 w-40 h-15">
@@ -25,8 +25,6 @@ export default function Header({ username }: AvatarProp){
 					<li><a href="">My Activity</a></li>
 				</ul>
 			</nav>
-
-		
 			
 			<div className="relative flex flex-row basis-64 grow shrink h-fit items-center shadow-md rounded-md ">
 				<svg
@@ -51,23 +49,7 @@ export default function Header({ username }: AvatarProp){
 
 			
 			<div className="flex flex-row gap-3 h-fit items-center">
-				<button
-					type="button"
-					aria-label="Add item"
-					className="p-2 rounded-full cursor-pointer"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1.8"
-						className="w-7 h-7  rounded-full hover:bg-gray-200"
-						aria-hidden="true"
-					>
-					<path d="M12 5v14M5 12h14"/>
-					</svg>
-				</button>
+				<CreateButton />
 
 				<button
 					type="button"
@@ -85,27 +67,9 @@ export default function Header({ username }: AvatarProp){
 					</svg>
 				</button>
 
-				<button
-					type="button"
-					aria-label="Open notifications"
-					className="p-2 rounded-full hover:bg-gray-200 cursor-pointer"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1.8"
-						className="w-7 h-7"
-					>
-						<path d="M12 4a4 4 0 0 0-4 4v2.8c0 .7-.2 1.4-.6 2L6 15h12l-1.4-2.2a3.8 3.8 0 0 1-.6-2V8a4 4 0 0 0-4-4Z" />
-						<path d="M10 18a2 2 0 1 0 4 0" />
-					</svg>
-				</button>
+				<NotifButton />
 
-				<button className='cursor-pointer rounded-full hover:border-gray-300'>
-					<Avatar username={username}/>
-				</button>
+				<AvatarButton username={`${username}`}/>
 				
 			</div>
 

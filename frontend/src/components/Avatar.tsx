@@ -1,20 +1,10 @@
-type AvatarProp = {
-  username: string
-}
-function Avatar({ username }: AvatarProp){
-  let getInitial = `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0D8ABC&color=fff&rounded=true&size=64`;
-
+export default function Avatar({ username }: {username: string}){
   return( 
     <img
-      src={getInitial}
+      src={`https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0D8ABC&color=fff&rounded=true&size=64`}
       alt={`${username} avatar`}
-      className="w-9 h-9 rounded-full  "
+      className="w-8 h-8 rounded-full"
     />
   )
-} 
-
-export{
-  Avatar,
-  type AvatarProp
 }
 
