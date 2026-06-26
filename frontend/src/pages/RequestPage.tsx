@@ -35,7 +35,7 @@ export default function RequestPage(){
 
 */
   
-  const reqData = usePull<RequestResponse>('http://localhost:5000/api/v1/trips/getAll');  
+  const reqData = usePull<RequestResponse>('http://localhost:5000/api/v1/request/getAll');  
   
   return (
     <section className="py-24">

@@ -71,7 +71,7 @@ export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () =
               <span className="text-sm font-semibold text-gray-700">Settings</span>
             </Link>
 
-            {/* Divider before sign out */}
+            {/* SIGNOUT*/}
             <div className="my-1 border-t border-gray-100" />
 
             <Link
@@ -98,7 +98,7 @@ export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () =
           </div>
         )}
 
-        {/* notif */}
+        {/* NOTIF */}
         {mode === "notif" && (
           <div>
             <div className="px-4 py-3 border-b border-gray-100">
@@ -138,7 +138,7 @@ export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () =
           </div>
         )}
 
-        {/* create */}
+        {/* CREATE */}
         {mode === "create" && (
           <div className="py-2 px-2 flex flex-col gap-0.5">
             {/* Label */}
