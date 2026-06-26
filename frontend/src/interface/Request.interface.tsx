@@ -4,7 +4,7 @@ interface RequestResponse{
   estimatedPrice: number;
   origin?: string;
   description?: string;
-  createdAt: string;
+  createdAt: Date;
   buyerUsername: string;
   status: string
   imageUrl?: string;

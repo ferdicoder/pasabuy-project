@@ -1,5 +1,6 @@
 import  Avatar  from "./Avatar";
 import type { RequestCardProp } from "../interface/Request.interface";
+import formatDate from "../utils/formatDate";
 
 
 export default function RequestCard({ ...cardData }: RequestCardProp) {
@@ -61,7 +62,7 @@ export default function RequestCard({ ...cardData }: RequestCardProp) {
             <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
-            {`${cardData.createdAt} ago`}
+            {`${formatDate(cardData.createdAt)}`}
           </span>
         </div>
 
