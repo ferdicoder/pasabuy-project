@@ -20,8 +20,8 @@ export default function Header({ username }: {username: string} ){
 			<nav className="w-sm flex item-center justify-center">
 				<ul className="flex flex-row gap-8 content-between w-fit">
 					<li><a href="/">Home</a></li>
-					<Link to='requests'><li>Requests</li></Link>
-					<Link to='trips'><li>Trips</li></Link>
+					<Link to='/requests'><li>Requests</li></Link>
+					<Link to='/trips'><li>Trips</li></Link>
 					<li><a href="">My Activity</a></li>
 				</ul>
 			</nav>
