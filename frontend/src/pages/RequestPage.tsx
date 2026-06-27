@@ -38,16 +38,18 @@ export default function RequestPage(){
   const reqData = usePull<RequestResponse>('http://localhost:5000/api/v1/request/getAll');  
   
   return (
-    <section className="py-24">
+    <>
       <Header username="Current User"/>
-
-      <div className="grid grid-cols-1 2xl:grid-cols-6 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-4 px-16">
-        {
-          reqData.map(req =>(
-            <RequestCard key={req.request_id} { ...req }/>
-          ))
-        }
-      </div>
-    </section>
+      
+      <section className="py-24">
+        <div className="grid grid-cols-1 2xl:grid-cols-6 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-4 px-16">
+          {
+            reqData.map(req =>(
+              <RequestCard key={req.request_id} { ...req }/>
+            ))
+          }
+        </div>
+      </section>
+    </>
   )
 }

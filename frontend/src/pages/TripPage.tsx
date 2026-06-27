@@ -11,9 +11,10 @@ export default function TripPage(){
   const tripData = usePull<Trip>('http://localhost:5000/api/v1/trips/getAll')
 
   return (
+    <>
+    <Header username="Current User"/>
+    
     <section className="py-24">
-      <Header username="Current User"/>
-
       <div className="grid grid-cols-1 2xl:grid-cols-6 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-4 px-16">
           {
             tripData.map(trip =>(
@@ -22,5 +23,6 @@ export default function TripPage(){
           }
       </div>
     </section>
+    </>
   )
 }

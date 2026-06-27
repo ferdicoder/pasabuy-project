@@ -4,13 +4,9 @@ import type { Trip } from "../interface/Trip.interface";
 
 const statusColor: Record<Trip["status"],{ label: string; bg: string; text: string; dot: string }> = {
   open:       { label: "Open", bg: "bg-emerald-50", text: "text-emerald-700", dot: "bg-emerald-500" },
-
   full:       { label: "Full", bg: "bg-amber-50", text: "text-amber-700", dot: "bg-amber-500" },
-
   in_transit: { label: "In Transit", bg: "bg-sky-50", text: "text-sky-700", dot: "bg-sky-500" },
-
   completed:  { label: "Completed",  bg: "bg-slate-100", text: "text-slate-600", dot: "bg-slate-400" },
-
   cancelled:  { label: "Cancelled",  bg: "bg-red-50", text: "text-red-600", dot: "bg-red-400" },
 };
 
@@ -27,7 +23,7 @@ function ImagePlaceholder({ destination }: { destination: string }) {
         viewBox="0 0 24 24"
         fill="currentColor"
       >
-        
+
         <path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2a1.5 1.5 0 0 0-1.5 1.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5Z" />
       </svg>
     </div>
@@ -36,7 +32,7 @@ function ImagePlaceholder({ destination }: { destination: string }) {
 
 
 
-export function TripCard({ ...tripData }: Trip) {
+export function TripCard({ homeStyle, ...tripData }: Trip & { homeStyle?: string }) {
   
 
   const statusCfg = statusColor[tripData.status] ?? statusColor.open;
@@ -45,7 +41,7 @@ export function TripCard({ ...tripData }: Trip) {
     <article
       onClick={() => tripData.onClick}
       className={[
-        // Base card
+        `${homeStyle}`,
         "group relative flex w-full max-w-sm overflow-hidden rounded-2xl",
         "bg-white border border-slate-200/80",
         "shadow-sm hover:shadow-md",
@@ -53,7 +49,7 @@ export function TripCard({ ...tripData }: Trip) {
         tripData.onClick ? "cursor-pointer hover:-translate-y-0.5 active:scale-[0.99]" : "",
       ].join(" ")}
     >
-      {/* ── Left: Destination Image ── */}
+      {/* left image destination */}
       <div className="relative w-22 shrink-0 overflow-hidden">
         {tripData.image_url ? (
           <img
@@ -68,7 +64,7 @@ export function TripCard({ ...tripData }: Trip) {
         <div className="absolute inset-y-0 right-0 w-5 bg-linear-to-r from-transparent to-white pointer-events-none" />
       </div>
 
-      {/* ── Right: Info ── */}
+      {/* right info */}
       <div className="flex flex-1 flex-col justify-between px-3 py-2.5 min-w-0">
 
         {/* Top row: Route + Status badge */}

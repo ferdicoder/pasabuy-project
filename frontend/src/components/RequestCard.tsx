@@ -3,12 +3,12 @@ import type { RequestCardProp } from "../interface/Request.interface";
 import formatDate from "../utils/formatDate";
 
 
-export default function RequestCard({ ...cardData }: RequestCardProp) {
+export default function RequestCard({ homeStyle, ...cardData }: RequestCardProp & { homeStyle?: string }) {
   const isTaken = cardData.status === 'taken'; 
   let borderColor = isTaken ? 'border-red-400' : 'border-green-800'; 
 
   return (
-    <div className={`flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor}`}>
+    <div className={`flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor} ${homeStyle}`}>
       {/* Image */}
       <div className="relative h-44 bg-gray-100 shrink-0 rounded-t-xl"
       >
