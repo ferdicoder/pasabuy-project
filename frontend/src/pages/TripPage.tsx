@@ -14,8 +14,8 @@ export default function TripPage(){
     <>
     <Header username="Current User"/>
     
-    <section className="py-24">
-      <div className="grid grid-cols-1 2xl:grid-cols-6 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-4 px-16">
+    <section className="py-24 px-8">
+      <div className="grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 2xl:gap-4 xl:gap-4 md:gap-3">
           {
             tripData.map(trip =>(
               <TripCard key={trip.trip_id} { ...trip } />

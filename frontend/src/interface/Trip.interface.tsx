@@ -1,6 +1,6 @@
  interface Trip {
   trip_id: string;
-  user_id: number;
+  username: string;
   current_loc: string;
   destination: string;
   depart_date: Date;
