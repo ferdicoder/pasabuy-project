@@ -49,8 +49,19 @@ async function readOneTrip(tripId: string) {
 // to be changed for sorting, filtering and pagination
 async function readAllTrip() {
   const query = `
-    SELECT *
-    FROM trips
+    SELECT 
+      t.trip_id,
+      t.current_location AS current_loc,
+      t.destination,
+      t.depart_date,
+      t.arrival_date, 
+      t.capacity_kg,
+      t.status,
+      t.image_url,
+      u.username
+    FROM trips t
+    JOIN users u 
+      ON t.user_id = u.user_id
   `;
 
   const result = await sql(query);
