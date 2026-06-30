@@ -18,16 +18,21 @@ export default function HomePage(){
 
     <section className="py-24 ">
 
-      {/* request */}
-      <div className=" flex flex-col items-center mb-4 gap-y-2">
+      {/* Matched Request */}
+      <div className=" flex flex-col items-center mb-4 gap-y-2 ">
 
-        <div className="flex justify-between w-full px-34 items-center">
-          <h2 className="font-bold text-xl">Matched Requests</h2>
+        <div className="flex justify-between w-full px-33 items-center">
+          <h2 className="font-extrabold text-xl">Matched Trips</h2>
           
-          <h2 className="text-gray-500 text-sm">View More</h2>
+          <h2 className="text-gray-500">View More</h2>
         </div>
 
-        <div className="columns-1 sm:columns-2 md:columns-3 xl:columns-4 2xl:columns-6 gap-4 px-16 ">
+        <div className="
+            w-full px-32 
+            min-w-25 sm:min-w-30 md:min-w-30 lg:min-w-40 xl:min-w-40 2xl:min-2-50
+            grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6
+            gap-2 sm:gap-2 md:gap-x-5 xl:gap-x-4 xl:gap-y-2 2xl:gap-2
+          ">
           {reqData.map((card) =>(
             <RequestCard key={card.request_id} { ...card } homeStyle="break-inside-avoid mb-4" /> 
           ))}
@@ -35,8 +40,7 @@ export default function HomePage(){
 
       </div>
       
-       {/* Trips */}
-      
+       {/* Matched Trips */}
       <div className=" flex flex-col items-center mb-4 gap-y-2 ">
 
         <div className="flex justify-between w-full px-33 items-center">
