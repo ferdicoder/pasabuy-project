@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import Dropdown from "./Dropdown";
+import RequestForm from "./RequestForm";
 
 export default function CreateButton(){
   const [isOpen, setIsOpen] = useState(false);
+  const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   
     // Close dropdown when clicking outside
@@ -37,7 +39,21 @@ export default function CreateButton(){
 					</svg>
 				</button>
 
-        {isOpen && <Dropdown mode="create" onClose={() => setIsOpen(false)}/>}
+          {isOpen && (
+            <Dropdown
+              mode="create"
+              onClose={() => setIsOpen(false)}
+              onRequestClick={() => setIsRequestFormOpen(true)}
+            />
+          )}
+
+          <RequestForm
+            isOpen={isRequestFormOpen}
+            onClose={() => setIsRequestFormOpen(false)}
+            onSubmit={async () => {
+              return;
+            }}
+          />
       </div>
     );
 }

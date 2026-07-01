@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 
-export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () => void;}) {
+export default function Dropdown({ mode, onClose, onRequestClick,}: {
+  mode: string;
+  onClose: () => void;
+  onRequestClick?: () => void;
+}){
   // Width per mode
   const widthMode = mode === "notif" ? "w-80" : mode === "avatar" ? "w-44" : "w-44";
 
-  // Horizontal offset — arrow is centered via left-1/2 -translate-x-1/2
   return (
     <div className={`absolute right-0 mt-3 ${widthMode} z-50`}>
+
       {/* Arrow */}
       <div className="absolute -top-2 right-3 w-4 h-2 overflow-visible">
         <svg
@@ -26,7 +30,6 @@ export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () =
 
       {/* Panel */}
       <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden">
-        {/* for avatar*/}
         {mode === "avatar" && (
           <div className="py-2 px-2 flex flex-col gap-0.5">
             <Link
@@ -71,34 +74,32 @@ export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () =
               <span className="text-sm font-semibold text-gray-700">Settings</span>
             </Link>
 
-            {/* SIGNOUT*/}
             <div className="my-1 border-t border-gray-100" />
-
-            <Link
-              to="/signout"
-              onClick={onClose}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-50 transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-4 w-4 text-red-500 shrink-0"
+              <Link
+                to="/signout"
+                onClick={onClose}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-50 transition-colors"
               >
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                <polyline points="16 17 21 12 16 7" />
-                <line x1="21" y1="12" x2="9" y2="12" />
-              </svg>
-              <span className="text-sm font-semibold text-red-600">Sign Out</span>
-            </Link>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4 text-red-500 shrink-0"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                <span className="text-sm font-semibold text-red-600">Sign Out</span>
+              </Link>
           </div>
         )}
 
-        {/* NOTIF */}
+        
         {mode === "notif" && (
           <div>
             <div className="px-4 py-3 border-b border-gray-100">
@@ -138,21 +139,20 @@ export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () =
           </div>
         )}
 
-        {/* CREATE */}
         {mode === "create" && (
           <div className="py-2 px-2 flex flex-col gap-0.5">
-            {/* Label */}
+            
             <p className="px-3 pt-1 pb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
               Create New
             </p>
 
-            {/* REQ */}
-            <Link
-              to="/request"
-              onClick={onClose}
+            <button
+              onClick={() => {
+                onRequestClick?.();
+                onClose();
+              }}
               className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              
+            > 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -171,9 +171,8 @@ export default function Dropdown({ mode, onClose,}: {mode: string; onClose: () =
                 <p className="text-sm font-semibold text-gray-700">Request</p>
                 <p className="text-[11px] text-gray-400">Post a request to take by travelers</p>
               </div>
-            </Link>
+            </button>
 
-            {/* TRIP */}
             <Link
               to="/trips"
               onClick={onClose}
