@@ -24,7 +24,7 @@ interface RequestFormProp {
 
 type CreateRequestPayload = Pick<RequestResponse,
   'title' | 'estimated_price' | 'origin' | 'delivery_location' | 'description'
-> & { imageUrl?: string, buyer_id: number //for change dont put PK in FE};
+> & { imageUrl?: string, buyer_id: number} //for change dont put PK in FE};
 
 export type{
   RequestResponse,
