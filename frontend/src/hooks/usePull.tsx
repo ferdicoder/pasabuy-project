@@ -14,6 +14,7 @@ export default function usePull<T>(url: string){
         if(!data.ok) throw new Error('Request Failed'); 
         
         const result = await data.json();
+        console.log(result)
         setState(result); 
         
       }catch(error){

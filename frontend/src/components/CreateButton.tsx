@@ -1,13 +1,27 @@
 import { useState, useRef, useEffect } from "react";
+import type { CreateRequestPayload } from "../interface/Request.interface";
 import Dropdown from "./Dropdown";
 import RequestForm from "./RequestForm";
+import usePost from "../hooks/usePost";
+
+
 
 export default function CreateButton(){
   const [isOpen, setIsOpen] = useState(false);
   const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  
-    // Close dropdown when clicking outside
+
+  // map frontend payload to backend expected fields
+  const { postRequest } = usePost<any>('http://localhost:5000/api/v1/request/create'); 
+  const handleRequestSubmit = async (payload: CreateRequestPayload) =>{
+    try{
+      await postRequest(payload); 
+    }catch(error){
+      console.log(error); 
+    }
+  }
+
+  // Close dropdown when clicking outside
     useEffect(() => {
       function clickOutside(event: MouseEvent) {
         if (ref.current && !ref.current.contains(event.target as Node)) {
@@ -17,7 +31,7 @@ export default function CreateButton(){
       document.addEventListener("mousedown", clickOutside);
       return () => document.removeEventListener("mousedown", clickOutside);
     }, []);
-  
+
     return (
       <div ref={ref} className="relative">
        <button
@@ -50,9 +64,7 @@ export default function CreateButton(){
           <RequestForm
             isOpen={isRequestFormOpen}
             onClose={() => setIsRequestFormOpen(false)}
-            onSubmit={async () => {
-              return;
-            }}
+            onSubmit={handleRequestSubmit}
           />
       </div>
     );

@@ -1,33 +1,26 @@
 import { useState } from "react";
-import type { CreateRequestPayload } from "../interface/Request.interface";
+import type { CreateRequestPayload, RequestFormProp } from "../interface/Request.interface";
 
-interface RequestFormProp {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (payload: CreateRequestPayload) => unknown;
-}
-
-const initialState: CreateRequestPayload = {
-  title: "",
-  estimatedPrice: 0,
-  origin: "",
-  delivery_location: "",
-  description: "",
-  imageUrl: "",
-};
 
 export default function RequestForm({ isOpen, onClose, onSubmit }: RequestFormProp) {
+  const initialState: CreateRequestPayload = {
+    buyer_id: 6, // for change dont put primary key in FE
+    title: "",
+    estimated_price: 0,
+    origin: "",
+    delivery_location: "",
+    description: "",
+    imageUrl: ""
+  };
+
   const [form, setForm] = useState<CreateRequestPayload>(initialState);
   const [submitting, setSubmitting] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleChange = (
-    field: keyof CreateRequestPayload,
-    value: string | number
-  ) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-  };
+  const handleChange = (field: keyof CreateRequestPayload, value: string | number) =>{
+    setForm((prevState) => ({ ...prevState, [field]: value }))
+  }
 
   const handleSubmit = async () => {
     if (!form.title.trim() || !form.delivery_location.trim()) return;
@@ -40,7 +33,7 @@ export default function RequestForm({ isOpen, onClose, onSubmit }: RequestFormPr
     } finally {
       setSubmitting(false);
     }
-  };
+  }
 
   return (
     <div // backdrop-blur-sm
@@ -111,8 +104,8 @@ export default function RequestForm({ isOpen, onClose, onSubmit }: RequestFormPr
             <input
               type="number"
               min={0}
-              value={form.estimatedPrice || ""}
-              onChange={(e) => handleChange("estimatedPrice", Number(e.target.value))}
+              value={form.estimated_price || ""}
+              onChange={(e) => handleChange("estimated_price", Number(e.target.value))}
               placeholder="0"
               className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors
               [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
