@@ -1,14 +1,37 @@
 import  Avatar  from "./Avatar";
-import type { RequestCardProp } from "../interface/Request.interface";
+import type { RequestResponse } from "../interface/Request.interface";
 import formatDate from "../utils/formatDate";
 
+interface RequestCardProp extends RequestResponse{
+  onTakeRequest?: () => unknown;
+}
 
-export default function RequestCard({ homeStyle, ...cardData }: RequestCardProp & { homeStyle?: string }) {
+type RequestCardViewProps = RequestCardProp & {
+  homeStyle?: string;
+  showCloseIcon?: boolean;
+  onDelete?: () => void;
+};
+
+export default function RequestCard({ homeStyle, showCloseIcon, onDelete, ...cardData }: RequestCardViewProps) {
   const isTaken = cardData.status === 'taken'; 
   let borderColor = isTaken ? 'border-red-400' : 'border-green-800'; 
 
   return (
-    <div className={`flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor} ${homeStyle}`}>
+    <div className={`relative flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor} ${homeStyle}`}>
+      {showCloseIcon && (
+        <button
+          type="button"
+          onClick={onDelete}
+          aria-label="Delete request"
+          className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-opacity hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/80 cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      )}
+
       {/* Image */}
       <div className="relative h-44 bg-gray-100 shrink-0 rounded-t-xl"
       >

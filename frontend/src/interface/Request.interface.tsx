@@ -12,9 +12,7 @@ interface RequestResponse{
   
 } 
 
-interface RequestCardProp extends RequestResponse{
-  onTakeRequest?: () => unknown
-}
+
 
 interface RequestFormProp {
   isOpen: boolean;
@@ -28,7 +26,6 @@ type CreateRequestPayload = Pick<RequestResponse,
 
 export type{
   RequestResponse,
-  RequestCardProp,
   CreateRequestPayload,
   RequestFormProp
 }

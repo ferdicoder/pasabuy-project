@@ -23,7 +23,6 @@ function ImagePlaceholder({ destination }: { destination: string }) {
 }
 
 function TravelerAvatar({ username, avatar_url }: { username: string; avatar_url?: string | null }) {
-  const initial = username.trim().charAt(0).toUpperCase();
   return avatar_url ? (
     <img
       src={avatar_url}
@@ -38,7 +37,13 @@ function TravelerAvatar({ username, avatar_url }: { username: string; avatar_url
   );
 }
 
-export function TripCard({ homeStyle, ...tripData }: Trip & { homeStyle?: string }) {
+type TripCardViewProps = Trip & {
+  homeStyle?: string;
+  showCloseIcon?: boolean;
+  onDelete?: () => void;
+};
+
+export function TripCard({ homeStyle, showCloseIcon, onDelete, ...tripData }: TripCardViewProps) {
   const statusCfg = statusColor[tripData.status] ?? statusColor.open;
 
   return (
@@ -46,15 +51,32 @@ export function TripCard({ homeStyle, ...tripData }: Trip & { homeStyle?: string
       onClick={tripData.onClick}
       className={[
         homeStyle ?? "",
-        "group relative flex w-full max-w-sm overflow-hidden rounded-2xl",
+        "group relative flex w-full max-w-sm overflow-visible rounded-2xl",
         "bg-white border border-slate-200/80",
         "shadow-sm hover:shadow-md",
         "transition-all duration-200 ease-out",
         tripData.onClick ? "cursor-pointer hover:-translate-y-0.5 active:scale-[0.99]" : "",
       ].join(" ")}
     >
+      {showCloseIcon && (
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onDelete?.();
+          }}
+          aria-label="Delete trip"
+          className="absolute -right-2 -top-2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur-sm transition-opacity hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/80 cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      )}
+
       {/* Left: destination image */}
-      <div className="relative w-22 shrink-0 overflow-hidden">
+      <div className="relative w-22 shrink-0 overflow-hidden rounded-l-2xl">
         {tripData.image_url ? (
           <img
             src={tripData.image_url}

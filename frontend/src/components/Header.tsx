@@ -8,7 +8,7 @@ import CreateButton from './CreateButton';
 
 export default function Header({ username }: {username: string} ){
 	return (
-		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-10 bg-[#F8F8FF]">
+		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-20 bg-[#F8F8FF]">
 			<div className="ml-0 w-40 h-15">
 				<img
 					src={pasabuyLogo}
@@ -22,7 +22,7 @@ export default function Header({ username }: {username: string} ){
 					<li><a href="/">Home</a></li>
 					<Link to='/requests'><li>Requests</li></Link>
 					<Link to='/trips'><li>Trips</li></Link>
-					<li><a href="">My Activity</a></li>
+					<Link to='/activity'><li>My Activity</li></Link>
 				</ul>
 			</nav>
 			
