@@ -14,7 +14,7 @@ function formatDateInput(date: Date) {
 export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 	const now = new Date();
 	const initialState: CreateTripPayload = {
-		user_id: "6", // for change dont put primary key in FE
+		user_id: 6, // for change dont put primary key in FE
 		username: "", 
 		current_loc: "",
 		destination: "",
