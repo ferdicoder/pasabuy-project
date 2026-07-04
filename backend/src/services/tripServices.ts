@@ -9,10 +9,9 @@ async function createTrip(tripData: Trip) {
       destination,
       depart_date,
       arrival_date,
-      capacity_kg,
-      status
+      capacity_kg
     )
-    VALUES($1,$2,$3,$4,$5,$6,$7)
+    VALUES($1,$2,$3,$4,$5,$6)
     RETURNING *;
   `;
 
@@ -22,8 +21,7 @@ async function createTrip(tripData: Trip) {
     tripData.destination,
     tripData.depart_date,
     tripData.arrival_date,
-    tripData.capacity_kg,
-    tripData.status,
+    tripData.capacity_kg
   ];
 
   const result = await sql(query, values);

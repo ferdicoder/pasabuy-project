@@ -7,7 +7,7 @@ const tripSchema = z.object({
   depart_date: z.coerce.date(), 
   arrival_date: z.coerce.date(), 
   capacity_kg: z.number().nonnegative(),
-  status: z.string()
+  status: z.string().optional()
 }); 
 
 const UpdateTripSchema = tripSchema.partial();
