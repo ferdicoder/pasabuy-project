@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 
-export default function Dropdown({ mode, onClose, onRequestClick,}: {
+export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: {
   mode: string;
   onClose: () => void;
   onRequestClick?: () => void;
+  onTripClick?: () => void; 
 }){
   // Width per mode
   const widthMode = mode === "notif" ? "w-80" : mode === "avatar" ? "w-44" : "w-44";
@@ -173,9 +174,11 @@ export default function Dropdown({ mode, onClose, onRequestClick,}: {
               </div>
             </button>
 
-            <Link
-              to="/trips"
-              onClick={onClose}
+            <button
+               onClick={() => {
+                onTripClick?.();
+                onClose();
+              }}
               className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
             >
               <svg
@@ -194,7 +197,8 @@ export default function Dropdown({ mode, onClose, onRequestClick,}: {
                 <p className="text-sm font-semibold text-gray-700">Trip</p>
                 <p className="text-[11px] text-gray-400">Post trip to receive a request</p>
               </div>
-            </Link>
+            </button>
+
           </div>
         )}
 

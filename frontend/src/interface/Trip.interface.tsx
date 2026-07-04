@@ -11,8 +11,17 @@
   onClick?: () => (void)
 }
 
+interface TripFormProp {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (payload: CreateTripPayload) => unknown;
+}
 
+type CreateTripPayload = Omit<Trip, 'trip_id' | 'onClick' | 'status' > 
+  & { user_id: string } // for change dont put PK in FE
 
 export type {
-  Trip
+  Trip, 
+  CreateTripPayload,
+  TripFormProp
 }

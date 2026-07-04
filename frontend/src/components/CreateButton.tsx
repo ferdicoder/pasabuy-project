@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import type { CreateRequestPayload } from "../interface/Request.interface";
+import type { CreateTripPayload } from "../interface/Trip.interface";
 import Dropdown from "./Dropdown";
 import RequestForm from "./RequestForm";
+import TripForm from "./TripForm";
 import usePost from "../hooks/usePost";
 
 
@@ -9,16 +11,19 @@ import usePost from "../hooks/usePost";
 export default function CreateButton(){
   const [isOpen, setIsOpen] = useState(false);
   const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
+  const [isTripFormOpen, setIsTripFormOpen] = useState(false);
+  
   const ref = useRef<HTMLDivElement>(null);
 
-  // map frontend payload to backend expected fields
-  const { postRequest } = usePost<any>('http://localhost:5000/api/v1/request/create'); 
+  // keep the hook generic; the parent chooses the endpoint for each form
+  const { postRequest } = usePost<CreateRequestPayload>('http://localhost:5000/api/v1/request/create');
   const handleRequestSubmit = async (payload: CreateRequestPayload) =>{
-    try{
-      await postRequest(payload); 
-    }catch(error){
-      console.log(error); 
-    }
+    await postRequest(payload);
+  }
+
+  const { postRequest: postTripRequest } = usePost<CreateTripPayload>('http://localhost:5000/api/v1/trips/create');
+  const handleTripSubmit = async (payload: CreateTripPayload) =>{
+    await postTripRequest(payload);
   }
 
   // Close dropdown when clicking outside
@@ -58,6 +63,7 @@ export default function CreateButton(){
               mode="create"
               onClose={() => setIsOpen(false)}
               onRequestClick={() => setIsRequestFormOpen(true)}
+              onTripClick={() => setIsTripFormOpen(true)}
             />
           )}
 
@@ -66,6 +72,13 @@ export default function CreateButton(){
             onClose={() => setIsRequestFormOpen(false)}
             onSubmit={handleRequestSubmit}
           />
+          
+          <TripForm 
+            isOpen={isTripFormOpen}
+            onClose={() => setIsTripFormOpen(false)}
+            onSubmit={handleTripSubmit}
+          />
+          
       </div>
     );
 }

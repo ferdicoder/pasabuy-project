@@ -41,7 +41,7 @@ export default function RequestCard({ homeStyle, ...cardData }: RequestCardProp 
         <div className="flex justify-between items-start gap-2">
           <p className="font-medium text-[15px] text-gray-900 leading-snug">{cardData.title}</p>
           <span className="shrink-0 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-            ~₱{cardData.estimatedPrice}
+            ~₱{cardData.estimated_price}
           </span>
         </div>
 
