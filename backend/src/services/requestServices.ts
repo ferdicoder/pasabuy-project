@@ -72,6 +72,7 @@ async function readReqList(){
 async function updateReqList(reqId: string, requestData: UpdateReqList) {
   await readOneReqList(reqId);
 
+  // use coalesce fn to prevent nullish value
   const query = `
     UPDATE requests
     SET
