@@ -4,11 +4,23 @@ import TripCard from "../components/TripCard";
 import usePull from "../hooks/usePull";
 import type { RequestResponse } from "../interface/Request.interface";
 import type { Trip } from "../interface/Trip.interface";
+import useDelete from "../hooks/useDelete";
 
 
 export default function ActivityPage(){
   const requestData = usePull<RequestResponse>('http://localhost:5000/api/v1/request/getAll');
   const tripData = usePull<Trip>('http://localhost:5000/api/v1/trips/getAll');
+
+  // deletion of card event
+    const { deleteItem: deleteRequest } = useDelete('http://localhost:5000/api/v1/request/delete'); 
+    const handleDeleteRequest = async (id: string) =>{
+      deleteRequest(id); 
+    }
+  
+    const { deleteItem: deleteTrip } = useDelete('http://localhost:5000/api/v1/trips/delete'); 
+    const handleDeleteTrip = async (id: string) =>{
+      deleteTrip(id); 
+    }
 
   return(
     <>
@@ -23,7 +35,7 @@ export default function ActivityPage(){
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             {requestData.map((request) => (
-              <RequestCard key={request.request_id} {...request} showCloseIcon />
+              <RequestCard key={request.request_id} {...request} showCloseIcon onDelete={() => handleDeleteRequest(request.request_id)}/>
             ))}
           </div>
         </div>
@@ -36,7 +48,7 @@ export default function ActivityPage(){
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {tripData.map((trip) => (
-              <TripCard key={trip.trip_id} {...trip} showCloseIcon />
+              <TripCard key={trip.trip_id} {...trip} showCloseIcon onDelete={() => handleDeleteTrip(trip.trip_id)}/>
             ))}
           </div>
         </div>

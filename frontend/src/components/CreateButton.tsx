@@ -4,6 +4,7 @@ import type { CreateTripPayload } from "../interface/Trip.interface";
 import Dropdown from "./Dropdown";
 import RequestForm from "./RequestForm";
 import TripForm from "./TripForm";
+
 import usePost from "../hooks/usePost";
 
 
@@ -15,7 +16,7 @@ export default function CreateButton(){
   
   const ref = useRef<HTMLDivElement>(null);
 
-  // keep the hook generic; the parent chooses the endpoint for each form
+  // creation of trip and request
   const { postRequest } = usePost<CreateRequestPayload>('http://localhost:5000/api/v1/request/create');
   const handleRequestSubmit = async (payload: CreateRequestPayload) =>{
     await postRequest(payload);
@@ -25,6 +26,7 @@ export default function CreateButton(){
   const handleTripSubmit = async (payload: CreateTripPayload) =>{
     await postTripRequest(payload);
   }
+
 
   // Close dropdown when clicking outside
     useEffect(() => {
