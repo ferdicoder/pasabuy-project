@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { MessageSquare, Search } from 'lucide-react';
 import pasabuyLogo from '../assets/pasabuy-logo.svg';
 
 import AvatarButton from './AvatarButton';
@@ -27,18 +28,12 @@ export default function Header({ username }: {username: string} ){
 			</nav>
 			
 			<div className="relative flex flex-row basis-64 grow shrink h-fit items-center shadow-md rounded-md ">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="1.8"
-					className="w-5 h-5 text-gray-500 absolute left-3 pointer-events-none hover:cursor-pointer"
+				<Search
+					size={20}
+					strokeWidth={1.8}
+					className="text-gray-500 absolute left-3 pointer-events-none hover:cursor-pointer"
 					aria-hidden="true"
-				>
-					<circle cx="11" cy="11" r="6" />
-					<path d="m16 16 4 4" />
-				</svg>
+				/>
 
 				<input 
 					type="text" 
@@ -55,16 +50,7 @@ export default function Header({ username }: {username: string} ){
 					type="button"
 					aria-label="Open messages"
 					className="p-2 rounded-full hover:bg-gray-200 cursor-pointer">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1.8"
-						className="w-7 h-7"
-					>
-						<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-					</svg>
+					<MessageSquare size={28} strokeWidth={1.8} />
 				</button>
 
 				<NotifButton />

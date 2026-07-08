@@ -1,4 +1,5 @@
-import  Avatar  from "./Avatar";
+import { Clock, MapPin, PencilLine, ShoppingBag, X } from "lucide-react";
+import Avatar from "./Avatar";
 import type { RequestResponse } from "../interface/Request.interface";
 import formatDate from "../utils/formatDate";
 
@@ -24,10 +25,7 @@ export default function RequestCard({ homeStyle, onTakeRequest, showDeleteIcon, 
           aria-label="Delete request"
           className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-opacity hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/80 cursor-pointer"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
+          <X className="h-4 w-4" strokeWidth={2.2} />
         </button>
       )}
 
@@ -48,10 +46,7 @@ export default function RequestCard({ homeStyle, onTakeRequest, showDeleteIcon, 
 
         {/* Origin */}
         <span className="absolute bottom-2.5 left-2.5 flex items-center gap-1 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 21c-4-4-7-7.5-7-11a7 7 0 0 1 14 0c0 3.5-3 7-7 11z"/>
-            <circle cx="12" cy="10" r="2"/>
-          </svg>
+          <MapPin className="w-3 h-3" strokeWidth={2} />
           {cardData.origin ? (`${cardData.origin} to ${cardData.delivery_location}`) : (`to ${cardData.delivery_location}`)}
         </span>
       </div>
@@ -81,9 +76,7 @@ export default function RequestCard({ homeStyle, onTakeRequest, showDeleteIcon, 
             <p className="text-[13px] text-gray-500">{cardData.buyerUsername}</p>
           </div>
           <span className="flex items-center gap-1 text-[12px] text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-            </svg>
+            <Clock className="w-3.5 h-3.5" strokeWidth={2} />
             {`${formatDate(cardData.createdAt)}`}
           </span>
         </div>
@@ -95,16 +88,9 @@ export default function RequestCard({ homeStyle, onTakeRequest, showDeleteIcon, 
           className={`w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-[1rem] font-medium py-2.5 rounded-lg transition-all duration-150  disabled:cursor-not-allowed disabled:opacity-75`}
         >
           {actionLabel === 'Edit' ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m18 2 4 4-12 12-4 1 1-4Z" />
-              <path d="M2 22h20" />
-            </svg>
-            
+            <PencilLine className="w-4 h-4" strokeWidth={2} />
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-            
+            <ShoppingBag className="w-4 h-4" strokeWidth={2} />
           )}
           {actionLabel ?? 'Take Request'}
         </button>
