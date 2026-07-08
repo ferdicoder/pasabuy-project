@@ -1,5 +1,5 @@
-import { sql } from "../config/query";
-import type {  ReqList, UpdateReqList } from "../interface/reqList.interface";
+import { sql } from "../config/query.js";
+import type { ReqList, UpdateReqList } from "../interface/reqList.interface.js";
 
 async function createReqList(requestData: ReqList) {
   const query = `

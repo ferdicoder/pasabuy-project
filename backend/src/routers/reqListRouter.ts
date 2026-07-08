@@ -5,7 +5,7 @@ import {
   getReqList,
   patchReqList,
   removeReqList, 
-} from "../controllers/requestController";
+} from "../controllers/requestController.js";
 
 const reqListRouter = Router(); 
 

@@ -1,13 +1,13 @@
 import type { Request, Response } from "express";
-import { validateBody } from "../utils/validateBody";
-import { tripSchema, UpdateTripSchema } from "../interface/trip.interface";
+import { validateBody } from "../utils/validateBody.js";
+import { tripSchema, UpdateTripSchema } from "../interface/trip.interface.js";
 import {
   createTrip,
   readOneTrip,
   readAllTrip,
   updateTrip,
   deleteTrip,
-} from "../services/tripServices";
+} from "../services/tripServices.js";
 
 async function setTrip(req: Request, res: Response) {
   const result = validateBody(tripSchema, req.body);

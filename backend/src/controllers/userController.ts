@@ -1,18 +1,18 @@
 import type { Request, Response } from 'express'; 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'; 
-import { validateBody } from '../utils/validateBody'
+import { validateBody } from '../utils/validateBody.js'
 
 import { 
   UserSchema,
   LoginSchema
-  } from '../interface/user.internface';
+  } from '../interface/user.internface.js';
 
 import { 
   createUser, 
   readUser,
   issueToken
-} from '../services/userServices';
+} from '../services/userServices.js';
 
 
 async function registerUser(req:Request, res:Response){

@@ -5,7 +5,7 @@ import {
   getAllTrip,
   patchTrip, 
   removeTrip 
-} from "../controllers/tripController";
+} from "../controllers/tripController.js";
 
 const tripRouter = Router();
 

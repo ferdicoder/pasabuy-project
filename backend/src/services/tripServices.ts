@@ -1,5 +1,5 @@
-import { sql } from "../config/query";
-import type { Trip, UpdateTrip } from "../interface/trip.interface";
+import { sql } from "../config/query.js";
+import type { Trip, UpdateTrip } from "../interface/trip.interface.js";
 
 async function createTrip(tripData: Trip) {
   const query = `

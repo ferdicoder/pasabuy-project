@@ -1,8 +1,8 @@
 import type { 
   DbUser,
   Users
-} from "../interface/user.internface";
-import { sql } from "../config/query";
+} from "../interface/user.internface.js";
+import { sql } from "../config/query.js";
 
 
 

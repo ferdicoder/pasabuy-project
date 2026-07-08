@@ -1,4 +1,4 @@
-import { pool } from "./connectDB";
+import { pool } from "./connectDB.js";
 import type { QueryResult, QueryResultRow } from "pg";
 
 export async function sql<T extends QueryResultRow = QueryResultRow>(

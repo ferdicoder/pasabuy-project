@@ -3,7 +3,7 @@ import {
   type ReqList, 
   ReqListSchema,
   UpdateReqListSchema
-} from '../interface/reqList.interface';
+} from '../interface/reqList.interface.js';
 
 import { 
   createReqList,
@@ -11,9 +11,9 @@ import {
   readReqList,
   updateReqList,
   deleteReqList
-} from '../services/requestServices';
+} from '../services/requestServices.js';
 
-import { validateBody } from '../utils/validateBody';
+import { validateBody } from '../utils/validateBody.js';
 
 
 async function postReqList(req:Request, res:Response){
