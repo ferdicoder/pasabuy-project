@@ -1,7 +1,9 @@
-import type ButtonProp from "../interface/ButtonProp"
+type ProductButtonProps = {
+  name: string;
+};
 
 // fill design for buy
-export default function ProductButton({name}: ButtonProp){  
+export default function ProductButton({ name }: ProductButtonProps) {  
   
   return(
     <button className={`border cursor-pointer rounded-sm hover`}>

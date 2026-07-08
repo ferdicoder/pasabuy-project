@@ -1,5 +1,6 @@
 import { type RequestResponse } from "../interface/Request.interface";
 import { type Trip } from "../interface/Trip.interface";
+import { API } from "../config/api";
 import usePull from "../hooks/usePull";
 
 import Header from "../components/Header"; 
@@ -9,8 +10,8 @@ import TripCard from "../components/TripCard";
 
 
 export default function HomePage(){
-    const reqData = usePull<RequestResponse>('http://localhost:5000/api/v1/request/getAll');  
-    const tripData = usePull<Trip>('http://localhost:5000/api/v1/trips/getAll');
+    const reqData = usePull<RequestResponse>(API.request.getAll);
+    const tripData = usePull<Trip>(API.trips.getAll);
     
   return(
      <>

@@ -1,4 +1,5 @@
 import type { Trip } from '../interface/Trip.interface'
+import { API } from '../config/api';
 import usePull from '../hooks/usePull'; 
 import Header from "../components/Header";
 import TripCard from "../components/TripCard";
@@ -8,7 +9,7 @@ import TripCard from "../components/TripCard";
 */
 
 export default function TripPage(){
-  const tripData = usePull<Trip>('http://localhost:5000/api/v1/trips/getAll')
+  const tripData = usePull<Trip>(API.trips.getAll)
 
   return (
     <>

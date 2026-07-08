@@ -1,4 +1,5 @@
 import type { RequestResponse} from "../interface/Request.interface";
+import { API } from "../config/api";
 import usePull from "../hooks/usePull";
 import Header from "../components/Header";
 import RequestCard from "../components/RequestCard";
@@ -35,7 +36,7 @@ export default function RequestPage(){
 
 */
   
-  const reqData = usePull<RequestResponse>('http://localhost:5000/api/v1/request/getAll');  
+  const reqData = usePull<RequestResponse>(API.request.getAll);  
   
   return (
     <>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import RequestCard from "../components/RequestCard";
 import TripCard from "../components/TripCard";
+import { API } from "../config/api";
 import usePull from "../hooks/usePull";
 import type { CreateRequestPayload, RequestResponse } from "../interface/Request.interface";
 import type { Trip } from "../interface/Trip.interface";
@@ -14,22 +15,22 @@ export default function ActivityPage(){
   const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
   const [editingRequest, setEditingRequest] = useState<RequestResponse | null>(null);
 
-  const requestData = usePull<RequestResponse>('http://localhost:5000/api/v1/request/getAll');
-  const tripData = usePull<Trip>('http://localhost:5000/api/v1/trips/getAll');
+  const requestData = usePull<RequestResponse>(API.request.getAll);
+  const tripData = usePull<Trip>(API.trips.getAll);
 
   // deletion of cards
-    const { deleteItem: deleteRequest } = useDelete('http://localhost:5000/api/v1/request/delete'); 
+    const { deleteItem: deleteRequest } = useDelete(API.request.delete); 
     const handleDeleteRequest = async (id: string) =>{
       deleteRequest(id); 
     }
   
-    const { deleteItem: deleteTrip } = useDelete('http://localhost:5000/api/v1/trips/delete'); 
+    const { deleteItem: deleteTrip } = useDelete(API.trips.delete); 
     const handleDeleteTrip = async (id: string) =>{
       deleteTrip(id); 
     }
 
     // patching items
-    const { patchItem: patchRequest } = usePatch<CreateRequestPayload>('http://localhost:5000/api/v1/request/update'); 
+    const { patchItem: patchRequest } = usePatch<CreateRequestPayload>(API.request.update); 
     const handlePatchRequest = async (payload: CreateRequestPayload) =>{
       if (!editingRequest) return;
       await patchRequest(editingRequest.request_id, payload);

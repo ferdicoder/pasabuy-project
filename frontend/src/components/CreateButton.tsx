@@ -5,6 +5,7 @@ import Dropdown from "./Dropdown";
 import RequestForm from "./RequestForm";
 import TripForm from "./TripForm";
 
+import { API } from "../config/api";
 import usePost from "../hooks/usePost";
 
 
@@ -17,12 +18,12 @@ export default function CreateButton(){
   const ref = useRef<HTMLDivElement>(null);
 
   // creation of trip and request
-  const { postRequest } = usePost<CreateRequestPayload>('http://localhost:5000/api/v1/request/create');
+  const { postRequest } = usePost<CreateRequestPayload>(API.request.create);
   const handleRequestSubmit = async (payload: CreateRequestPayload) =>{
     await postRequest(payload);
   }
 
-  const { postRequest: postTripRequest } = usePost<CreateTripPayload>('http://localhost:5000/api/v1/trips/create');
+  const { postRequest: postTripRequest } = usePost<CreateTripPayload>(API.trips.create);
   const handleTripSubmit = async (payload: CreateTripPayload) =>{
     await postTripRequest(payload);
   }
