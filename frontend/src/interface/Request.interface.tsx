@@ -9,7 +9,6 @@ interface RequestResponse{
   status: string
   imageUrl?: string;
   delivery_location: string; 
-  
 } 
 
 
@@ -17,6 +16,9 @@ interface RequestFormProp {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (payload: CreateRequestPayload) => unknown;
+  initialValues?: Partial<CreateRequestPayload>;
+  mode?: 'create' | 'edit';
+  resetKey?: string;
 }
 
 type CreateRequestPayload = Pick<RequestResponse,

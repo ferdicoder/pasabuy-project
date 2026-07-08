@@ -4,21 +4,20 @@ import formatDate from "../utils/formatDate";
 
 interface RequestCardProp extends RequestResponse{
   onTakeRequest?: () => unknown;
+  homeStyle?: string;
+  showDeleteIcon?: boolean;
+  onDelete?: () => void;
+  actionLabel?: string;
+  onEdit?: () => void;
 }
 
-type RequestCardViewProps = RequestCardProp & {
-  homeStyle?: string;
-  showCloseIcon?: boolean;
-  onDelete?: () => void;
-};
-
-export default function RequestCard({ homeStyle, showCloseIcon, onDelete, ...cardData }: RequestCardViewProps) {
+export default function RequestCard({ homeStyle, onTakeRequest, showDeleteIcon,  onDelete, actionLabel, onEdit, ...cardData }: RequestCardProp) {
   const isTaken = cardData.status === 'taken'; 
   let borderColor = isTaken ? 'border-red-400' : 'border-green-800'; 
 
   return (
     <div className={`relative flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor} ${homeStyle}`}>
-      {showCloseIcon && (
+      {showDeleteIcon && (
         <button
           type="button"
           onClick={onDelete}
@@ -92,13 +91,22 @@ export default function RequestCard({ homeStyle, showCloseIcon, onDelete, ...car
         {/* Button */}
         <button
           disabled={isTaken}
-          onClick={cardData.onTakeRequest}
+          onClick={actionLabel === 'Edit' ? onEdit : onTakeRequest}
           className={`w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-[1rem] font-medium py-2.5 rounded-lg transition-all duration-150  disabled:cursor-not-allowed disabled:opacity-75`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-          </svg>
-          Take Request
+          {actionLabel === 'Edit' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m18 2 4 4-12 12-4 1 1-4Z" />
+              <path d="M2 22h20" />
+            </svg>
+            
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            
+          )}
+          {actionLabel ?? 'Take Request'}
         </button>
 
       </div>

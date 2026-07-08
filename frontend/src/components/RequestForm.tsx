@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CreateRequestPayload, RequestFormProp } from "../interface/Request.interface";
 
 
-export default function RequestForm({ isOpen, onClose, onSubmit }: RequestFormProp) {
+export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, mode = 'create', resetKey }: RequestFormProp) {
   const initialState: CreateRequestPayload = {
     buyer_id: 6, // for change dont put primary key in FE
     title: "",
@@ -15,6 +15,11 @@ export default function RequestForm({ isOpen, onClose, onSubmit }: RequestFormPr
 
   const [form, setForm] = useState<CreateRequestPayload>(initialState);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setForm({ ...initialState, ...initialValues });
+  }, [isOpen, resetKey]);
 
   if (!isOpen) return null;
 
@@ -47,9 +52,9 @@ export default function RequestForm({ isOpen, onClose, onSubmit }: RequestFormPr
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-2 border-black/30">
           <div>
-           
+
             <h2 className="text-lg font-semibold text-black leading-tight">
-              Post a Request
+              {mode === 'edit' ? 'Edit Request' : 'Post a Request'}
             </h2>
           </div>
           
@@ -154,7 +159,7 @@ export default function RequestForm({ isOpen, onClose, onSubmit }: RequestFormPr
             disabled={submitting || !form.title.trim() || !form.delivery_location.trim()}
             className="flex-1 py-2.5 rounded-lg text-sm font-semibold bg-black text-white hover:bg-black/90 active:scale-98 disabled:opacity-70 disabled:cursor-not-allowed transition-all cursor-pointer"
           >
-            {submitting ? "Posting..." : "Post Request"}
+            {submitting ? (mode === 'edit' ? "Saving..." : "Posting...") : (mode === 'edit' ? "Save Changes" : "Post Request")}
           </button>
         </div>
         

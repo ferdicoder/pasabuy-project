@@ -39,11 +39,13 @@ function TravelerAvatar({ username, avatar_url }: { username: string; avatar_url
 
 type TripCardViewProps = Trip & {
   homeStyle?: string;
-  showCloseIcon?: boolean;
+  showDeleteIcon?: boolean;
   onDelete?: () => void;
+  actionLabel?: string;
+  onEdit?: () => void;
 };
 
-export function TripCard({ homeStyle, showCloseIcon, onDelete, ...tripData }: TripCardViewProps) {
+export function TripCard({ homeStyle, showDeleteIcon, onDelete, actionLabel, onEdit, ...tripData }: TripCardViewProps) {
   const statusCfg = statusColor[tripData.status] ?? statusColor.open;
 
   return (
@@ -58,7 +60,7 @@ export function TripCard({ homeStyle, showCloseIcon, onDelete, ...tripData }: Tr
         tripData.onClick ? "cursor-pointer hover:-translate-y-0.5 active:scale-[0.99]" : "",
       ].join(" ")}
     >
-      {showCloseIcon && (
+      {showDeleteIcon && (
         <button
           type="button"
           onClick={(event) => {
@@ -150,8 +152,21 @@ export function TripCard({ homeStyle, showCloseIcon, onDelete, ...tripData }: Tr
             </span>
           </div>
 
-          
         </div>
+
+        {actionLabel && (
+          <button
+            type="button"
+            onClick={onEdit}
+            className="mt-2 inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-slate-400 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 cursor-pointer"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m18 2 4 4-12 12-4 1 1-4Z" />
+              <path d="M2 22h20" />
+            </svg>
+            {actionLabel}
+          </button>
+        )}
 
       </div>
     </article>
