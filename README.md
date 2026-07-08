@@ -6,8 +6,7 @@
 ## Features(as of June 2026): 
 - Trip Setting - setting departure date, capacity(for their product) 
 - Requset-First Marketplace - from a buyer posting their product they want and their location. Traveller could browse this page while planning their trip.
-- Matching - match based on route from another user's set up trip or posted request
-
+- *****Note: The basic Create,Read,Update,Delete(CRUD) is done. Currently, working on transaction between users and auth. 
 ## Tools & Technologies
 - React
 - TailwindCSS
