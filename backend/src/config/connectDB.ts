@@ -10,9 +10,9 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-export async function connectDB() {
+ async function connectDB() {
   console.log("Database Connected");
   await pool.query('SELECT NOW()'); 
 }
 
-export { pool };
+export { pool, connectDB };
