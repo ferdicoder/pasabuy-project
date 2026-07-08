@@ -48,7 +48,7 @@ async function getOneReqList(req:Request<{ id: string }>, res:Response){
 }
 
 /// tp be changes 
-async function getReqList(req:Request, res:Response){
+async function getReqList(_req:Request, res:Response){
   try{
     const reqList = await readReqList();
     return res.status(200).json(reqList);

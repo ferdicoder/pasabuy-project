@@ -36,7 +36,7 @@ async function getOneTrip(req: Request<{ id: string }>, res: Response) {
   }
 }
 
-async function getAllTrip(req: Request, res: Response) {
+async function getAllTrip(_req: Request, res: Response) {
 
   try {
     const trip = await readAllTrip();
