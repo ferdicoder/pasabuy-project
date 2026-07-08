@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "npm --prefix ../frontend ci && npm --prefix ../frontend run build && tsc",
+    "build": "tsc",
     "start": "node dist/server.js"
   },
   "author": "",
