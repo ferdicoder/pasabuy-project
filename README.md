@@ -6,9 +6,9 @@
 ## Features(as of June 2026): 
 - Trip Setting - setting departure date, capacity(for their product) 
 - Requset-First Marketplace - from a buyer posting their product they want and their location. Traveller could browse this page while planning their trip.
-- #### Upoming Features for next iteration: 
- - Route-Based Matching
- - Pagination, Sorting, Filtering
+- #### Upcoming Features for next iteration:
+ - Transactions for Trips and Requests
+ - Filtering, Sorting, and Pagination
 
 ## Tools & Technologies
 - React
@@ -16,6 +16,8 @@
 - TypeScript
 - Node + Express
 - PostgreSQL (in NeonDB)
+- Railway
+
 
 Demo CRUD: For user perspective: 
 https://pasabuy.up.railway.app/
