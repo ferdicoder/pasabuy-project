@@ -18,4 +18,4 @@
 - PostgreSQL (in NeonDB)
 
 Demo CRUD: For user perspective: 
-https://pasabuy-frontend-production.up.railway.app/
+https://pasabuy.up.railway.app/
