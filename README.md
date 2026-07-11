@@ -7,8 +7,9 @@
 - Trip Setting - setting departure date, capacity(for their product) 
 - Requset-First Marketplace - from a buyer posting their product they want and their location. Traveller could browse this page while planning their trip.
 - #### Upcoming Features for next iteration:
- - Transactions for Trips and Requests
- - Filtering, Sorting, and Pagination
+   - Wiring Cloudinary for creating a Request with images. 
+   - Transactions for Trips and Requests between users. 
+   - Filtering, Sorting, and Pagination of Trips and Request Page. 
 
 ## Tools & Technologies
 - React
