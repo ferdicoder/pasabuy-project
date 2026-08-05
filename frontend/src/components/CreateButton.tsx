@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Plus } from "lucide-react";
 import type { CreateRequestPayload } from "../interface/Request.interface";
 import type { CreateTripPayload } from "../interface/Trip.interface";
 import Dropdown from "./Dropdown";
@@ -46,19 +47,9 @@ export default function CreateButton(){
           onClick={() => setIsOpen(prev => !prev)}
 					type="button"
 					aria-label="Add item"
-					className="p-2 rounded-full cursor-pointer"
+					className="p-2 rounded-full cursor-pointer hover:bg-gray-200"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1.8"
-						className="w-7 h-7  rounded-full hover:bg-gray-200"
-						aria-hidden="true"
-					>
-					<path d="M12 5v14M5 12h14"/>
-					</svg>
+					<Plus size={28} strokeWidth={1.8} />
 				</button>
 
           {isOpen && (
