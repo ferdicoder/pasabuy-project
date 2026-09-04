@@ -4,9 +4,11 @@ import { useFetch } from "../hooks/useAPI";
 import Header from "../components/Header";
 import TripCard from "../components/TripCard";
 
+import { queryKeys } from "../config/queryKeys";
+
 export default function TripPage() {
   const { data: tripData, isPending, isError, error } = useFetch<Trip[]>(
-    ["trips"],
+    queryKeys.trips,
     API.trips.getAll
   );
 
