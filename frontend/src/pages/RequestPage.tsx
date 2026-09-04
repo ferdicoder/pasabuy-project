@@ -1,56 +1,29 @@
-import type { RequestResponse} from "../interface/Request.interface";
+import type { RequestResponse } from "../interface/Request.interface";
 import { API } from "../config/api";
-import usePull from "../hooks/usePull";
+import { useFetch } from "../hooks/useAPI";
 import Header from "../components/Header";
 import RequestCard from "../components/RequestCard";
 
+export default function RequestPage() {
+  const { data: reqData, isPending, isError, error } = useFetch<RequestResponse[]>(
+    ["requests"],
+    API.request.getAll
+  );
 
-export default function RequestPage(){
-  /*
-  const [reqData, setReqData] = useState<RequestResponse[]>([]); 
-  
-//   useEffect(() => {
+  if (isPending) return <p className="text-center py-24">Loading requests…</p>;
+  if (isError) return <p className="text-center py-24 text-red-500">{error.message}</p>;
 
-//     const loadReq = async () => {
-//       try {
-//         const url = 'http://localhost:5000/api/v1/request/getAll';
-//         const res = await fetch(url, {
-//           method: 'GET',
-//           headers: {
-//             'Content-Type': 'application/json'
-//           }
-//         });
-        
-//         if (!res.ok) throw new Error('Request Error');
-        
-//         const result = await res.json();
-//         setReqData(result); 
-
-//       } catch (error) {
-//         console.log(`Error: ${error}`);
-//       }
-//     };
-
-//     loadReq();
-// }, []); 
-
-*/
-  
-  const reqData = usePull<RequestResponse>(API.request.getAll);  
-  
   return (
     <>
-      <Header username="Current User"/>
-      
+      <Header username="Current User" />
+
       <section className="py-24">
         <div className="grid grid-cols-1 2xl:grid-cols-6 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-4 px-16">
-          {
-            reqData.map(req =>(
-              <RequestCard key={req.request_id} { ...req }/>
-            ))
-          }
+          {reqData.map((req) => (
+            <RequestCard key={req.request_id} {...req} />
+          ))}
         </div>
       </section>
     </>
-  )
+  );
 }
