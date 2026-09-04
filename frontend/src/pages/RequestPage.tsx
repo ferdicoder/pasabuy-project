@@ -1,12 +1,14 @@
 import type { RequestResponse } from "../interface/Request.interface";
 import { API } from "../config/api";
+import { queryKeys } from "../config/queryKeys";
+
 import { useFetch } from "../hooks/useAPI";
 import Header from "../components/Header";
 import RequestCard from "../components/RequestCard";
 
 export default function RequestPage() {
   const { data: reqData, isPending, isError, error } = useFetch<RequestResponse[]>(
-    ["requests"],
+    queryKeys.requests,
     API.request.getAll
   );
 

@@ -23,7 +23,7 @@ export default function Header({ username }: {username: string} ){
 					<li><a href="/">Home</a></li>
 					<Link to='/requests'><li>Requests</li></Link>
 					<Link to='/trips'><li>Trips</li></Link>
-					<Link to='/activity'><li>My Activity</li></Link>
+					<Link to='/activities'><li>My Activity</li></Link>
 				</ul>
 			</nav>
 			

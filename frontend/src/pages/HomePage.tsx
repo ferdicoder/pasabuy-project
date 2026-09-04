@@ -2,6 +2,7 @@ import { type RequestResponse } from "../interface/Request.interface";
 import { type Trip } from "../interface/Trip.interface";
 import { API } from "../config/api";
 import { useFetch } from "../hooks/useAPI";
+import { queryKeys } from "../config/queryKeys";
 
 import Header from "../components/Header";
 import RequestCard from "../components/RequestCard";
@@ -9,11 +10,11 @@ import TripCard from "../components/TripCard";
 
 export default function HomePage() {
   const { data: reqData, isPending: reqPending } = useFetch<RequestResponse[]>(
-    ["requests"],
+    queryKeys.requests,
     API.request.getAll
   );
   const { data: tripData, isPending: tripPending } = useFetch<Trip[]>(
-    ["trips"],
+    queryKeys.trips,
     API.trips.getAll
   );
 
