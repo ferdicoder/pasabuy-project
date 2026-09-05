@@ -18,7 +18,7 @@ app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true,
 }));
-app.all("/api/auth/*", toNodeHandler(auth));
+app.all("/api/auth/*splat", toNodeHandler(auth));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

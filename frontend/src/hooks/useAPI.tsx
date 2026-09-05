@@ -6,23 +6,18 @@ import {
   type UseQueryOptions,
 } from '@tanstack/react-query';
 
-
-// API configs
 export const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
 });
+
 function getErrorMessage(error: unknown): string {
   if (axios.isAxiosError(error)) {
     const axiosErr = error as AxiosError<{ message?: string }>;
-    return (
-      axiosErr.response?.data?.message ||
-      axiosErr.message ||
-      'Request failed'
-    );
+    return axiosErr.response?.data?.message || axiosErr.message || 'Request failed';
   }
   return error instanceof Error ? error.message : 'Request failed';
 }
-
 
 export function useFetch<T>(
   queryKey: readonly unknown[],
@@ -42,7 +37,6 @@ export function useFetch<T>(
     ...options,
   });
 }
-
 
 export function usePost<TPayload, TResponse = TPayload>(
   url: string,
@@ -64,7 +58,6 @@ export function usePost<TPayload, TResponse = TPayload>(
     },
   });
 }
-
 
 export function usePatch<TPayload, TResponse = TPayload>(
   url: string,
@@ -101,5 +94,22 @@ export function useDelete(url: string, invalidateKey: readonly unknown[]) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: invalidateKey });
     },
+  });
+}
+
+export function useSession<T = unknown>(url: string, queryKey: readonly unknown[]) {
+  return useQuery<T | null>({
+    queryKey,
+    queryFn: async () => {
+      try {
+        const res = await api.get<T>(url);
+        return res.data;
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 401) return null;
+        throw new Error(getErrorMessage(error));
+      }
+    },
+    retry: false,
+    staleTime: 5 * 60 * 1000,
   });
 }

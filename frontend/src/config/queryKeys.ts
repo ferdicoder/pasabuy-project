@@ -1,4 +1,5 @@
 export const queryKeys = {
   requests: ["requests"],
-  trips: ["trips"]
-}
+  trips: ["trips"],
+  session: ["session"],
+} as const;

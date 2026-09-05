@@ -1,37 +1,30 @@
 import { useState, type FormEvent } from "react";
 import { Eye, EyeOff, LockKeyhole, Mail, LogIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../hooks/useAPI";
+import { usePost } from "../hooks/useAPI";
 import { API } from "../config/api";
+import { queryKeys } from "../config/queryKeys";
+
+type SignInPayload = { email: string; password: string };
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const { mutateAsync: signIn, isPending, error } = usePost<SignInPayload>(
+    API.auth.signInEmail,
+    queryKeys.session
+  );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setErrorMessage("");
-    setIsSubmitting(true);
-
     try {
-      await api.post(
-        API.auth.signInEmail,
-        { email, password },
-        { withCredentials: true }
-      );
+      await signIn({ email, password });
       navigate("/");
-    } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else {
-        setErrorMessage("Unable to sign in. Please check your details and try again.");
-      }
-    } finally {
-      setIsSubmitting(false);
+    } catch {
+      // error state is already surfaced via `error` below
     }
   };
 
@@ -83,19 +76,19 @@ export default function LoginForm() {
         </div>
       </div>
 
-      {errorMessage && (
+      {error && (
         <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
-          {errorMessage}
+          {error.message}
         </p>
       )}
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isPending}
         className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-900 px-4 py-3 font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
         <LogIn size={18} aria-hidden="true" />
-        {isSubmitting ? "Signing in..." : "Sign in"}
+        {isPending ? "Signing in..." : "Sign in"}
       </button>
     </form>
   );

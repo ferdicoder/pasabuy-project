@@ -7,6 +7,9 @@ function apiUrl(path: string): string {
 export const API = {
   auth: {
     signInEmail: apiUrl('/api/auth/sign-in/email'),
+    signUpEmail: apiUrl('/api/auth/sign-up/email'),
+    getSession: apiUrl('/api/auth/get-session'),
+    signOut: apiUrl('/api/auth/sign-out'),
   },
   request: {
     getAll: apiUrl('/api/v1/request/getAll'),
