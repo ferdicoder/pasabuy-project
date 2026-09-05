@@ -2,6 +2,8 @@
 .env.development
 node_modules
 
+*.sql
+
 # Logs
 logs
 *.log
