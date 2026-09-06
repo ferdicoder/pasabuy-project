@@ -5,6 +5,11 @@ import "dotenv/config";
 export const auth = betterAuth({
   database: pool, 
   baseURL: process.env.BETTER_AUTH_URL,
+  advanced:{
+    database: {
+      generateId: "uuid"
+    }
+  },
   emailAndPassword: {
     enabled: true,
   },
