@@ -1,4 +1,4 @@
-type DbUser = {
+type User = {
   id: string;
   name: string;
   email: string;
@@ -8,4 +8,4 @@ type DbUser = {
   updatedAt: Date;
 }
 
-export type { DbUser }
+export type { User }

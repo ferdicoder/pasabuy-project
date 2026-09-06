@@ -1,7 +1,7 @@
-import type { DbUser } from "../interface/user.internface.js";
+import type { User } from "../interface/user.internface.js";
 import { sql } from "../config/query.js";
 
-async function getUserById(id: string): Promise<DbUser> {
+async function getUserById(id: string): Promise<User> {
   const query = `
     SELECT *
     FROM "user"
@@ -9,13 +9,13 @@ async function getUserById(id: string): Promise<DbUser> {
   `;
   const val = [id];
 
-  const user = await sql<DbUser>(query, val);
+  const user = await sql<User>(query, val);
   if (user.rowCount === 0 || !user.rows[0]) throw new Error("User does not exist");
 
   return user.rows[0];
 }
 
-async function getUserByEmail(email: string): Promise<DbUser> {
+async function getUserByEmail(email: string): Promise<User> {
   const query = `
     SELECT *
     FROM "user"
@@ -23,7 +23,7 @@ async function getUserByEmail(email: string): Promise<DbUser> {
   `;
   const val = [email];
 
-  const user = await sql<DbUser>(query, val);
+  const user = await sql<User>(query, val);
   if (user.rowCount === 0 || !user.rows[0]) throw new Error("User does not exist");
 
   return user.rows[0];
