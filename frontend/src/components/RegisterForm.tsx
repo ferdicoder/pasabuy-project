@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Eye, EyeOff, LockKeyhole, Mail, UserPlus } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole, Mail, UserPlus, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../config/api";
 import { queryKeys } from "../config/queryKeys";
@@ -64,7 +64,6 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [mismatchError, setMismatchError] = useState("");
 
   const { mutateAsync: signUp, isPending, error } = usePost<SignUpPayload>(
@@ -92,6 +91,24 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
+        
+        <label htmlFor="register-email" className="text-sm font-semibold text-gray-700">
+          Username
+        </label>        
+        <div className="relative">
+          <User size={19} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+          <input
+            id="register-email"
+            type="email"
+            autoComplete="email"
+            required
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            placeholder="juan12"
+            className="w-full rounded-md border border-gray-200 bg-white px-4 py-3 pl-11 text-gray-900 outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10"
+          />
+        </div>
+
         <label htmlFor="register-email" className="text-sm font-semibold text-gray-700">
           Email address
         </label>
@@ -125,8 +142,8 @@ export default function RegisterForm() {
           label="Confirm password"
           value={confirmPassword}
           onChange={setConfirmPassword}
-          showPassword={showConfirmPassword}
-          onToggle={() => setShowConfirmPassword((visible) => !visible)}
+          showPassword={showPassword}
+          onToggle={() => setShowPassword((visible) => !visible)}
           autoComplete="new-password"
         />
       </div>

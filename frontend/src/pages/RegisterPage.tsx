@@ -7,11 +7,14 @@ export default function RegisterPage() {
     <main className="min-h-screen bg-[#F8F8FF] px-6 py-10 sm:px-10">
       <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-5xl items-center justify-center">
         <section className="grid w-full max-w-4xl overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-200/70 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex flex-col justify-between bg-gray-900 p-8 text-white sm:p-12">
-            <Link to="/" aria-label="Go to Pasabuy home" className="block w-40 rounded-md bg-white/95 p-2">
-              <img src={pasabuyLogo} alt="Pasabuy" className="h-auto w-full" />
-            </Link>
-            <div className="mt-16 space-y-4">
+
+          <div className="flex flex-col justify-center bg-gray-900 p-8 text-white sm:p-12">
+
+            {/* <div className="w-fit border ">
+              <img src={pasabuyLogo} alt="Pasabuy" className="h-20  object-cover" />
+            </div> */}
+            
+            <div className="space-y-8">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-300">Make it happen</p>
               <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">Your next find is closer.</h1>
               <p className="max-w-xs text-gray-300">Join the community that brings hard-to-find items within reach.</p>
@@ -23,6 +26,7 @@ export default function RegisterPage() {
               <h2 className="text-2xl font-extrabold text-gray-900">Create your account</h2>
               <p className="text-sm text-gray-500">Start buying, carrying, and connecting with Pasabuy.</p>
             </div>
+
             <RegisterForm />
             <p className="mt-6 text-center text-sm text-gray-500">
               Already have an account?{" "}
@@ -30,7 +34,9 @@ export default function RegisterPage() {
                 Sign in
               </Link>
             </p>
+
           </div>
+
         </section>
       </div>
     </main>

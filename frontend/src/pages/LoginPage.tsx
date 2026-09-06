@@ -8,9 +8,9 @@ export default function LoginPage() {
       <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-5xl items-center justify-center">
         <section className="grid w-full max-w-4xl overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-200/70 md:grid-cols-[0.9fr_1.1fr]">
           <div className="flex flex-col justify-between bg-gray-900 p-8 text-white sm:p-12">
-            <Link to="/" aria-label="Go to Pasabuy home" className="block w-40 rounded-md bg-white/95 p-2">
+            {/* <Link to="/" aria-label="Go to Pasabuy home" className="block w-40 rounded-md bg-white/95 p-2">
               <img src={pasabuyLogo} alt="Pasabuy" className="h-auto w-full" />
-            </Link>
+            </Link> */}
             <div className="mt-16 space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-300">Welcome back</p>
               <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">Bring it home.</h1>
