@@ -22,4 +22,7 @@ export const API = {
     create: apiUrl('/api/v1/trips/create'),
     delete: apiUrl('/api/v1/trips/delete'),
   },
+  users:{
+    me: apiUrl('/api/v1/users/me')  
+  }
 } as const;
