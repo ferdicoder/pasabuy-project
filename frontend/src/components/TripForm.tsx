@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { CreateTripPayload, TripFormProp } from "../interface/Trip.interface";
+import { uploadImage } from "../utils/uploadImage.ts";
 
 function formatDateInput(date: Date) {
 	if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "";
@@ -132,13 +133,18 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 					</div>
 
 					<div className="flex flex-col gap-1.5">
-						<label className="text-xs font-medium text-black/80">Destination image URL (optional)</label>
+						<label className="text-xs font-medium text-black/80">Destination image (optional)</label>
 						<input
-							value={form.image_url ?? ""}
-							onChange={(e) => handleChange("image_url", e.target.value)}
-							placeholder="https://..."
-							className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors"
+							type="file"
+							accept="image/*"
+							onChange={async (e) => {
+								const file = e.target.files?.[0];
+								if (!file) return;
+								handleChange("image_url", await uploadImage(file));
+							}}
+							className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black file:mr-3 file:rounded-md file:border-0 file:bg-black file:px-3 file:py-1.5 file:text-sm file:text-white"
 						/>
+						{form.image_url && <img src={form.image_url} alt="Selected destination" className="h-24 w-full rounded-lg object-cover" />}
 					</div>
 				</div>
 

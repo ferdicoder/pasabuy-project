@@ -9,9 +9,10 @@ async function createReqList(requestData: ReqList) {
       description, 
       estimated_price, 
       origin,
-      delivery_location
+      delivery_location,
+      imageurl
     ) 
-    VALUES ($1, $2, $3, $4, $5, $6)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *
   `
   const val = [
@@ -21,6 +22,7 @@ async function createReqList(requestData: ReqList) {
     requestData.estimated_price,
     requestData.origin,
     requestData.delivery_location,
+    requestData.imageUrl,
   ];
 
   const newRequest = await sql(query, val);
@@ -81,7 +83,8 @@ async function updateReqList(reqId: string, requestData: UpdateReqList) {
       description = COALESCE($4, description),
       estimated_price = COALESCE($5, estimated_price),
       origin = COALESCE($6, origin),
-      delivery_location = COALESCE($7, delivery_location)
+      delivery_location = COALESCE($7, delivery_location),
+      imageurl = COALESCE($8, imageurl)
     WHERE request_id = $1
     RETURNING *
   `;
@@ -93,6 +96,7 @@ async function updateReqList(reqId: string, requestData: UpdateReqList) {
     requestData.estimated_price,
     requestData.origin,
     requestData.delivery_location,
+    requestData.imageUrl,
   ];
 
   const updatedReq = await sql(query, val);

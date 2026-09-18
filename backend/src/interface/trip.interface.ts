@@ -7,6 +7,7 @@ const tripSchema = z.object({
   depart_date: z.coerce.date(), 
   arrival_date: z.coerce.date(), 
   capacity_kg: z.number().nonnegative(),
+  image_url: z.string().optional(),
   status: z.string().optional()
 }); 
 

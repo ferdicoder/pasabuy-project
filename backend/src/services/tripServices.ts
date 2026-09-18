@@ -9,9 +9,10 @@ async function createTrip(tripData: Trip) {
       destination,
       depart_date,
       arrival_date,
-      capacity_kg
+      capacity_kg,
+      image_url
     )
-    VALUES($1,$2,$3,$4,$5,$6)
+    VALUES($1,$2,$3,$4,$5,$6,$7)
     RETURNING *;
   `;
 
@@ -21,7 +22,8 @@ async function createTrip(tripData: Trip) {
     tripData.destination,
     tripData.depart_date,
     tripData.arrival_date,
-    tripData.capacity_kg
+    tripData.capacity_kg,
+    tripData.image_url
   ];
 
   const result = await sql(query, values);
@@ -80,7 +82,8 @@ async function updateTrip(tripId: string, tripData: UpdateTrip) {
       depart_date = COALESCE($5, depart_date),
       arrival_date = COALESCE($6, arrival_date),
       capacity_kg = COALESCE($7, capacity_kg),
-      status = COALESCE($8, status)
+      status = COALESCE($8, status),
+      image_url = COALESCE($9, image_url)
     WHERE trip_id = $1
     RETURNING *;
   `;
@@ -94,6 +97,7 @@ async function updateTrip(tripId: string, tripData: UpdateTrip) {
     tripData.arrival_date ?? null,
     tripData.capacity_kg ?? null,
     tripData.status ?? null,
+    tripData.image_url ?? null,
   ];
 
   const result = await sql(query, values);

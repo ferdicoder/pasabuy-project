@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { CreateRequestPayload, RequestFormProp } from "../interface/Request.interface";
-
+import { uploadImage } from "../utils/uploadImage.ts";
 
 export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, mode = 'create', resetKey }: RequestFormProp) {
   const initialState: CreateRequestPayload = {
@@ -15,6 +15,7 @@ export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, 
 
   const [form, setForm] = useState<CreateRequestPayload>(initialState);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -28,13 +29,16 @@ export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, 
   }
 
   const handleSubmit = async () => {
-    if (!form.title.trim() || !form.delivery_location.trim()) return;
+    if (!form.title.trim() || !form.delivery_location.trim() || !form.imageUrl) return;
     setSubmitting(true);
+    setError("");
 
     try {
       await onSubmit(form);
       setForm(initialState);
       onClose();
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Unable to post request");
     } finally {
       setSubmitting(false);
     }
@@ -132,19 +136,31 @@ export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, 
             />
           </div>
 
-          {/* Image URL placeholder — swap for upload once storage is wired */}
+          {/* Image upload */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-black/80">
-              Reference image URL (optional)
+              Reference image (required)
             </label>
             <input
-              value={form.imageUrl}
-              onChange={(e) => handleChange("imageUrl", e.target.value)}
-              placeholder="https://..."
-              className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors"
+              type="file"
+              accept="image/*"
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                try {
+                  setError("");
+                  handleChange("imageUrl", await uploadImage(file));
+                } catch (uploadError) {
+                  setError(uploadError instanceof Error ? uploadError.message : "Unable to upload image");
+                }
+              }}
+              className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black file:mr-3 file:rounded-md file:border-0 file:bg-black file:px-3 file:py-1.5 file:text-sm file:text-white"
             />
+            {form.imageUrl && <img src={form.imageUrl} alt="Selected reference" className="h-24 w-full rounded-lg object-cover" />}
           </div>
         </div>
+
+        {error && <p className="px-5 pb-2 text-sm text-red-600">{error}</p>}
 
         {/* Footer */}
         <div className="flex items-center gap-3 px-5 py-4 border-t border-black/30">
@@ -156,7 +172,7 @@ export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, 
           </button>
           <button
             onClick={handleSubmit}
-            disabled={submitting || !form.title.trim() || !form.delivery_location.trim()}
+            disabled={submitting || !form.title.trim() || !form.delivery_location.trim() || !form.imageUrl}
             className="flex-1 py-2.5 rounded-lg text-sm font-semibold bg-black text-white hover:bg-black/90 active:scale-98 disabled:opacity-70 disabled:cursor-not-allowed transition-all cursor-pointer"
           >
             {submitting ? (mode === 'edit' ? "Saving..." : "Posting...") : (mode === 'edit' ? "Save Changes" : "Post Request")}
