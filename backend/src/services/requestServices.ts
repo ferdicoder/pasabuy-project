@@ -10,7 +10,7 @@ async function createReqList(requestData: ReqList) {
       estimated_price, 
       origin,
       delivery_location,
-      imageurl
+      image_url
     ) 
     VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *
@@ -57,7 +57,7 @@ async function readReqList(){
       r.estimated_price AS "estimatedPrice", 
       r.origin,
       r.delivery_location, 
-      r.imageurl AS "imageUrl",
+      r.image_url AS "imageUrl",
       r.status,
       r.created_at AS "createdAt",
       u.username AS buyerUsername
@@ -84,7 +84,7 @@ async function updateReqList(reqId: string, requestData: UpdateReqList) {
       estimated_price = COALESCE($5, estimated_price),
       origin = COALESCE($6, origin),
       delivery_location = COALESCE($7, delivery_location),
-      imageurl = COALESCE($8, imageurl)
+      image_url = COALESCE($8, image_url)
     WHERE request_id = $1
     RETURNING *
   `;
