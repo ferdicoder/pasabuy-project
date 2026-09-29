@@ -44,7 +44,7 @@ export default function ActivityPage() {
 
   return (
     <>
-      <Header username={"current username"} />
+      <Header />
 
       <section className="py-24 px-28 space-y-10">
         <div className="space-y-4">

@@ -17,7 +17,7 @@ export default function TripPage() {
 
   return (
     <>
-      <Header username="Current User" />
+      <Header />
 
       <section className="py-24 px-8">
         <div className="grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 2xl:gap-4 xl:gap-4 md:gap-3">

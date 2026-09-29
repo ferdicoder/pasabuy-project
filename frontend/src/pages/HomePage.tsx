@@ -20,7 +20,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header username="current user" />
+      <Header />
 
       <section className="py-24 ">
         <div className=" flex flex-col items-center mb-4 gap-y-2 ">
