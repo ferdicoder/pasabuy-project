@@ -23,6 +23,6 @@ export const API = {
     delete: apiUrl('/api/v1/trips/delete'),
   },
   users:{
-    me: apiUrl('/api/v1/users/me')  
+    me: apiUrl('/api/v1/users/me')
   }
 } as const;

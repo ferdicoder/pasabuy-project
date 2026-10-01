@@ -58,14 +58,13 @@ async function readAllTrip() {
       t.capacity_kg,
       t.status,
       t.image_url,
-      u.username
+      u.name
     FROM trips t
-    JOIN user u 
+    JOIN "user" u 
       ON t.user_id = u.id
   `;
 
   const result = await sql(query);
-  if (result.rowCount === 0) throw new Error("not found");
 
   return result.rows;
 }

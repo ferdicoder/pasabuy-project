@@ -60,13 +60,12 @@ async function readReqList(){
       r.image_url AS "imageUrl",
       r.status,
       r.created_at AS "createdAt",
-      u.username AS buyerUsername
+      u.name AS buyerUsername
     FROM requests r 
-    JOIN user u ON r.buyer_id = u.id
+    JOIN "user" u ON r.buyer_id = u.id
   `
   
   const reqList = await sql(query); 
-  if(reqList.rowCount === 0) throw new Error('not found'); 
   
   return reqList.rows; 
 }
