@@ -62,7 +62,7 @@ async function readReqList(){
       r.created_at AS "createdAt",
       u.username AS buyerUsername
     FROM requests r 
-    JOIN users u ON r.buyer_id = u.user_id
+    JOIN user u ON r.buyer_id = u.id
   `
   
   const reqList = await sql(query); 

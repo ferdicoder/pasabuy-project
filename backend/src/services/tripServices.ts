@@ -60,8 +60,8 @@ async function readAllTrip() {
       t.image_url,
       u.username
     FROM trips t
-    JOIN users u 
-      ON t.user_id = u.user_id
+    JOIN user u 
+      ON t.user_id = u.id
   `;
 
   const result = await sql(query);
