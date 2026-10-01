@@ -1,0 +1,46 @@
+import type { RequestResponse } from "../interface/Request.interface";
+import type { Trip } from "../interface/Trip.interface";
+import Header from "./Header";
+import RequestCard from "./RequestCard";
+import TripCard from "./TripCard";
+
+interface HomeViewProps {
+  requests: RequestResponse[];
+  trips: Trip[];
+}
+
+export default function HomeView({ requests, trips }: HomeViewProps) {
+  return (
+    <>
+      <Header />
+
+      <section className="py-24">
+        <div className="mb-4 flex flex-col items-center gap-y-2">
+          <div className="flex w-full items-center justify-between px-33">
+            <h2 className="text-xl font-extrabold">Matched Requests</h2>
+            <h2 className="text-gray-500">View More</h2>
+          </div>
+
+          <div className="grid w-full grid-cols-1 gap-2 px-32 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            {requests.map((request) => (
+              <RequestCard key={request.request_id} {...request} homeStyle="break-inside-avoid mb-4" />
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-4 flex flex-col items-center gap-y-2">
+          <div className="flex w-full items-center justify-between px-33">
+            <h2 className="text-xl font-extrabold">Matched Trips</h2>
+            <h2 className="text-gray-500">View More</h2>
+          </div>
+
+          <div className="grid w-full grid-cols-1 gap-2 px-32 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            {trips.map((trip) => (
+              <TripCard key={trip.trip_id} {...trip} homeStyle="break-inside-avoid mb-4" />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

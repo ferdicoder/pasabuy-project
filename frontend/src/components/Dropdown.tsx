@@ -5,7 +5,7 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
   mode: string;
   onClose: () => void;
   onRequestClick?: () => void;
-  onTripClick?: () => void; 
+  onTripClick?: () => void;   
 }){
   // Width per mode
   const widthMode = mode === "notif" ? "w-80" : mode === "avatar" ? "w-44" : "w-44";

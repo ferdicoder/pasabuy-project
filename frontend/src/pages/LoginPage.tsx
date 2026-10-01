@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import pasabuyLogo from "../assets/pasabuy-logo.svg";
 import LoginForm from "../components/LoginForm";
 
 export default function LoginPage() {

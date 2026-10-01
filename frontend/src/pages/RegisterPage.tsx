@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import pasabuyLogo from "../assets/pasabuy-logo.svg";
 import RegisterForm from "../components/RegisterForm";
 
 export default function RegisterPage() {
