@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { Eye, EyeOff, LockKeyhole, Mail, UserPlus, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../config/api";
@@ -71,7 +71,7 @@ export default function RegisterForm() {
     queryKeys.session
   );
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setMismatchError("");
 
@@ -83,8 +83,8 @@ export default function RegisterForm() {
     try {
       await signUp({ name, email, password });
       navigate("/");
-    } catch {
-      // error state is already surfaced via `error` below
+    } catch(error) {
+      console.error(error)
     }
   };
 
@@ -92,15 +92,15 @@ export default function RegisterForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
         
-        <label htmlFor="register-email" className="text-sm font-semibold text-gray-700">
+        <label htmlFor="register-name" className="text-sm font-semibold text-gray-700">
           Username
         </label>        
         <div className="relative">
           <User size={19} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true" />
           <input
-            id="register-email"
-            type="email"
-            autoComplete="email"
+            id="register-name"
+            type="text"
+            autoComplete="username"
             required
             value={name}
             onChange={(event) => setName(event.target.value)}
