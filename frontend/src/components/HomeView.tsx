@@ -10,6 +10,10 @@ interface HomeViewProps {
 }
 
 export default function HomeView({ requests, trips }: HomeViewProps) {
+  let isRequestsEmpty = false; 
+  let isTripsEmpty = false; 
+  if (requests.length === 0) isRequestsEmpty = true; 
+  if (trips.length === 0) isTripsEmpty = true; 
   return (
     <>
       <Header />
@@ -22,7 +26,8 @@ export default function HomeView({ requests, trips }: HomeViewProps) {
           </div>
 
           <div className="grid w-full grid-cols-1 gap-2 px-32 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-            {requests.map((request) => (
+             {isRequestsEmpty === true ? <p className="col-span-full flex min-h-32 items-center justify-center rounded-lg border border-dashed border-gray-300 bg-gray-50 px-6 py-8 text-center text-sm font-medium text-gray-500">No matched requests yet.</p> 
+             : requests.map((request) => (
               <RequestCard key={request.request_id} {...request} homeStyle="break-inside-avoid mb-4" />
             ))}
           </div>
@@ -34,9 +39,10 @@ export default function HomeView({ requests, trips }: HomeViewProps) {
             <h2 className="text-gray-500">View More</h2>
           </div>
 
-          <div className="grid w-full grid-cols-1 gap-2 px-32 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-            {trips.map((trip) => (
-              <TripCard key={trip.trip_id} {...trip} homeStyle="break-inside-avoid mb-4" />
+          <div className="grid w-full grid-cols-1 gap-2 px-32 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+             {isTripsEmpty === true ? <p className="col-span-full flex min-h-32 items-center justify-center rounded-lg border border-dashed border-gray-300 bg-gray-50 px-6 py-8 text-center text-sm font-medium text-gray-500">No matched trips yet.</p> 
+             : trips.map((request) => (
+              <TripCard key={request.trip_id} {...request} homeStyle="break-inside-avoid mb-4" />
             ))}
           </div>
         </div>
