@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import type { CreateRequestPayload, RequestFormProp } from "../interface/Request.interface";
+import type { CreateRequestPayload } from "../interface/Request.interface";
 import { uploadImage } from "../utils/uploadImage.ts";
+
+interface RequestFormProp {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (payload: CreateRequestPayload) => unknown;
+  initialValues?: Partial<CreateRequestPayload>;
+  mode?: 'create' | 'edit';
+  resetKey?: string;
+}
+
 
 export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, mode = 'create', resetKey }: RequestFormProp) {
   const initialState: CreateRequestPayload = {
-    buyer_id: 6, // for change dont put primary key in FE
     title: "",
     estimated_price: 0,
     origin: "",
