@@ -17,8 +17,7 @@ interface TripFormProp {
   onSubmit: (payload: CreateTripPayload) => unknown;
 }
 
-type CreateTripPayload = Omit<Trip, 'trip_id' | 'onClick' | 'status' > 
-  & { user_id: number } // for change dont put PK in FE
+type CreateTripPayload = Omit<Trip, 'trip_id' | 'onClick' | 'status' | 'username' | 'user_id'>
 
 export type {
   Trip, 
