@@ -6,11 +6,12 @@ import {
   patchTrip, 
   removeTrip 
 } from "../controllers/tripController.js";
+import { requireAuth } from "../middlewares/requireAuth.js";
 
 const tripRouter = Router();
 
 export default tripRouter
-  .post('/create', setTrip)
+  .post('/create', requireAuth, setTrip)
   .get('/get/:id', getOneTrip)
   .get('/getAll', getAllTrip)
   .patch('/update/:id', patchTrip)
