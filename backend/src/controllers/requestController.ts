@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'; 
 import { 
   type ReqList, 
-  ReqListSchema,
+  CreateReqListSchema,
   UpdateReqListSchema
 } from '../interface/reqList.interface.js';
 
@@ -17,15 +17,20 @@ import { validateBody } from '../utils/validateBody.js';
 
 
 async function postReqList(req:Request, res:Response){
-  const result = validateBody(ReqListSchema, req.body); 
+  if (!req.user) return res.sendStatus(401);
+
+  const result = validateBody(CreateReqListSchema, req.body); 
 	if (!result.success) {
     // console.log(z.prettifyError(result.error));
     return res.sendStatus(400);
   }
   
   try{
-    const requestData:ReqList = { ...req.body }; 
-    await createReqList({ ...requestData });
+    const requestData: ReqList = {
+      ...result.data,
+      buyer_id: req.user.id,
+    };
+    await createReqList(requestData);
 
     return res.sendStatus(201)
   }catch(error){

@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { validateBody } from "../utils/validateBody.js";
-import { tripSchema, UpdateTripSchema } from "../interface/trip.interface.js";
+import { CreateTripSchema, UpdateTripSchema, type Trip } from "../interface/trip.interface.js";
 import {
   createTrip,
   readOneTrip,
@@ -10,12 +10,17 @@ import {
 } from "../services/tripServices.js";
 
 async function setTrip(req: Request, res: Response) {
-  const result = validateBody(tripSchema, req.body);
+  if (!req.user) return res.sendStatus(401);
+
+  const result = validateBody(CreateTripSchema, req.body);
   if (!result.success) return res.sendStatus(400);
 
   try {
-    const tripData = result.data;
-    const newTrip = await createTrip({ ...tripData });
+    const tripData: Trip = {
+      ...result.data,
+      user_id: req.user.id,
+    };
+    const newTrip = await createTrip(tripData);
     return res.status(201).json(newTrip);
   } catch (error) {
     console.log(`${error}`);
