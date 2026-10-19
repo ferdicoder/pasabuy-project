@@ -53,8 +53,8 @@ export function usePost<TPayload, TResponse = TPayload>(
         throw new Error(getErrorMessage(error));
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateKey });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: invalidateKey });
     },
   });
 }
@@ -74,8 +74,8 @@ export function usePatch<TPayload, TResponse = TPayload>(
         throw new Error(getErrorMessage(error));
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateKey });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: invalidateKey });
     },
   });
 }
@@ -91,8 +91,8 @@ export function useDelete(url: string, invalidateKey: readonly unknown[]) {
         throw new Error(getErrorMessage(error));
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: invalidateKey });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: invalidateKey });
     },
   });
 }

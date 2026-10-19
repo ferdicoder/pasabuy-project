@@ -10,7 +10,8 @@ import {
   readOneReqList,
   readReqList,
   updateReqList,
-  deleteReqList
+  deleteReqList,
+  queryMyRequest
 } from '../services/requestServices.js';
 
 import { validateBody } from '../utils/validateBody.js';
@@ -92,10 +93,25 @@ async function removeReqList(req:Request<{ id: string }>, res:Response){
   }
 }
 
+async function getMyRequests(req: Request, res:Response){
+  if(!req?.user?.id) return res.sendStatus(404); 
+
+  try{
+    const currentUserId = req.user.id; 
+    const myRequests = await queryMyRequest(currentUserId);
+    return  res.status(200).json(myRequests); 
+  }catch(error){
+    console.error(error);
+    return res.sendStatus(500); 
+  }
+}
+
+
 export{ 
   postReqList,
   getOneReqList,
   getReqList,
   patchReqList,
   removeReqList,
+  getMyRequests
 }

@@ -16,6 +16,8 @@ export const API = {
     create: apiUrl('/api/v1/request/create'),
     update: apiUrl('/api/v1/request/update'),
     delete: apiUrl('/api/v1/request/delete'),
+    // mine 
+    myRequests: apiUrl('/api/v1/request/myRequests')
   },
   trips: {
     getAll: apiUrl('/api/v1/trips/getAll'),

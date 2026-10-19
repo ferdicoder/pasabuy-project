@@ -120,10 +120,35 @@ async function deleteReqList(reqId: string){
   return deletedReq.rows[0];
 }
 
+async function queryMyRequest(userId: string){
+  const query = `
+    SELECT
+      r.request_id,
+      r.buyer_id,
+      r.title,
+      r.description,
+      r.estimated_price AS "estimated_price",
+      r.origin,
+      r.delivery_location,
+      r.image_url AS "imageUrl",
+      r.status,
+      r.created_at AS "createdAt",
+      u.name AS "buyerUsername"
+    FROM requests r
+    JOIN "user" u ON r.buyer_id = u.id
+    WHERE r.buyer_id = $1
+  `
+  const val = [userId];
+  
+  const myRequests = await sql(query, val);
+  return myRequests.rows; 
+} 
+
 export{
   createReqList,
   readReqList,
   updateReqList,
   deleteReqList,
-  readOneReqList
+  readOneReqList,
+  queryMyRequest
 }

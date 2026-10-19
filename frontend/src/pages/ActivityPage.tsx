@@ -9,9 +9,18 @@ import ActivityView from "../components/ActivityView";
 export default function ActivityPage() {
   const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
   const [editingRequest, setEditingRequest] = useState<RequestResponse | null>(null);
-  const { data: requests = [], isPending: isRequestsPending } = useFetch<RequestResponse[]>(queryKeys.requests, API.request.getAll);
+  
+  // fetch activity data
+  const {
+    data: requests = [],
+    isPending: isMyRequestsPending
+  } = useFetch<RequestResponse[]>(queryKeys.myRequests, API.request.myRequests);
+
+  // to be edited for trips same as requests
   const { data: trips = [], isPending: isTripsPending } = useFetch<Trip[]>(queryKeys.trips, API.trips.getAll);
-  const { mutate: deleteRequest } = useDelete(API.request.delete, queryKeys.requests);
+
+  // mutating & updating
+  const { mutate: deleteRequest } = useDelete(API.request.delete, queryKeys.myRequests);
   const { mutate: deleteTrip } = useDelete(API.trips.delete, queryKeys.trips);
   const { mutateAsync: patchRequest } = usePatch<CreateRequestPayload>(API.request.update, queryKeys.requests);
 
@@ -30,7 +39,7 @@ export default function ActivityPage() {
     <ActivityView
       requests={requests}
       trips={trips}
-      isRequestsPending={isRequestsPending}
+      isRequestsPending={isMyRequestsPending}
       isTripsPending={isTripsPending}
       editingRequest={editingRequest}
       isRequestFormOpen={isRequestFormOpen}

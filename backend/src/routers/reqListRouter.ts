@@ -5,6 +5,7 @@ import {
   getReqList,
   patchReqList,
   removeReqList, 
+  getMyRequests
 } from "../controllers/requestController.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
 
@@ -15,4 +16,5 @@ export default reqListRouter
   .get('/get/:id', getOneReqList)
   .get('/getAll', getReqList)
   .patch('/update/:id', patchReqList)
-  .delete('/delete/:id', removeReqList);
+  .delete('/delete/:id', removeReqList)
+  .get('/myRequests', requireAuth, getMyRequests)
