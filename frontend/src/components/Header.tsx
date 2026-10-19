@@ -25,7 +25,7 @@ export default function Header(){
 
 			<nav className="w-sm flex item-center justify-center">
 				<ul className="flex flex-row gap-8 content-between w-fit">
-					<li><a href="/">Home</a></li>
+					<li><Link to="/">Home</Link></li>
 					<Link to='/requests'><li>Requests</li></Link>
 					<Link to='/trips'><li>Trips</li></Link>
 					<Link to='/activities'><li>My Activity</li></Link>
