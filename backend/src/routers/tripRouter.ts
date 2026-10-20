@@ -4,7 +4,8 @@ import {
   getOneTrip, 
   getAllTrip,
   patchTrip, 
-  removeTrip 
+  removeTrip, 
+  getMyTrips
 } from "../controllers/tripController.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
 
@@ -15,4 +16,5 @@ export default tripRouter
   .get('/get/:id', getOneTrip)
   .get('/getAll', getAllTrip)
   .patch('/update/:id', patchTrip)
-  .delete('/delete/:id', removeTrip);
+  .delete('/delete/:id', removeTrip)
+  .get('/myTrips', requireAuth, getMyTrips); 

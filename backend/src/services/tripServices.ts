@@ -121,10 +121,34 @@ async function deleteTrip(tripId: string) {
   return result.rows[0];
 }
 
+async function queryMyTrips(userId: string){
+  const query  = `
+    SELECT 
+      t.trip_id,
+      t.current_location AS current_loc,
+      t.destination, 
+      t.depart_date, 
+      t.arrival_date, 
+      t.capacity_kg,
+      t.status,
+      t.image_url,
+      u.name as "username"
+    FROM trips t
+    JOIN "user" u 
+      ON u.id = t.user_id
+    WHERE t.user_id = $1
+  `
+  const val = [userId]; 
+
+  const myTrips = await sql(query, val); 
+  return myTrips.rows; 
+}
+
 export {
   createTrip,
   readOneTrip,
   readAllTrip,
   updateTrip,
   deleteTrip,
+  queryMyTrips
 };

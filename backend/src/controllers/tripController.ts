@@ -7,6 +7,7 @@ import {
   readAllTrip,
   updateTrip,
   deleteTrip,
+  queryMyTrips
 } from "../services/tripServices.js";
 
 async function setTrip(req: Request, res: Response) {
@@ -81,10 +82,23 @@ async function removeTrip(req: Request<{ id: string }>, res: Response) {
   }
 }
 
+async function getMyTrips(req: Request<{id: string}>, res: Response){
+  if(!req?.user?.id) return res.sendStatus(400); 
+  
+  try{
+    const myTrips = await queryMyTrips(req.user.id); 
+    return res.status(200).json(myTrips); 
+  }catch(error){
+    console.error(error); 
+    return res.sendStatus(500); 
+  }
+}
+
 export { 
   setTrip, 
   getOneTrip, 
   getAllTrip,
   patchTrip, 
-  removeTrip 
+  removeTrip,
+  getMyTrips
 };

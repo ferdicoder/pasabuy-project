@@ -16,8 +16,11 @@ export default function ActivityPage() {
     isPending: isMyRequestsPending
   } = useFetch<RequestResponse[]>(queryKeys.myRequests, API.request.myRequests);
 
-  // to be edited for trips same as requests
-  const { data: trips = [], isPending: isTripsPending } = useFetch<Trip[]>(queryKeys.trips, API.trips.getAll);
+  const {
+    data: trips = [],
+    isPending: isMyTripsPending
+  } = useFetch<Trip[]>(queryKeys.myTrips, API.trips.myTrips)
+  
 
   // mutating & updating
   const { mutate: deleteRequest } = useDelete(API.request.delete, queryKeys.myRequests);
@@ -40,7 +43,7 @@ export default function ActivityPage() {
       requests={requests}
       trips={trips}
       isRequestsPending={isMyRequestsPending}
-      isTripsPending={isTripsPending}
+      isTripsPending={isMyTripsPending}
       editingRequest={editingRequest}
       isRequestFormOpen={isRequestFormOpen}
       onDeleteRequest={deleteRequest}
