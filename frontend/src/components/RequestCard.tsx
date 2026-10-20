@@ -12,12 +12,18 @@ interface RequestCardProp extends RequestResponse{
   onEdit?: () => void;
 }
 
-export default function RequestCard({ homeStyle, onTakeRequest, showDeleteIcon,  onDelete, actionLabel, onEdit, ...cardData }: RequestCardProp) {
+export default function RequestCard({
+  homeStyle,
+  onTakeRequest,
+  showDeleteIcon,
+  onDelete,
+  actionLabel,
+  onEdit,
+  ...cardData
+}: RequestCardProp) {
   const isTaken = cardData.status === 'taken'; 
-  let borderColor = isTaken ? 'border-red-400' : 'border-green-800'; 
-
   return (
-    <div className={`relative flex flex-col rounded-xl bg-white shadow-sm m-0 w-full border ${borderColor} ${homeStyle}`}>
+    <div className={`relative flex flex-col overflow-hidden rounded-xl bg-white shadow-sm m-0 w-full ${homeStyle}`}>
       {showDeleteIcon && (
         <button
           type="button"
