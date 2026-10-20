@@ -6,6 +6,8 @@ import { useFetch } from "../hooks/useAPI";
 import HomeView from "../components/HomeView";
 
 export default function HomePage() {
+  // fetch all data for home
+  // to be filtered by algorithm
   const { data: requests = [] } = useFetch<RequestResponse[]>(queryKeys.requests, API.request.getAll);
   const { data: trips = [] } = useFetch<Trip[]>(queryKeys.trips, API.trips.getAll);
 
