@@ -1,4 +1,4 @@
-# PasaBUY: Ecommerce for Travellers within the Philippines
+# PasaBUY: Matching Marketplace for Travellers within the Philippines
 
 ## About: 
 - PasaBuy is a web-based matching marketplace for travellers that wants to establish a business and hop city to city at the same time, within the Philippines. Features such as matching based on route of the seller and request-first marketplace for the buyer makes PasaBuy ideal for travelling nomads or for the people with on-going trips. 
