@@ -5,6 +5,7 @@ import RequestPage from '../pages/RequestPage';
 import TripPage from '../pages/TripPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import ProfilePage from '../pages/ProfilePage';
 import ProtectedRoutes from '../Layouts/ProtectedRoutes';
 
 export default function AppRoutes(){
@@ -18,6 +19,7 @@ export default function AppRoutes(){
         <Route path='/activities' element={ <ActivityPage /> } />
         <Route path="/requests" element={ <RequestPage/> } />
         <Route path="/trips" element={ <TripPage /> } /> 
+        <Route path="/profile" element={ <ProfilePage /> } />
       </Route>
 
     </Routes>
