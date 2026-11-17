@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { getCurrentUser } from "../controllers/userController.js";
+import { getCurrentUser, updateCurrentUser } from "../controllers/userController.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
 
 const userRouter = Router();
 
 export default userRouter
-  .get('/me', requireAuth, getCurrentUser);
+  .get('/me', requireAuth, getCurrentUser)
+  .patch('/update/:id', requireAuth, updateCurrentUser);

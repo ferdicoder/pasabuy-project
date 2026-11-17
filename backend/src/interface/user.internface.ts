@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 type User = {
   id: string;
   name: string;
@@ -8,4 +10,12 @@ type User = {
   updatedAt: Date;
 }
 
-export type { User }
+const UpdateUserSchema = z.object({
+  name: z.string().trim().min(1).optional(),
+  image: z.string().min(1).optional(),
+});
+
+type UpdateUser = z.infer<typeof UpdateUserSchema>
+
+export type { User, UpdateUser }
+export { UpdateUserSchema }
