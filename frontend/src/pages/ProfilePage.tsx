@@ -1,9 +1,10 @@
+import { useState } from "react";
 import type { RequestResponse } from "../interface/Request.interface";
 import type { Trip } from "../interface/Trip.interface";
-import type { User } from "../interface/User.interface";
+import type { UpdateUserPayload, User } from "../interface/User.interface";
 import { API } from "../config/api";
 import { queryKeys } from "../config/queryKeys";
-import { useFetch, useSession } from "../hooks/useAPI";
+import { useFetch, usePatch, useSession } from "../hooks/useAPI";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ProfileView from "../components/ProfileView";
 
@@ -20,8 +21,17 @@ export default function ProfilePage() {
     isPending: isTripsPending
   } = useFetch<Trip[]>(queryKeys.myTrips, API.trips.myTrips);
 
+  const { mutateAsync: patchUser } = usePatch<UpdateUserPayload>(API.users.update, queryKeys.session);
+  const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+
   if (isUserPending) return <LoadingSpinner />;
   if (!user) return <p className="py-24 text-center text-red-500">Unable to load your profile.</p>;
+
+  const closeEditForm = () => setIsEditFormOpen(false);
+
+  const patchProfile = async (payload: UpdateUserPayload) => {
+    await patchUser({ id: user.id, payload });
+  };
 
   return (
     <ProfileView
@@ -30,6 +40,10 @@ export default function ProfilePage() {
       trips={trips}
       isRequestsPending={isRequestsPending}
       isTripsPending={isTripsPending}
+      isEditFormOpen={isEditFormOpen}
+      onEdit={() => setIsEditFormOpen(true)}
+      onCloseEditForm={closeEditForm}
+      onPatchProfile={patchProfile}
     />
   );
 }

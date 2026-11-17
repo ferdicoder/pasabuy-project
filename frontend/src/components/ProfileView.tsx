@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { BadgeCheck, CalendarDays, Clock, Mail, Plane, ShoppingBag } from "lucide-react";
+import { BadgeCheck, CalendarDays, Clock, Mail, PencilLine, Plane, ShoppingBag } from "lucide-react";
 import type { RequestResponse } from "../interface/Request.interface";
 import type { Trip } from "../interface/Trip.interface";
-import type { User } from "../interface/User.interface";
+import type { UpdateUserPayload, User } from "../interface/User.interface";
 import Avatar from "./Avatar";
 import Header from "./Header";
+import ProfileForm from "./ProfileForm";
 
 interface ProfileViewProps {
   user: User;
@@ -13,6 +14,10 @@ interface ProfileViewProps {
   trips: Trip[];
   isRequestsPending: boolean;
   isTripsPending: boolean;
+  isEditFormOpen: boolean;
+  onEdit: () => void;
+  onCloseEditForm: () => void;
+  onPatchProfile: (payload: UpdateUserPayload) => Promise<void>;
 }
 
 function formatMonthYear(date: Date): string {
@@ -42,6 +47,10 @@ export default function ProfileView({
   trips,
   isRequestsPending,
   isTripsPending,
+  isEditFormOpen,
+  onEdit,
+  onCloseEditForm,
+  onPatchProfile,
 }: ProfileViewProps) {
   const requestCount = isRequestsPending ? "—" : String(requests.length);
   const tripCount = isTripsPending ? "—" : String(trips.length);
@@ -92,13 +101,23 @@ export default function ProfileView({
               </div>
             </div>
 
-            <Link
-              to="/activities"
-              className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              <ShoppingBag size={16} strokeWidth={2} aria-hidden="true" />
-              My Activity
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={onEdit}
+                className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-lg border border-gray-900 px-5 py-2.5 text-sm font-medium text-gray-900 transition-colors duration-200 hover:bg-gray-900 hover:text-white focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                <PencilLine size={16} strokeWidth={2} aria-hidden="true" />
+                Edit Profile
+              </button>
+              <Link
+                to="/activities"
+                className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                <ShoppingBag size={16} strokeWidth={2} aria-hidden="true" />
+                My Activity
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -178,6 +197,18 @@ export default function ProfileView({
           </ul>
         </div>
       </section>
+
+      {isEditFormOpen && (
+        <ProfileForm
+          isOpen={isEditFormOpen}
+          onClose={onCloseEditForm}
+          onSubmit={onPatchProfile}
+          initialValues={{
+            name: user.name,
+            image: user.image ?? "",
+          }}
+        />
+      )}
     </>
   );
 }

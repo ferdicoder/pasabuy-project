@@ -27,6 +27,7 @@ export const API = {
     myTrips: apiUrl('/api/v1/trips/myTrips')
   },
   users:{
-    me: apiUrl('/api/v1/users/me')
+    me: apiUrl('/api/v1/users/me'),
+    update: apiUrl('/api/v1/users/update')
   }
 } as const;
