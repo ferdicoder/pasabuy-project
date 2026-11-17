@@ -22,7 +22,7 @@ export default function LoginForm() {
     event.preventDefault();
     try {
       await signIn({ email, password });
-      navigate("/");
+      navigate("/home");
     } catch {
       // error state is already surfaced via `error` below
     }

@@ -82,7 +82,7 @@ export default function RegisterForm() {
 
     try {
       await signUp({ name, email, password });
-      navigate("/");
+      navigate("/home");
     } catch(error) {
       console.error(error)
     }
