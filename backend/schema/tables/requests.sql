@@ -2,26 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict sFIddRw13J7Af33GVqyEvxbsGj4Nz1GsRaveGKNBvYKQz5Yfyp2lGmnLRynYLPz
 
 -- Dumped from database version 18.7 (a21afb5)
 -- Dumped by pg_dump version 18.6
 
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
 
-SET default_tablespace = '';
 
-SET default_table_access_method = heap;
 
 --
 -- Name: requests; Type: TABLE; Schema: public; Owner: -
@@ -61,5 +47,4 @@ ALTER TABLE ONLY public.requests
 -- PostgreSQL database dump complete
 --
 
-\unrestrict sFIddRw13J7Af33GVqyEvxbsGj4Nz1GsRaveGKNBvYKQz5Yfyp2lGmnLRynYLPz
 

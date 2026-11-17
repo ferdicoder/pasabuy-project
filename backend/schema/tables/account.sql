@@ -2,26 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict wDeP0KBGXoMXkAmbrqa9mijG72Obf6Im6Ec3ZQ7gDerPpmyjDhZuaqhjG4Q8k6c
 
 -- Dumped from database version 18.7 (a21afb5)
 -- Dumped by pg_dump version 18.6
 
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
 
-SET default_tablespace = '';
 
-SET default_table_access_method = heap;
 
 --
 -- Name: account; Type: TABLE; Schema: public; Owner: -
@@ -44,12 +30,14 @@ CREATE TABLE public.account (
     "updatedAt" timestamp with time zone NOT NULL
 );
 
+
 --
 -- Name: account account_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.account
     ADD CONSTRAINT account_pkey PRIMARY KEY (id);
+
 
 --
 -- Name: account_issuer_accountId_uidx; Type: INDEX; Schema: public; Owner: -
@@ -77,5 +65,4 @@ ALTER TABLE ONLY public.account
 -- PostgreSQL database dump complete
 --
 
-\unrestrict wDeP0KBGXoMXkAmbrqa9mijG72Obf6Im6Ec3ZQ7gDerPpmyjDhZuaqhjG4Q8k6c
 
