@@ -1,2 +1,18 @@
 @import "tailwindcss"; 
 
+@theme {
+  --color-pasabuy-ink: #191a17;
+  --color-pasabuy-orange: #ff6500;
+  --color-pasabuy-ivory: #fbfaf7;
+  --color-pasabuy-sage: #e5ecdf;
+  --color-pasabuy-mint: #d5dfd0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fbfaf7;
+  color: #191a17;
+}

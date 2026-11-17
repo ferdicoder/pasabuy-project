@@ -23,7 +23,7 @@ export default function NotifButton(){
           onClick={() => setIsOpen(prev => !prev)}
 					type="button"
 					aria-label="Open notifications"
-					className="p-2 rounded-full hover:bg-gray-200 cursor-pointer"
+					className="p-2 rounded-full hover:bg-[#fff0e7] hover:text-[#ff6500] cursor-pointer"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

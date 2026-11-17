@@ -105,7 +105,7 @@ export default function RegisterForm() {
             value={name}
             onChange={(event) => setName(event.target.value)}
             placeholder="juan12"
-            className="w-full rounded-md border border-gray-200 bg-white px-4 py-3 pl-11 text-gray-900 outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10"
+            className="w-full rounded-md border border-black/12 bg-white px-4 py-3 pl-11 text-gray-900 outline-none transition focus:border-[#ff6500] focus:ring-2 focus:ring-[#ff6500]/15"
           />
         </div>
 
@@ -122,7 +122,7 @@ export default function RegisterForm() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder="you@example.com"
-            className="w-full rounded-md border border-gray-200 bg-white px-4 py-3 pl-11 text-gray-900 outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10"
+            className="w-full rounded-md border border-black/12 bg-white px-4 py-3 pl-11 text-gray-900 outline-none transition focus:border-[#ff6500] focus:ring-2 focus:ring-[#ff6500]/15"
           />
         </div>
       </div>
@@ -157,7 +157,7 @@ export default function RegisterForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-900 px-4 py-3 font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex w-full items-center justify-center gap-2 rounded-full bg-[#ff6500] px-4 py-3 font-semibold text-[#191a17] transition hover:bg-[#ff7a21] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <UserPlus size={18} aria-hidden="true" />
         {isPending ? "Creating account..." : "Create account"}

@@ -3,20 +3,20 @@ import RegisterForm from "../components/RegisterForm";
 
 export default function RegisterPage() {
   return (
-    <main className="min-h-screen bg-[#F8F8FF] px-6 py-10 sm:px-10">
+    <main className="min-h-screen bg-[#fbfaf7] px-6 py-10 sm:px-10">
       <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-5xl items-center justify-center">
         <section className="grid w-full max-w-4xl overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-200/70 md:grid-cols-[0.9fr_1.1fr]">
 
-          <div className="flex flex-col justify-center bg-gray-900 p-8 text-white sm:p-12">
+          <div className="flex flex-col justify-center bg-[#d5dfd0] p-8 text-[#191a17] sm:p-12">
 
             {/* <div className="w-fit border ">
               <img src={pasabuyLogo} alt="Pasabuy" className="h-20  object-cover" />
             </div> */}
             
             <div className="space-y-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-300">Make it happen</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#ff6500]">Make it happen</p>
               <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">Your next find is closer.</h1>
-              <p className="max-w-xs text-gray-300">Join the community that brings hard-to-find items within reach.</p>
+              <p className="max-w-xs text-black/60">Join the community that brings hard-to-find items within reach.</p>
             </div>
           </div>
 
