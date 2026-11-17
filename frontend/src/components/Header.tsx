@@ -14,7 +14,7 @@ export default function Header(){
 	const { data: user } = useSession<{ name: string }>(API.users.me, queryKeys.session);
 
 	return (
-		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between shadow-sm z-20 bg-[#F8F8FF]">
+		<header className="flex flex-row py-2 px-24 gap-4 h-20 items-center fixed top-0 right-0 left-0 space justify-between border-b border-black/8 shadow-sm z-20 bg-[#fbfaf7]/95 backdrop-blur">
 			<div className="ml-0 w-40 h-15">
 				<img
 					src={pasabuyLogo}
@@ -54,7 +54,7 @@ export default function Header(){
 				<button
 					type="button"
 					aria-label="Open messages"
-					className="p-2 rounded-full hover:bg-gray-200 cursor-pointer">
+					className="p-2 rounded-full hover:bg-black/7 cursor-pointer">
 					<MessageSquare size={28} strokeWidth={1.8} />
 				</button>
 

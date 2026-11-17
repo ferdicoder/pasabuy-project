@@ -23,7 +23,7 @@ export default function RequestCard({
 }: RequestCardProp) {
   const isTaken = cardData.status === 'taken'; 
   return (
-    <div className={`relative flex flex-col overflow-hidden rounded-xl bg-white shadow-sm m-0 w-full ${homeStyle}`}>
+    <div className={`relative flex flex-col overflow-hidden rounded-xl border border-black/8 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md m-0 w-full ${homeStyle}`}>
       {showDeleteIcon && (
         <button
           type="button"
@@ -36,7 +36,7 @@ export default function RequestCard({
       )}
 
       {/* Image */}
-      <div className="relative h-44 bg-gray-100 shrink-0 rounded-t-xl"
+      <div className="relative h-44 bg-[#e8e8e4] shrink-0 rounded-t-xl"
       >
         {cardData.imageUrl ? (
           <img
@@ -45,7 +45,7 @@ export default function RequestCard({
             alt={cardData.title}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-300 text-sm">
+          <div className="w-full h-full flex items-center justify-center text-black/30 text-sm">
             No image
           </div>
         )}
@@ -63,7 +63,7 @@ export default function RequestCard({
         
         <div className="flex justify-between items-start gap-2">
           <p className="font-medium text-[15px] text-gray-900 leading-snug">{cardData.title}</p>
-          <span className="shrink-0 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+          <span className="shrink-0 bg-[#fff0e7] text-[#d95700] text-xs font-medium px-2.5 py-0.5 rounded-full">
             ~₱{cardData.estimated_price}
           </span>
         </div>
@@ -91,7 +91,7 @@ export default function RequestCard({
         <button
           disabled={isTaken}
           onClick={actionLabel === 'Edit' ? onEdit : onTakeRequest}
-          className={`w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 cursor-pointer active:scale-98 text-white text-[1rem] font-medium py-2.5 rounded-lg transition-all duration-150  disabled:cursor-not-allowed disabled:opacity-75`}
+          className={`w-full flex items-center justify-center gap-1.5 bg-[#ff6500] hover:bg-[#ff7a21] cursor-pointer active:scale-98 text-[#191a17] text-[1rem] font-semibold py-2.5 rounded-lg transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-75`}
         >
           {actionLabel === 'Edit' ? (
             <PencilLine className="w-4 h-4" strokeWidth={2} />

@@ -44,7 +44,7 @@ export default function LoginForm() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder="you@example.com"
-            className="w-full rounded-md border border-gray-200 bg-white px-4 py-3 pl-11 text-gray-900 outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10"
+            className="w-full rounded-md border border-black/12 bg-white px-4 py-3 pl-11 text-gray-900 outline-none transition focus:border-[#ff6500] focus:ring-2 focus:ring-[#ff6500]/15"
           />
         </div>
       </div>
@@ -63,13 +63,13 @@ export default function LoginForm() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="Enter your password"
-            className="w-full rounded-md border border-gray-200 bg-white px-4 py-3 pl-11 pr-12 text-gray-900 outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10"
+            className="w-full rounded-md border border-black/12 bg-white px-4 py-3 pl-11 pr-12 text-gray-900 outline-none transition focus:border-[#ff6500] focus:ring-2 focus:ring-[#ff6500]/15"
           />
           <button
             type="button"
             onClick={() => setShowPassword((visible) => !visible)}
             aria-label={showPassword ? "Hide password" : "Show password"}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-gray-400 hover:bg-[#fff0e7] hover:text-[#ff6500]"
           >
             {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
           </button>
@@ -85,7 +85,7 @@ export default function LoginForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-900 px-4 py-3 font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex w-full items-center justify-center gap-2 rounded-full bg-[#ff6500] px-4 py-3 font-semibold text-[#191a17] transition hover:bg-[#ff7a21] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <LogIn size={18} aria-hidden="true" />
         {isPending ? "Signing in..." : "Sign in"}

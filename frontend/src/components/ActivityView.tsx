@@ -35,9 +35,9 @@ export default function ActivityView({
   return (
     <>
       <Header />
-      <section className="space-y-10 px-28 py-24">
+      <section className="min-h-screen space-y-10 bg-[#fbfaf7] px-28 py-28">
         <div className="space-y-4">
-          <h2 className="text-xl font-extrabold text-gray-900">My Requests</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-[#191a17]">My Requests</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             {!isRequestsPending && requests.map((request) => (
               <RequestCard
@@ -53,7 +53,7 @@ export default function ActivityView({
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-xl font-extrabold text-gray-900">My Trips</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-[#191a17]">My Trips</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {!isTripsPending && trips.map((trip) => (
               <TripCard key={trip.trip_id} {...trip} actionLabel="Edit" showDeleteIcon onDelete={() => onDeleteTrip(trip.trip_id)} />

@@ -50,7 +50,7 @@ export default function CreateButtonView({
         onClick={onToggleMenu}
         type="button"
         aria-label="Add item"
-        className="cursor-pointer rounded-full p-2 hover:bg-gray-200"
+        className="cursor-pointer rounded-full p-2 hover:bg-[#fff0e7] hover:text-[#ff6500]"
       >
         <Plus size={28} strokeWidth={1.8} />
       </button>

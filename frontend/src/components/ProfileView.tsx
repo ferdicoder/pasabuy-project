@@ -30,7 +30,7 @@ function formatMonthYear(date: Date): string {
 function StatCard({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
   return (
     <div className="flex items-center gap-4 rounded-xl bg-white p-5 shadow-sm">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-purple-50 text-[#7C3AED]">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#fff0e7] text-[#ff6500]">
         {icon}
       </span>
       <div className="min-w-0">
@@ -58,10 +58,10 @@ export default function ProfileView({
   return (
     <>
       <Header />
-      <section className="space-y-8 px-28 py-24">
+      <section className="min-h-screen space-y-8 bg-[#fbfaf7] px-28 py-28">
         {/* Hero card */}
         <div className="overflow-hidden rounded-xl bg-white shadow-sm">
-          <div className="h-32 bg-linear-to-r from-[#7C3AED] to-[#A78BFA]" />
+          <div className="h-32 bg-linear-to-r from-[#ffc29b] to-[#ff6500]" />
           <div className="flex flex-col gap-6 px-8 pb-8 md:flex-row md:items-end md:justify-between">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
               {user.image ? (
@@ -105,14 +105,14 @@ export default function ProfileView({
               <button
                 type="button"
                 onClick={onEdit}
-                className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-lg border border-gray-900 px-5 py-2.5 text-sm font-medium text-gray-900 transition-colors duration-200 hover:bg-gray-900 hover:text-white focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-black/20 px-5 py-2.5 text-sm font-medium text-[#191a17] transition-colors duration-200 hover:bg-black/7 focus-visible:ring-2 focus-visible:ring-[#ff6500] focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <PencilLine size={16} strokeWidth={2} aria-hidden="true" />
                 Edit Profile
               </button>
               <Link
                 to="/activities"
-                className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-[#ff6500] px-5 py-2.5 text-sm font-semibold text-[#191a17] transition-colors duration-200 hover:bg-[#ff7a21] focus-visible:ring-2 focus-visible:ring-[#ff6500] focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ShoppingBag size={16} strokeWidth={2} aria-hidden="true" />
                 My Activity

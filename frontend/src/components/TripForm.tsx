@@ -66,7 +66,7 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 		>
 			<div
 				onClick={(e) => e.stopPropagation()}
-				className="w-full max-w-md border border-black/30 rounded-2xl bg-white/80 shadow-2xl overflow-hidden"
+				className="w-full max-w-md border border-black/10 rounded-2xl bg-[#fbfaf7] shadow-2xl overflow-hidden"
 			>
 				<div className="flex items-center justify-between px-5 pt-5 pb-2 border-black/30">
 					<div>
@@ -82,7 +82,7 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 								value={form.current_loc}
 								onChange={(e) => handleChange("current_loc", e.target.value)}
 								placeholder="Baguio"
-								className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors"
+								className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors"
 							/>
 						</div>
 						<div className="flex flex-col gap-1.5">
@@ -91,7 +91,7 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 								value={form.destination}
 								onChange={(e) => handleChange("destination", e.target.value)}
 								placeholder="Quezon City"
-								className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors"
+								className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors"
 							/>
 						</div>
 					</div>
@@ -103,7 +103,7 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 								type="date"
 								value={formatDateInput(form.depart_date)}
 								onChange={(e) => handleChange("depart_date", parseDateInput(e.target.value))}
-								className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black outline-none transition-colors"
+								className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black outline-none transition-colors"
 							/>
 						</div>
 						<div className="flex flex-col gap-1.5">
@@ -125,7 +125,7 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 							value={form.capacity_kg || ""}
 							onChange={(e) => handleChange("capacity_kg", Number(e.target.value))}
 							placeholder="0"
-							className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors
+							className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors
 							[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 						/>
 					</div>
@@ -140,7 +140,7 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 								if (!file) return;
 								handleChange("image_url", await uploadImage(file));
 							}}
-							className="w-full bg-white/5 border border-black/30 focus:border-black rounded-lg px-3 py-2.5 text-sm text-black file:mr-3 file:rounded-md file:border-0 file:bg-black file:px-3 file:py-1.5 file:text-sm file:text-white"
+							className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black file:mr-3 file:rounded-md file:border-0 file:bg-[#ff6500] file:px-3 file:py-1.5 file:text-sm file:text-[#191a17]"
 						/>
 						{form.image_url && <img src={form.image_url} alt="Selected destination" className="h-24 w-full rounded-lg object-cover" />}
 					</div>
@@ -149,14 +149,14 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 				<div className="flex items-center gap-3 px-5 py-4 border-t border-black/30">
 					<button
 						onClick={onClose}
-						className="flex-1 py-2.5 rounded-lg text-sm font-medium text-black hover:border-black/70 hover:text-black/70 border border-black transition-colors cursor-pointer"
+						className="flex-1 py-2.5 rounded-full text-sm font-medium text-black hover:bg-black/7 border border-black/20 transition-colors cursor-pointer"
 					>
 						Cancel
 					</button>
 					<button
 						onClick={handleSubmit}
 						disabled={submitting || !isValid}
-						className="flex-1 py-2.5 rounded-lg text-sm font-semibold bg-black text-white hover:bg-black/90 active:scale-98 disabled:opacity-70 disabled:cursor-not-allowed transition-all cursor-pointer"
+						className="flex-1 py-2.5 rounded-full text-sm font-semibold bg-[#ff6500] text-[#191a17] hover:bg-[#ff7a21] active:scale-98 disabled:opacity-70 disabled:cursor-not-allowed transition-all cursor-pointer"
 					>
 						{submitting ? "Posting..." : "Post Trip"}
 					</button>

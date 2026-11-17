@@ -31,13 +31,13 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
       </div>
 
       {/* Panel */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden">
+      <div className="bg-[#fbfaf7] border border-black/10 rounded-xl shadow-xl overflow-hidden">
         {mode === "avatar" && (
           <div className="py-2 px-2 flex flex-col gap-0.5">
             <Link
               to="/profile"
               onClick={onClose}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#fff0e7] transition-colors"
             >
               <User size={16} className="text-gray-500 shrink-0" />
               <span className="text-sm font-semibold text-gray-700">Profile</span>
@@ -46,7 +46,7 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
             <Link
               to="/settings"
               onClick={onClose}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#fff0e7] transition-colors"
             >
               <Settings size={16} className="text-gray-500 shrink-0" />
               <span className="text-sm font-semibold text-gray-700">Settings</span>
@@ -56,7 +56,7 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
               <Link
                 to="/signout"
                 onClick={onClose}
-                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-50 transition-colors"
+                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#f6e5e1] transition-colors"
               >
                 <LogOut size={16} className="text-red-500 shrink-0" />
                 <span className="text-sm font-semibold text-red-600">Sign Out</span>
@@ -74,7 +74,7 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
               <Link
                 to="/notification"
                 onClick={onClose}
-                className="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                className="flex items-start gap-3 px-4 py-3 hover:bg-[#fff0e7] transition-colors"
               >
                 <div className="mt-0.5 h-2 w-2 rounded-full bg-blue-500 shrink-0" />
                 <p className="text-xs text-gray-600 leading-relaxed">
@@ -84,7 +84,7 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
               <Link
                 to="/notification"
                 onClick={onClose}
-                className="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                className="flex items-start gap-3 px-4 py-3 hover:bg-[#fff0e7] transition-colors"
               >
                 <div className="mt-0.5 h-2 w-2 rounded-full bg-gray-300 shrink-0" />
                 <p className="text-xs text-gray-600 leading-relaxed">
@@ -96,7 +96,7 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
               <Link
                 to="/notification"
                 onClick={onClose}
-                className="text-xs font-semibold text-blue-600 hover:underline"
+                className="text-xs font-semibold text-[#d95700] hover:underline"
               >
                 See all notifications
               </Link>
@@ -116,9 +116,9 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
                 onRequestClick?.();
                 onClose();
               }}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#fff0e7] transition-colors"
             > 
-              <ShoppingBag size={16} className="text-blue-500 shrink-0" />
+              <ShoppingBag size={16} className="text-[#ff6500] shrink-0" />
               <div>
                 <p className="text-sm font-semibold text-gray-700">Request</p>
                 <p className="text-[11px] text-gray-400">Post a request to take by travelers</p>
@@ -130,9 +130,9 @@ export default function Dropdown({ mode, onClose, onRequestClick, onTripClick}: 
                 onTripClick?.();
                 onClose();
               }}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#fff0e7] transition-colors"
             >
-              <Plane size={16} className="text-indigo-500 shrink-0" />
+              <Plane size={16} className="text-[#6b936c] shrink-0" />
               <div>
                 <p className="text-sm font-semibold text-gray-700">Trip</p>
                 <p className="text-[11px] text-gray-400">Post trip to receive a request</p>

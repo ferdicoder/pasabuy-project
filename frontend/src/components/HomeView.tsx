@@ -17,8 +17,8 @@ export default function HomeView({ requests, trips }: HomeViewProps) {
       <section className="py-24">
         <div className="mb-4 flex flex-col items-center gap-y-2">
           <div className="flex w-full items-center justify-between px-33">
-            <h2 className="text-xl font-extrabold">Matched Requests</h2>
-            <h2 className="text-gray-500">View More</h2>
+            <h2 className="text-xl font-semibold tracking-tight">Matched Requests</h2>
+            <h2 className="text-sm font-semibold text-[#ff6500]">View More</h2>
           </div>
 
           <div className="grid w-full grid-cols-1 items-start gap-2 px-32 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
@@ -31,8 +31,8 @@ export default function HomeView({ requests, trips }: HomeViewProps) {
 
         <div className="mb-4 flex flex-col items-center gap-y-2">
           <div className="flex w-full items-center justify-between px-33">
-            <h2 className="text-xl font-extrabold">Matched Trips</h2>
-            <h2 className="text-gray-500">View More</h2>
+            <h2 className="text-xl font-semibold tracking-tight">Matched Trips</h2>
+            <h2 className="text-sm font-semibold text-[#ff6500]">View More</h2>
           </div>
 
           <div className="grid w-full grid-cols-1 items-start gap-2 px-32 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">

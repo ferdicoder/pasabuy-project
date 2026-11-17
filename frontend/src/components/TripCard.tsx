@@ -4,17 +4,17 @@ import type { Trip } from "../interface/Trip.interface";
 import Avatar from "./Avatar";
 
 const statusColor: Record<Trip["status"], { label: string; bg: string; text: string; dot: string }> = {
-  open:       { label: "Open",       bg: "bg-emerald-50",  text: "text-emerald-700", dot: "bg-emerald-500" },
-  full:       { label: "Full",       bg: "bg-amber-50",    text: "text-amber-700",   dot: "bg-amber-500"   },
-  in_transit: { label: "In Transit", bg: "bg-sky-50",      text: "text-sky-700",     dot: "bg-sky-500"     },
-  completed:  { label: "Completed",  bg: "bg-slate-100",   text: "text-slate-600",   dot: "bg-slate-400"   },
-  cancelled:  { label: "Cancelled",  bg: "bg-red-50",      text: "text-red-600",     dot: "bg-red-400"     },
+  open:       { label: "Open",       bg: "bg-[#fff0e7]",  text: "text-[#d95700]", dot: "bg-[#ff6500]" },
+  full:       { label: "Full",       bg: "bg-[#f4eadb]",  text: "text-[#8d5b22]", dot: "bg-[#c98b3b]" },
+  in_transit: { label: "In Transit", bg: "bg-[#e5ecdf]", text: "text-[#426145]", dot: "bg-[#6b936c]" },
+  completed:  { label: "Completed",  bg: "bg-black/5",    text: "text-black/55",   dot: "bg-black/30"   },
+  cancelled:  { label: "Cancelled",  bg: "bg-[#f6e5e1]", text: "text-[#a64a3d]", dot: "bg-[#c7776b]"     },
 };
 
 function ImagePlaceholder({ destination }: { destination: string }) {
   const initial = destination.trim().charAt(0).toUpperCase();
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-linear-to-br from-amber-400 to-orange-500 select-none">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-linear-to-br from-[#ffc29b] to-[#ff6500] select-none">
       <span className="text-white text-2xl font-bold leading-none">{initial}</span>
       <Plane className="mt-1 text-white/70" size={16} strokeWidth={2} />
     </div>
@@ -53,7 +53,7 @@ export function TripCard({ homeStyle, showDeleteIcon, onDelete, actionLabel, onE
       className={[
         homeStyle ?? "",
         "group relative flex w-full max-w-sm overflow-visible rounded-2xl",
-        "bg-white border border-slate-200/80",
+        "bg-white border border-black/8",
         "shadow-sm hover:shadow-md",
         "transition-all duration-200 ease-out",
         tripData.onClick ? "cursor-pointer hover:-translate-y-0.5 active:scale-[0.99]" : "",
@@ -96,7 +96,7 @@ export function TripCard({ homeStyle, showDeleteIcon, onDelete, actionLabel, onE
             <span className="truncate text-[11px] font-semibold text-slate-500 uppercase tracking-wide">
               {tripData.current_loc}
             </span>
-            <Plane className="shrink-0 text-amber-400" size={14} strokeWidth={2} />
+            <Plane className="shrink-0 text-[#ff6500]" size={14} strokeWidth={2} />
             <span className="truncate text-[11px] font-bold text-slate-800 uppercase tracking-wide">
               {tripData.destination}
             </span>

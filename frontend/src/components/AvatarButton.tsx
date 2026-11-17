@@ -21,7 +21,7 @@ export default function AvatarButton({ username }: { username: string }) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setIsOpen(prev => !prev)}
-        className="cursor-pointer rounded-full hover:ring-2 hover:ring-gray-300"
+        className="cursor-pointer rounded-full hover:ring-2 hover:ring-[#ff6500]/40"
       >
         <Avatar username={username} />
       </button>
