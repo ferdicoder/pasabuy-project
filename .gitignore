@@ -2,7 +2,6 @@
 .env.development
 node_modules
 
-*.sql
 .opencode
 
 # Logs
