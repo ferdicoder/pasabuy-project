@@ -13,9 +13,13 @@ import tripRouter from './routers/tripRouter.js';
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
+const corsOrigins = [
+  'http://localhost:5173',
+  ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
+];
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: corsOrigins,
   credentials: true,
 }));
 app.all("/api/auth/*splat", toNodeHandler(auth));
