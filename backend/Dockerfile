@@ -1,5 +1,3 @@
-# DB is NeonDB (hosted Postgres over SSL) → no DB container,
-# no volumes, no data persistence inside this image.
 
 # ---- Stage 1: build TypeScript dist/ ----
 FROM node:24-alpine AS build
