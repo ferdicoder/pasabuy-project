@@ -60,7 +60,7 @@ async function readReqList(){
       r.image_url AS "imageUrl",
       r.status,
       r.created_at AS "createdAt",
-      u.name AS buyerUsername
+      u.name AS "buyerUsername"
     FROM requests r 
     JOIN "user" u ON r.buyer_id = u.id
   `
@@ -77,19 +77,17 @@ async function updateReqList(reqId: string, requestData: UpdateReqList) {
   const query = `
     UPDATE requests
     SET
-      buyer_id = COALESCE($2, buyer_id),
-      title = COALESCE($3, title),
-      description = COALESCE($4, description),
-      estimated_price = COALESCE($5, estimated_price),
-      origin = COALESCE($6, origin),
-      delivery_location = COALESCE($7, delivery_location),
-      image_url = COALESCE($8, image_url)
+      title = COALESCE($2, title),
+      description = COALESCE($3, description),
+      estimated_price = COALESCE($4, estimated_price),
+      origin = COALESCE($5, origin),
+      delivery_location = COALESCE($6, delivery_location),
+      image_url = COALESCE($7, image_url)
     WHERE request_id = $1
     RETURNING *
   `;
   const val = [
     reqId,
-    requestData.buyer_id,
     requestData.title,
     requestData.description,
     requestData.estimated_price,

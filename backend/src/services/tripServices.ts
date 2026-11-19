@@ -58,7 +58,7 @@ async function readAllTrip() {
       t.capacity_kg,
       t.status,
       t.image_url,
-      u.name
+      u.name AS "username"
     FROM trips t
     JOIN "user" u 
       ON t.user_id = u.id

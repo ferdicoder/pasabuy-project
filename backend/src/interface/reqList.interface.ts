@@ -14,7 +14,7 @@ const CreateReqListSchema = ReqListSchema.omit({
   buyer_id: true,
 });
 
-const UpdateReqListSchema = ReqListSchema.partial();
+const UpdateReqListSchema = ReqListSchema.partial().omit({ buyer_id: true });
 type CreateReqList = z.infer<typeof CreateReqListSchema>;
 type UpdateReqList = z.infer<typeof UpdateReqListSchema>
 

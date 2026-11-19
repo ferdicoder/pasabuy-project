@@ -65,6 +65,8 @@ async function getReqList(_req:Request, res:Response){
 }
 
 async function patchReqList(req:Request<{ id: string }>, res:Response){
+  if(!req.user) return res.sendStatus(401);
+
   const reqId = req.params.id;
   if(!reqId || typeof reqId !== 'string') return res.sendStatus(400);
 
@@ -72,6 +74,10 @@ async function patchReqList(req:Request<{ id: string }>, res:Response){
   if(!result.success) return res.sendStatus(400);
 
   try{
+    const existingReq = await readOneReqList(reqId);
+    if(!existingReq) return res.sendStatus(404);
+    if(existingReq.buyer_id !== req.user.id) return res.sendStatus(403);
+
     const updatedReq = await updateReqList(reqId, result.data);
     return res.status(200).json(updatedReq);
   }catch(error){
@@ -81,10 +87,16 @@ async function patchReqList(req:Request<{ id: string }>, res:Response){
 }
 
 async function removeReqList(req:Request<{ id: string }>, res:Response){
+  if(!req.user) return res.sendStatus(401);
+
   const reqId = req.params.id;
   if(!reqId || typeof reqId !== 'string') return res.sendStatus(400);
 
   try{
+    const existingReq = await readOneReqList(reqId);
+    if(!existingReq) return res.sendStatus(404);
+    if(existingReq.buyer_id !== req.user.id) return res.sendStatus(403);
+
     await deleteReqList(reqId);
     return res.sendStatus(204);
   }catch(error){

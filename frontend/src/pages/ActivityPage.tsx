@@ -3,7 +3,7 @@ import type { CreateRequestPayload, RequestResponse } from "../interface/Request
 import type { Trip } from "../interface/Trip.interface";
 import { API } from "../config/api";
 import { queryKeys } from "../config/queryKeys";
-import { useDelete, useFetch, usePatch } from "../hooks/useAPI";
+import { useDelete, useFetch, usePatch, usePost } from "../hooks/useAPI";
 import ActivityView from "../components/ActivityView";
 
 export default function ActivityPage() {
@@ -24,12 +24,23 @@ export default function ActivityPage() {
 
   // mutating & updating
   const { mutate: deleteRequest } = useDelete(API.request.delete, queryKeys.myRequests);
-  const { mutate: deleteTrip } = useDelete(API.trips.delete, queryKeys.trips);
-  const { mutateAsync: patchRequest } = usePatch<CreateRequestPayload>(API.request.update, queryKeys.requests);
+  const { mutate: deleteTrip } = useDelete(API.trips.delete, queryKeys.myTrips);
+  const { mutateAsync: createRequest } = usePost<CreateRequestPayload>(API.request.create, queryKeys.myRequests);
+  const { mutateAsync: patchRequest } = usePatch<CreateRequestPayload>(API.request.update, queryKeys.myRequests);
 
   const closeRequestForm = () => {
     setIsRequestFormOpen(false);
     setEditingRequest(null);
+  };
+
+  const openCreateRequestForm = () => {
+    setEditingRequest(null);
+    setIsRequestFormOpen(true);
+  };
+
+  const postNewRequest = async (payload: CreateRequestPayload) => {
+    await createRequest(payload);
+    closeRequestForm();
   };
 
   const patchSelectedRequest = async (payload: CreateRequestPayload) => {
@@ -52,7 +63,9 @@ export default function ActivityPage() {
         setEditingRequest(request);
         setIsRequestFormOpen(true);
       }}
+      onOpenCreateRequestForm={openCreateRequestForm}
       onCloseRequestForm={closeRequestForm}
+      onCreateRequest={postNewRequest}
       onPatchRequest={patchSelectedRequest}
     />
   );

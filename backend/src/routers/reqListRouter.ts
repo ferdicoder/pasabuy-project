@@ -15,6 +15,6 @@ export default reqListRouter
   .post('/create', requireAuth, postReqList)
   .get('/get/:id', getOneReqList)
   .get('/getAll', getReqList)
-  .patch('/update/:id', patchReqList)
-  .delete('/delete/:id', removeReqList)
+  .patch('/update/:id', requireAuth, patchReqList)
+  .delete('/delete/:id', requireAuth, removeReqList)
   .get('/myRequests', requireAuth, getMyRequests)
