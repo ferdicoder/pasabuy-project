@@ -91,7 +91,7 @@ export default function RequestCard({
         <button
           disabled={isTaken}
           onClick={actionLabel === 'Edit' ? onEdit : onTakeRequest}
-          className={`w-full flex items-center justify-center gap-1.5 bg-[#ff6500] hover:bg-[#ff7a21] cursor-pointer active:scale-98 text-[#191a17] text-[1rem] font-semibold py-2.5 rounded-lg transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-75`}
+          className={`mt-auto w-full flex items-center justify-center gap-1.5 bg-[#ff6500] hover:bg-[#ff7a21] cursor-pointer active:scale-98 text-[#191a17] text-[1rem] font-semibold py-2.5 rounded-lg transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-75`}
         >
           {actionLabel === 'Edit' ? (
             <PencilLine className="w-4 h-4" strokeWidth={2} />
