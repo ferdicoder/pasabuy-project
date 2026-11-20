@@ -75,21 +75,19 @@ async function updateTrip(tripId: string, tripData: UpdateTrip) {
   const query = `
     UPDATE trips
     SET
-      user_id = COALESCE($2, user_id),
-      current_location = COALESCE($3, current_location),
-      destination = COALESCE($4, destination),
-      depart_date = COALESCE($5, depart_date),
-      arrival_date = COALESCE($6, arrival_date),
-      capacity_kg = COALESCE($7, capacity_kg),
-      status = COALESCE($8, status),
-      image_url = COALESCE($9, image_url)
+      current_location = COALESCE($2, current_location),
+      destination = COALESCE($3, destination),
+      depart_date = COALESCE($4, depart_date),
+      arrival_date = COALESCE($5, arrival_date),
+      capacity_kg = COALESCE($6, capacity_kg),
+      status = COALESCE($7, status),
+      image_url = COALESCE($8, image_url)
     WHERE trip_id = $1
     RETURNING *;
   `;
 
   const values = [
     tripId,
-    tripData.user_id ?? null,
     tripData.current_loc ?? null,
     tripData.destination ?? null,
     tripData.depart_date ?? null,

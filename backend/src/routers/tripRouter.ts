@@ -15,6 +15,6 @@ export default tripRouter
   .post('/create', requireAuth, setTrip)
   .get('/get/:id', getOneTrip)
   .get('/getAll', getAllTrip)
-  .patch('/update/:id', patchTrip)
-  .delete('/delete/:id', removeTrip)
+  .patch('/update/:id', requireAuth, patchTrip)
+  .delete('/delete/:id', requireAuth, removeTrip)
   .get('/myTrips', requireAuth, getMyTrips); 

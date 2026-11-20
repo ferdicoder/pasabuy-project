@@ -15,7 +15,7 @@ const CreateTripSchema = tripSchema.omit({
   user_id: true,
 });
 
-const UpdateTripSchema = tripSchema.partial();
+const UpdateTripSchema = tripSchema.partial().omit({ user_id: true });
 
 type Trip = z.infer<typeof tripSchema>
 type CreateTrip = z.infer<typeof CreateTripSchema>;

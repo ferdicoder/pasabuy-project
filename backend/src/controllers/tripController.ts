@@ -54,6 +54,8 @@ async function getAllTrip(_req: Request, res: Response) {
 }
 
 async function patchTrip(req: Request<{ id: string }>, res: Response) {
+  if (!req.user) return res.sendStatus(401);
+
   const tripId = req.params.id;
   if (!tripId || typeof tripId !== "string") return res.sendStatus(400);
 
@@ -61,6 +63,10 @@ async function patchTrip(req: Request<{ id: string }>, res: Response) {
   if (!result.success) return res.sendStatus(400);
 
   try {
+    const existingTrip = await readOneTrip(tripId);
+    if (!existingTrip) return res.sendStatus(404);
+    if (existingTrip.user_id !== req.user.id) return res.sendStatus(403);
+
     const updated = await updateTrip(tripId, result.data);
     return res.status(200).json(updated);
   } catch (error) {
@@ -70,10 +76,16 @@ async function patchTrip(req: Request<{ id: string }>, res: Response) {
 }
 
 async function removeTrip(req: Request<{ id: string }>, res: Response) {
+  if (!req.user) return res.sendStatus(401);
+
   const tripId = req.params.id;
   if (!tripId || typeof tripId !== "string") return res.sendStatus(400);
 
   try {
+    const existingTrip = await readOneTrip(tripId);
+    if (!existingTrip) return res.sendStatus(404);
+    if (existingTrip.user_id !== req.user.id) return res.sendStatus(403);
+
     await deleteTrip(tripId);
     return res.sendStatus(204);
   } catch (error) {
