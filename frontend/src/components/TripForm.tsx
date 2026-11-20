@@ -17,10 +17,18 @@ function parseDateInput(value: string) {
 	return value ? new Date(`${value}T00:00:00`) : new Date("Invalid Date");
 }
 
-// the API returns "yyyy-mm-dd" strings while the create form holds Date objects
+// the API serializes date columns as full ISO timestamps, while date-only
+// inputs give us "yyyy-mm-dd"
 function coerceDate(value: Date | string | undefined, fallback: Date) {
 	if (value instanceof Date) return value;
-	if (typeof value === "string") return parseDateInput(value);
+	if (typeof value === "string") {
+		const trimmed = value.trim();
+		// date-only strings parse as local midnight to avoid a UTC shift
+		const parsed = /^\d{4}-\d{2}-\d{2}$/.test(trimmed)
+			? parseDateInput(trimmed)
+			: new Date(trimmed);
+		if (!Number.isNaN(parsed.getTime())) return parsed;
+	}
 	return fallback;
 }
 
