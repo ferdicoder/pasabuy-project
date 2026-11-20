@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { createPortal } from "react-dom";
 import type { CreateRequestPayload } from "../interface/Request.interface";
 import { uploadImage } from "../utils/uploadImage.ts";
 
@@ -8,28 +9,22 @@ interface RequestFormProp {
   onSubmit: (payload: CreateRequestPayload) => unknown;
   initialValues?: Partial<CreateRequestPayload>;
   mode?: 'create' | 'edit';
-  resetKey?: string;
 }
 
-export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, mode = 'create', resetKey }: RequestFormProp) {
-  
-  const initialState: CreateRequestPayload = {
-    title: "",
-    estimated_price: 0,
-    origin: "",
-    delivery_location: "",
-    description: "",
-    imageUrl: ""
-  };
+const initialState: CreateRequestPayload = {
+  title: "",
+  estimated_price: 0,
+  origin: "",
+  delivery_location: "",
+  description: "",
+  imageUrl: ""
+};
 
-  const [form, setForm] = useState<CreateRequestPayload>(initialState);
+export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, mode = 'create' }: RequestFormProp) {
+
+  const [form, setForm] = useState<CreateRequestPayload>(() => ({ ...initialState, ...initialValues }));
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (!isOpen) return;
-    setForm({ ...initialState, ...initialValues });
-  }, [isOpen, resetKey]);
 
   if (!isOpen) return null;
 
@@ -53,7 +48,7 @@ export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, 
     }
   }
 
-  return (
+  return createPortal(
     <div // backdrop-blur-sm
       className="fixed inset-0 z-100 flex items-center justify-center bg-black/70  p-4"
       onClick={onClose}
@@ -189,6 +184,7 @@ export default function RequestForm({ isOpen, onClose, onSubmit, initialValues, 
         </div>
         
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

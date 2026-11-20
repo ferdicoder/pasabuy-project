@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import type { CreateTripPayload, TripFormProp } from "../interface/Trip.interface";
 import { uploadImage } from "../utils/uploadImage.ts";
 
@@ -12,9 +13,20 @@ function formatDateInput(date: Date) {
 	return `${year}-${month}-${day}`;
 }
 
-export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
+function parseDateInput(value: string) {
+	return value ? new Date(`${value}T00:00:00`) : new Date("Invalid Date");
+}
+
+// the API returns "yyyy-mm-dd" strings while the create form holds Date objects
+function coerceDate(value: Date | string | undefined, fallback: Date) {
+	if (value instanceof Date) return value;
+	if (typeof value === "string") return parseDateInput(value);
+	return fallback;
+}
+
+function buildInitialState(initialValues?: Partial<CreateTripPayload>): CreateTripPayload {
 	const now = new Date();
-	const initialState: CreateTripPayload = {
+	const base: CreateTripPayload = {
 		current_loc: "",
 		destination: "",
 		depart_date: now,
@@ -23,17 +35,25 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 		image_url: "",
 	};
 
-	const [form, setForm] = useState<CreateTripPayload>(initialState);
+	if (!initialValues) return base;
+
+	return {
+		...base,
+		...initialValues,
+		depart_date: coerceDate(initialValues.depart_date, base.depart_date),
+		arrival_date: coerceDate(initialValues.arrival_date, base.arrival_date),
+	};
+}
+
+export default function TripForm({ isOpen, onClose, onSubmit, initialValues, mode = 'create' }: TripFormProp) {
+	const [form, setForm] = useState<CreateTripPayload>(() => buildInitialState(initialValues));
 	const [submitting, setSubmitting] = useState(false);
+	const [error, setError] = useState("");
 
 	if (!isOpen) return null;
 
 	const handleChange = (field: keyof CreateTripPayload, value: string | number | Date) => {
 		setForm((prevState) => ({ ...prevState, [field]: value }));
-	};
-
-	const parseDateInput = (value: string) => {
-		return value ? new Date(`${value}T00:00:00`) : new Date("Invalid Date");
 	};
 
 	const isValid =
@@ -49,17 +69,20 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 	const handleSubmit = async () => {
 		if (!isValid) return;
 		setSubmitting(true);
+		setError("");
 
 		try {
 			await onSubmit(form);
-			setForm(initialState);
+			setForm(buildInitialState(initialValues));
 			onClose();
+		} catch (submitError) {
+			setError(submitError instanceof Error ? submitError.message : "Unable to save trip");
 		} finally {
 			setSubmitting(false);
 		}
 	};
 
-	return (
+	return createPortal(
 		<div
 			className="fixed inset-0 z-100 flex items-center justify-center bg-black/70 p-4"
 			onClick={onClose}
@@ -70,7 +93,9 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 			>
 				<div className="flex items-center justify-between px-5 pt-5 pb-2 border-black/30">
 					<div>
-						<h2 className="text-lg font-semibold text-black leading-tight">Post a Trip</h2>
+						<h2 className="text-lg font-semibold text-black leading-tight">
+							{mode === 'edit' ? 'Edit Trip' : 'Post a Trip'}
+						</h2>
 					</div>
 				</div>
 
@@ -125,7 +150,7 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 							value={form.capacity_kg || ""}
 							onChange={(e) => handleChange("capacity_kg", Number(e.target.value))}
 							placeholder="0"
-							className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black placeholder:text-black/30 outline-none transition-colors
+							className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black outline-none transition-colors
 							[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 						/>
 					</div>
@@ -138,13 +163,20 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 							onChange={async (e) => {
 								const file = e.target.files?.[0];
 								if (!file) return;
-								handleChange("image_url", await uploadImage(file));
+								try {
+									setError("");
+									handleChange("image_url", await uploadImage(file));
+								} catch (uploadError) {
+									setError(uploadError instanceof Error ? uploadError.message : "Unable to upload image");
+								}
 							}}
 							className="w-full bg-white border border-black/12 focus:border-[#ff6500] rounded-lg px-3 py-2.5 text-sm text-black file:mr-3 file:rounded-md file:border-0 file:bg-[#ff6500] file:px-3 file:py-1.5 file:text-sm file:text-[#191a17]"
 						/>
 						{form.image_url && <img src={form.image_url} alt="Selected destination" className="h-24 w-full rounded-lg object-cover" />}
 					</div>
 				</div>
+
+				{error && <p className="px-5 pb-2 text-sm text-red-600">{error}</p>}
 
 				<div className="flex items-center gap-3 px-5 py-4 border-t border-black/30">
 					<button
@@ -158,10 +190,13 @@ export default function TripForm({ isOpen, onClose, onSubmit }: TripFormProp) {
 						disabled={submitting || !isValid}
 						className="flex-1 py-2.5 rounded-full text-sm font-semibold bg-[#ff6500] text-[#191a17] hover:bg-[#ff7a21] active:scale-98 disabled:opacity-70 disabled:cursor-not-allowed transition-all cursor-pointer"
 					>
-						{submitting ? "Posting..." : "Post Trip"}
+						{submitting
+							? (mode === 'edit' ? "Saving..." : "Posting...")
+							: (mode === 'edit' ? "Save Changes" : "Post Trip")}
 					</button>
 				</div>
 			</div>
-		</div>
+		</div>,
+		document.body,
 	);
 }
