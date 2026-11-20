@@ -22,6 +22,7 @@ export const API = {
   trips: {
     getAll: apiUrl('/api/v1/trips/getAll'),
     create: apiUrl('/api/v1/trips/create'),
+    update: apiUrl('/api/v1/trips/update'),
     delete: apiUrl('/api/v1/trips/delete'),
     //mine
     myTrips: apiUrl('/api/v1/trips/myTrips')
