@@ -64,8 +64,8 @@ export default function CreateButtonView({
         />
       )}
 
-      <RequestForm isOpen={isRequestFormOpen} onClose={onCloseRequestForm} onSubmit={onRequestSubmit} />
-      <TripForm isOpen={isTripFormOpen} onClose={onCloseTripForm} onSubmit={onTripSubmit} />
+      <RequestForm key={String(isRequestFormOpen)} isOpen={isRequestFormOpen} onClose={onCloseRequestForm} onSubmit={onRequestSubmit} />
+      <TripForm key={String(isTripFormOpen)} isOpen={isTripFormOpen} onClose={onCloseTripForm} onSubmit={onTripSubmit} />
     </div>
   );
 }

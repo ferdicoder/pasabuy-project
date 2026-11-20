@@ -15,6 +15,8 @@ interface TripFormProp {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (payload: CreateTripPayload) => unknown;
+  initialValues?: Partial<CreateTripPayload>;
+  mode?: 'create' | 'edit';
 }
 
 type CreateTripPayload = Omit<Trip, 'trip_id' | 'onClick' | 'status' | 'username' | 'user_id'>

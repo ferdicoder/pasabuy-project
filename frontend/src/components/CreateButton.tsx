@@ -17,7 +17,7 @@ export default function CreateButton() {
     setIsRequestFormOpen(false);
   };
 
-  const { mutateAsync: postTrip } = usePost<CreateTripPayload>(API.trips.create, queryKeys.trips);
+  const { mutateAsync: postTrip } = usePost<CreateTripPayload>(API.trips.create, [queryKeys.trips, queryKeys.myTrips]);
   const handleTripSubmit = async (payload: CreateTripPayload) => {
     await postTrip(payload);
     setIsTripFormOpen(false);
