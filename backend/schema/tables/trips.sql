@@ -1,53 +1,38 @@
--- 02_trips.sql
--- Existing table + changes: enum status, NOT NULL owner, checks,
--- reserved_kg (capacity tracking), indexes.
--- Part 2 (ALTERs) is NOT re-runnable. It fails if existing rows hold a status
--- outside trip_status, or violate the new NOT NULL / CHECK constraints.
--- Check first:  SELECT DISTINCT status FROM public.trips;
-BEGIN;
+-- Table: public.trips
 
-CREATE TYPE public.trip_status AS ENUM
-  ('open', 'full', 'in_transit', 'completed', 'cancelled');
-
--- Part 1: existing table (as provided)
-CREATE TABLE IF NOT EXISTS public.trips (
-    trip_id           uuid DEFAULT public.uuid_generate_v7() NOT NULL,
-    current_location  character varying NOT NULL,
-    destination       character varying,
-    depart_date       date NOT NULL,
-    arrival_date      date NOT NULL,
-    capacity_kg       integer NOT NULL,
-    status            character varying(255) DEFAULT 'open'::character varying NOT NULL,
-    image_url         character varying,
-    user_id           text,
-    CONSTRAINT trips_pkey   PRIMARY KEY (trip_id),
-    CONSTRAINT fk_user_trip FOREIGN KEY (user_id) REFERENCES public."user"(id)
+-- ---------------------------------------------------------------------
+-- Table
+-- ---------------------------------------------------------------------
+CREATE TABLE public.trips (
+    trip_id uuid DEFAULT public.uuid_generate_v7() NOT NULL,
+    current_location character varying NOT NULL,
+    destination character varying,
+    depart_date date NOT NULL,
+    arrival_date date NOT NULL,
+    capacity_kg integer NOT NULL,
+    status public.trip_status DEFAULT 'open'::public.trip_status NOT NULL,
+    image_url character varying,
+    user_id text NOT NULL,
+    reserved_kg numeric(6,2) DEFAULT 0 NOT NULL,
+    CONSTRAINT chk_trips_capacity_positive CHECK ((capacity_kg > 0)),
+    CONSTRAINT chk_trips_dates CHECK ((arrival_date >= depart_date)),
+    CONSTRAINT chk_trips_reserved CHECK (((reserved_kg >= (0)::numeric) AND (reserved_kg <= (capacity_kg)::numeric)))
 );
+ALTER TABLE ONLY public.trips ALTER COLUMN status SET (pg_attver=59569960);
+ALTER TABLE ONLY public.trips ALTER COLUMN image_url SET (pg_attver=59569960);
+ALTER TABLE ONLY public.trips ALTER COLUMN user_id SET (pg_attver=59569960);
+ALTER TABLE ONLY public.trips ALTER COLUMN reserved_kg SET (pg_attver=59592256);
 
--- Part 2: changes
-ALTER TABLE public.trips ALTER COLUMN status DROP DEFAULT;
-ALTER TABLE public.trips
-  ALTER COLUMN status TYPE public.trip_status USING status::public.trip_status;
-ALTER TABLE public.trips ALTER COLUMN status SET DEFAULT 'open';
+-- ---------------------------------------------------------------------
+-- Constraints
+-- ---------------------------------------------------------------------
+ALTER TABLE ONLY public.trips ADD CONSTRAINT trips_pkey PRIMARY KEY (trip_id);
+ALTER TABLE ONLY public.trips ADD CONSTRAINT fk_user_trip FOREIGN KEY (user_id) REFERENCES public."user"(id);
 
-ALTER TABLE public.trips
-  ALTER COLUMN user_id SET NOT NULL,
-  ADD COLUMN reserved_kg numeric(6,2) NOT NULL DEFAULT 0,
-  ADD CONSTRAINT chk_trips_dates
-      CHECK (arrival_date >= depart_date),
-  ADD CONSTRAINT chk_trips_capacity_positive
-      CHECK (capacity_kg > 0),
-  ADD CONSTRAINT chk_trips_reserved
-      CHECK (reserved_kg >= 0 AND reserved_kg <= capacity_kg);
-
+-- ---------------------------------------------------------------------
 -- Indexes
-CREATE INDEX idx_trips_user_id
-  ON public.trips (user_id);
-CREATE INDEX idx_trips_open_by_date
-  ON public.trips (depart_date)
-  WHERE status = 'open';
-CREATE INDEX idx_trips_open_route
-  ON public.trips (current_location, destination, depart_date)
-  WHERE status = 'open';
+-- ---------------------------------------------------------------------
+CREATE INDEX idx_trips_open_by_date ON public.trips USING btree (depart_date) WHERE (status = 'open'::public.trip_status);
+CREATE INDEX idx_trips_open_route ON public.trips USING btree (current_location, destination, depart_date) WHERE (status = 'open'::public.trip_status);
+CREATE INDEX idx_trips_user_id ON public.trips USING btree (user_id);
 
-COMMIT;
