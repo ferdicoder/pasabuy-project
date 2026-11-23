@@ -78,8 +78,22 @@ BEGIN
   RETURN NEW;
 END $function$;
 
+CREATE OR REPLACE FUNCTION public.fn_matches_consume_candidate()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  UPDATE public.match_candidates
+     SET consumed_at = now(), updated_at = now()
+   WHERE request_id = NEW.request_id
+     AND trip_id    = NEW.trip_id
+     AND consumed_at IS NULL;
+  RETURN NULL;
+END $function$;
+
 -- ---------------------------------------------------------------------
 -- Triggers
 -- ---------------------------------------------------------------------
 CREATE TRIGGER trg_matches_before_insert BEFORE INSERT ON public.matches FOR EACH ROW EXECUTE FUNCTION public.fn_matches_before_insert();
+CREATE TRIGGER trg_matches_consume_candidate AFTER INSERT ON public.matches FOR EACH ROW EXECUTE FUNCTION public.fn_matches_consume_candidate();
 
