@@ -1,7 +1,7 @@
 # Pasabuy
 
 <p align="center">
-  <img src="./frontend/src/assets/pasabuy-logo.svg" alt="Pasabuy logo" width="260" />
+  <img width="1000" height="551" alt="image" src="https://github.com/user-attachments/assets/a485d6b8-af30-43f2-a18b-e6be3cad799f" />
 </p>
 
 <p align="center">
