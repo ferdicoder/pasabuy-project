@@ -4,19 +4,10 @@
   <img width="1000" height="551" alt="image" src="https://github.com/user-attachments/assets/a485d6b8-af30-43f2-a18b-e6be3cad799f" />
 </p>
 
-<p align="center">
-  A route-based pasabu<i>y</i> marketplace that connects travelers with buyers across the Philippines.
+<strong>
+  <i><p align="center"> A route-based pasabu<i>y</i> marketplace that connects travelers with buyers across the Philippines.</p></i>
 </p>
-
-## Introduction
-
-Pasabuy is a full-stack matching marketplace for people who need an item delivered along an existing trip. Buyers can post requests with an estimated price, origin, delivery location, details, and a reference image. Travelers can publish their route, departure and arrival dates, available capacity, and destination image.
-
-The system brings both sides together by route and trip data. Matching logic is powered by PostgreSQL functions and an outbox worker: requests and trips enqueue match work, the worker refreshes scored candidates, and the frontend presents the available requests and trips through one marketplace feed.
-
-### Tech Stack
-
-#### Frontend
+</strong>
 
 <p>
   <a href="https://react.dev/" title="React"><img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" /></a>
@@ -26,33 +17,29 @@ The system brings both sides together by route and trip data. Matching logic is 
   <a href="https://reactrouter.com/" title="React Router"><img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" alt="React Router" /></a>
   <a href="https://tanstack.com/query" title="TanStack Query"><img src="https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white" alt="TanStack Query" /></a>
   <a href="https://axios-http.com/" title="Axios"><img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt="Axios" /></a>
-</p>
-
-#### Backend
-
-<p>
+  
   <a href="https://nodejs.org/" title="Node.js"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" /></a>
   <a href="https://expressjs.com/" title="Express"><img src="https://img.shields.io/badge/Express_5-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express 5" /></a>
   <a href="https://better-auth.com/" title="Better Auth"><img src="https://img.shields.io/badge/Better_Auth-000000?style=for-the-badge&logo=auth0&logoColor=white" alt="Better Auth" /></a>
   <a href="https://zod.dev/" title="Zod"><img src="https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white" alt="Zod" /></a>
-</p>
-
-#### Database and media
-
-<p>
   <a href="https://www.postgresql.org/" title="PostgreSQL"><img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" /></a>
   <a href="https://neon.com/" title="Neon"><img src="https://img.shields.io/badge/Neon-00E699?style=for-the-badge&logo=postgresql&logoColor=black" alt="Neon" /></a>
   <a href="https://cloudinary.com/" title="Cloudinary"><img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" alt="Cloudinary" /></a>
+    <a href="https://www.docker.com/" title="Docker"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
 </p>
 
-#### Development and deployment
+## Introduction
 
-<p>
-  <a href="https://www.npmjs.com/" title="npm"><img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm" /></a>
-  <a href="https://www.docker.com/" title="Docker"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
-  <a href="https://docs.docker.com/compose/" title="Docker Compose"><img src="https://img.shields.io/badge/Docker_Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker Compose" /></a>
-  <a href="https://nginx.org/" title="Nginx"><img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx" /></a>
-</p>
+Pasabuy is a full-stack matching marketplace for people who need an item delivered along an existing trip. Buyers can post requests with an estimated price, origin, delivery location, details, and a reference image. Travelers can publish their route, departure and arrival dates, available capacity, and destination image.
+
+The system brings both sides together by route and trip data. Matching logic is powered by PostgreSQL functions and an outbox worker: requests and trips enqueue match work, the worker refreshes scored candidates, and the frontend presents the available requests and trips through one marketplace feed.
+
+
+
+
+
+
+
 
 ## Features
 
